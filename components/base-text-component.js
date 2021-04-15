@@ -7,8 +7,8 @@ export default class BaseTextComponent extends BaseLayoutComponent {
 
     this.text = properties.text || '';
     this.textAlignment = properties.textAlignment || TextAlignment.left;
-    this.fontSize = properties.fontSize || 12;
-    // fontFamily, fontWeight
-
+    this.fontSize = properties.fontSize || 10;
+    this.fontFamily = properties.fontFamily || 'Helvetica';
+    this.fontWeight = properties.fontWeight;
   }
 }

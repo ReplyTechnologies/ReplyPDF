@@ -1,3 +1,4 @@
+export * from './font-weight.js';
 export * from './text-alignment.js';
 export * from './offset.js';
 export * from './size.js';
