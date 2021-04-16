@@ -1,7 +1,7 @@
 import { default as PDFDocument } from 'pdfkit';
 import * as fs from 'fs';
 import { Container, Page, Table, Text, RepeatVertical } from './components/index.js';
-import { PageSize, Positioning, Offset, TextAlignment, FontWeight } from './components/properties/index.js';
+import { PageSize, Positioning, Offset, TextAlignment, FontWeight, Border, BorderSide } from './components/properties/index.js';
 
 const template = new Page({
   size: PageSize.A4,
@@ -38,12 +38,30 @@ const template = new Page({
       headerStyle: {
         fontWeight: FontWeight.bold,
       },
+      headerBorder: new Border({
+        left: new BorderSide({ thickness: 1 }),
+        right: new BorderSide({ thickness: 1 }),
+        bottom: new BorderSide({ thickness: 1 }),
+      }),
       columns: [
         {
           property: 'id',
           textAlignment: TextAlignment.center,
           width: 50,
-          text: '#'
+          text: '#',
+          headerBorder: new Border({
+            right: new BorderSide({
+              thickness: 1
+            }),
+            bottom: new BorderSide({
+              thickness: 1
+            }),
+          }),
+          cellBorder: new Border({
+            right: new BorderSide({
+              thickness: 1,
+            }),
+          }),
         },
         {
           property: 'invoice_id',
@@ -65,6 +83,14 @@ const template = new Page({
           property: 'amount',
           textAlignment: TextAlignment.right,
           width: 70,
+          headerBorder: new Border({
+            left: new BorderSide({
+              thickness: 1
+            }),
+            bottom: new BorderSide({
+              thickness: 1
+            }),
+          }),
           text: 'Amount',
           fx: (index, record, value) => {
             return value.toFixed(2);

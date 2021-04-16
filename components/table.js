@@ -1,14 +1,19 @@
 import BaseLayoutComponent from './base-layout-component.js';
 import { Container, Text } from './index.js';
-import { Offset } from './properties/offset.js';
-import { TextAlignment } from './properties/text-alignment.js';
+import { Border, Offset, TextAlignment } from './properties/index.js';
 
 export class Table extends BaseLayoutComponent {
   constructor(properties) {
     super(properties);
 
+    this.border = properties.border || new Border();
+
     this.headerStyle = properties.headerStyle || {};
+    this.headerBorder = properties.headerBorder || new Border();
+
     this.cellStyle = properties.cellStyle || {};
+    this.cellBorder = properties.cellBorder || new Border();
+
     this.columns = properties.columns || [];
   }
 
@@ -39,6 +44,7 @@ export class Table extends BaseLayoutComponent {
 
       const cell = new Container({
         margin: new Offset(5),
+        border: column.headerBorder || this.headerBorder,
         children: [
           text
         ],
@@ -84,6 +90,7 @@ export class Table extends BaseLayoutComponent {
 
         const cell = new Container({
           margin: new Offset(5),
+          border: column.cellBorder || this.cellBorder,
           children: [
             text
           ],
