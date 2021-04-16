@@ -75,9 +75,6 @@ const template = new Page({
           property: 'date_created',
           width: 100,
           text: 'Date',
-          // fx: (index, record, value) => {
-          //   return Date.parse(value).toLocaleString();
-          // },
         },
         {
           property: 'amount',
