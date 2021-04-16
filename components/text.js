@@ -8,38 +8,10 @@ export class Text extends BaseTextComponent {
     this._text = '';
   }
 
-  generateDebugLayout(document) {
-    if (!document.debug) {
-      return;
-    }
-
-    document.lineWidth(0.5);
-
-    document
-      .strokeColor('red')
-      .rect(
-        this.originX + this.x,
-        this.originY + this.y,
-        this.width,
-        this.height)
-      .stroke();
-
-    // area for content
-    document
-      .strokeColor('green')
-      .rect(
-        this.originX + this.x + this.margin.left,
-        this.originY + this.y + this.margin.top,
-        this.width - this.margin.horizontalTotal,
-        this.height - this.margin.verticalTotal
-      )
-      .stroke();
-  }
-
-  layoutComponent(document, data) {
+  initializeComponent(data) {
     this._text = this.text;
 
-    if (typeof(this._text) == 'string') {
+    if (data && typeof(this._text) == 'string') {
       while (this._text.indexOf('{{') != -1 && this._text.indexOf('}}') != -1) {
         const startIndex = this._text.indexOf('{{');
         const endIndex = this._text.indexOf('}}') + 2;
@@ -47,17 +19,26 @@ export class Text extends BaseTextComponent {
         this._text = this._text.substring(0, startIndex) + bindingResult + this._text.substring(endIndex);
       }
     }
+  }
 
-    this.height = document
+  layoutComponent(document) {
+    document
       .fontSize(this.fontSize)
       .font(this.fontFamily + (this.fontWeight == FontWeight.bold ? '-Bold' : ''))
-      .heightOfString(this._text, this.width - this.margin.horizontalTotal, {
-        fontFamily: this.fontFamily + (this.fontWeight == FontWeight.bold ? '-Bold' : ''),
-      }) + this.margin.verticalTotal;
+
+    if (this.width == 0) {
+      this.width = document
+        .widthOfString(this._text) + this.margin.horizontalTotal;
+    }
+
+    if (this.height == 0) {
+      this.height = document
+        .heightOfString(this._text, this.width - this.margin.horizontalTotal) + this.margin.verticalTotal;
+    }
   }
 
   generateComponent(document, data) {
-    this.generateDebugLayout(document);
+    this._generateDebugLayout(document);
 
     document
       .fontSize(this.fontSize)
@@ -67,7 +48,7 @@ export class Text extends BaseTextComponent {
         this.originY + this.y + this.margin.top, {
           width: this.width - this.margin.horizontalTotal,
           align: this.textAlignment,
-          ellipsis: true,
+          ellipsis: '',
           lineBreak: false,
           height: this.fontSize
         }

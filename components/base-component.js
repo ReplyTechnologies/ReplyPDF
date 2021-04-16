@@ -3,7 +3,7 @@ export default class BaseComponent {
     this.binding = properties.binding;
   }
 
-  generateDebugLayout(document) {}
+  initializeComponent(data) {}
 
   generateComponent(document, data) {}
 
@@ -18,7 +18,7 @@ export default class BaseComponent {
       binding = this.binding;
     }
 
-    if (binding && binding == '' || binding == '.') {
+    if (!binding || binding == '' || binding == '.') {
       return data;
     }
 

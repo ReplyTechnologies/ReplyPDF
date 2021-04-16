@@ -9,7 +9,7 @@ export class RepeatVertical extends BaseLayoutComponent {
   }
 
   generateComponent(document, data) {
-    this.generateDebugLayout(document);
+    this._generateDebugLayout(document);
 
     const values = this.getBinding(data);
     if (!values || !values.length) {
@@ -27,7 +27,8 @@ export class RepeatVertical extends BaseLayoutComponent {
       this.child.originX = this.originX + this.margin.left;
       this.child.originY = offsetY + this.originY + this.margin.top;
 
-      this.child.layoutComponent(document, value);
+      this.child.initializeComponent(data);
+      this.child.layoutComponent(document);
 
       if (this.child.originY + this.child.height > this.originY + this.height) {
         document.renderNextPage = true;

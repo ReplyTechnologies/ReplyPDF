@@ -1,6 +1,8 @@
 import BaseLayoutComponent from './base-layout-component.js';
 import { Container, Text } from './index.js';
 import { Border, Offset, TextAlignment } from './properties/index.js';
+import { StackHorizontal } from './stack-horizontal.js';
+import { default as _ } from 'lodash';
 
 export class Table extends BaseLayoutComponent {
   constructor(properties) {
@@ -17,12 +19,16 @@ export class Table extends BaseLayoutComponent {
     this.columns = properties.columns || [];
   }
 
-  layoutComponent(document, data) {
+  initializeComponent(data) {
+    // prepare columns
+    for (let column of this.columns) {
+      column.width = column.width || 1;
+    }
 
   }
 
   generateComponent(document, data) {
-    this.generateDebugLayout(document);
+    this._generateDebugLayout(document);
 
     const values = this.getBinding(data);
     if (!values || !values.length) {
@@ -30,85 +36,104 @@ export class Table extends BaseLayoutComponent {
       return;
     }
 
-    let offsetX = 0;
-    let offsetY = 0;
 
-    let maxHeight = 0;
 
+    // calculate relative width unit
+    const absoluteWidthTotal = _(this.columns)
+      .filter((c) => c.width > 1)
+      .sumBy((c) => c.width);
+
+    const relativeWidthTotal = _(this.columns)
+      .filter((c) => c.width <= 1)
+      .sumBy((c) => c.width);
+
+    const availableRelativeWidth = this.width - this.margin.horizontalTotal - absoluteWidthTotal;
+
+    const relativeWidthUnit = availableRelativeWidth / relativeWidthTotal;
+
+    // create horizontal stack for heading components
+    const headingComponents = [];
+    const headings = new StackHorizontal({
+      width: this.width,
+      children: headingComponents,
+    });
+
+    // create heading cells
     for (let column of this.columns) {
-      const text = new Text(this.headerStyle);
-      text.textAlignment = column.textAlignment || TextAlignment.left;
-      text.text = column.text;
+      column._width = column.width;
 
-      text.layoutComponent(document);
+      if (column._width <= 1) {
+        column._width *= relativeWidthUnit;
+      }
 
       const cell = new Container({
         margin: new Offset(5),
+        width: column._width,
         border: column.headerBorder || this.headerBorder,
         children: [
-          text
+          new Text({
+            textAlignment: column.textAlignment,
+            text: column.text,
+          }),
         ],
-        width: column.width,
-        height: text.height + 10,
       });
-
-      maxHeight = Math.max(maxHeight, cell.height);
-
-      cell.originX = offsetX + this.originX + this.margin.left;
-      cell.originY = this.originY + this.margin.top;
-
-      cell.generateComponent(document, data);
-
-      offsetX += column.width;
+      headingComponents.push(cell);
     }
 
-    offsetY += maxHeight;
+    // layout and render heading
+    headings.originX = this.originX + this.x + this.margin.left;
+    headings.originY = this.originY + this.y + this.margin.top;
 
+    headings.initializeComponent(data);
+    headings.layoutComponent(document);
+    headings.generateComponent(document, data);
+
+    let offsetY = headings.height;
+
+    // create table content
     for (let index = values._index || 0; index < values.length; index++) {
       values._index = index;
       const value = values[index];
 
-      offsetX = 0;
-      maxHeight = 0;
+      const rowComponents = [];
+      const row = new StackHorizontal({
+        children: rowComponents,
+      });
 
       for (let column of this.columns) {
-        const text = new Text(this.cellStyle);
-        text.textAlignment = column.textAlignment || TextAlignment.left;
-
         let textValue = value[column.property];
         if (column.fx) {
           textValue = column.fx(index, value, textValue);
         }
-        text.text = textValue;
-
-        text.layoutComponent(document);
-
-        if (offsetY + this.originY + text.height + 10 > this.originY + this.height) {
-          document.renderNextPage = true;
-          return;
-        }
 
         const cell = new Container({
           margin: new Offset(5),
+          width: column._width,
           border: column.cellBorder || this.cellBorder,
           children: [
-            text
+            new Text({
+              textAlignment: column.textAlignment,
+              text: textValue,
+            }),
           ],
-          width: column.width,
-          height: text.height + 10,
         });
-
-        maxHeight = Math.max(maxHeight, cell.height);
-
-        cell.originX = offsetX + this.originX + this.margin.left;
-        cell.originY = offsetY + this.originY + this.margin.top;
-
-        cell.generateComponent(document, data);
-
-        offsetX += column.width;
+        rowComponents.push(cell);
       }
 
-      offsetY += maxHeight;
+      row.originX = this.originX + this.x + this.margin.left;
+      row.originY = offsetY + this.originY + this.y + this.margin.top;
+
+      row.initializeComponent(data);
+      row.layoutComponent(document);
+
+      if (offsetY + this.originY + row.height > this.originY + this.height) {
+        document.renderNextPage = true;
+        return;
+      }
+
+      row.generateComponent(document, data);
+
+      offsetY += row.height;
     }
   }
 }

@@ -22,13 +22,14 @@ export default class BaseLayoutComponent extends BaseComponent {
     this.positioning = properties.positioning || Positioning.absolute;
   }
 
-  generateDebugLayout(document) {
+  _generateDebugLayout(document) {
     if (!document.debug) {
       return;
     }
 
     document.lineWidth(0.5);
 
+    // absolut area for component
     document
       .strokeColor('red')
       .rect(
@@ -51,5 +52,5 @@ export default class BaseLayoutComponent extends BaseComponent {
       .stroke();
   }
 
-  layoutComponent(document, data) {}
+  layoutComponent(document) {}
 }

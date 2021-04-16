@@ -66,7 +66,8 @@ export class Page extends BaseContainerComponent {
     this.header.originX = this.margin.left;
     this.header.originY = this.margin.top;
 
-    this.header.layoutComponent(document, data);
+    this.header.initializeComponent(data);
+    this.header.layoutComponent(document);
     this.header.generateComponent(document, data);
   }
 
@@ -75,12 +76,13 @@ export class Page extends BaseContainerComponent {
     this.footer.originX = this.margin.left;
     this.footer.originY = this.size.height - this.margin.bottom - this.footer.height;
 
-    this.footer.layoutComponent(document, data);
+    this.footer.initializeComponent(data);
+    this.footer.layoutComponent(document);
     this.footer.generateComponent(document, data);
   }
 
   generateComponent(document, data) {
-    this.generateDebugLayout(document);
+    this._generateDebugLayout(document);
 
     for (let child of this.children) {
       child.width = this.width - this.margin.horizontalTotal;
@@ -88,7 +90,8 @@ export class Page extends BaseContainerComponent {
       child.originX = this.margin.left;
       child.originY = this.margin.top + this.header.height;
 
-      child.layoutComponent(document, data);
+      child.initializeComponent(data);
+      child.layoutComponent(document);
       child.generateComponent(document, data);
 
       if (document.renderNextPage) {

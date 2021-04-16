@@ -1,10 +1,8 @@
-import BaseLayoutComponent from './base-layout-component.js';
+import BaseContainerComponent from './base-container-component.js';
 
-export default class BaseContainerComponent extends BaseLayoutComponent {
+export class StackHorizontal extends BaseContainerComponent {
   constructor(properties) {
     super(properties);
-
-    this.children = properties.children || [];
   }
 
   initializeComponent(data) {
@@ -16,14 +14,20 @@ export default class BaseContainerComponent extends BaseLayoutComponent {
   }
 
   layoutComponent(document) {
+    let offsetX = 0;
+    let maxHeight = 0;
+
     for (let child of this.children) {
-      child.width = this.width - this.margin.horizontalTotal;
-      child.height = this.height - this.margin.verticalTotal;
-      child.originX = this.originX + this.x + this.margin.left;
+      child.originX = offsetX + this.originX + this.x + this.margin.left;
       child.originY = this.originY + this.y + this.margin.top;
 
       child.layoutComponent(document);
+
+      offsetX += child.width;
+      maxHeight = Math.max(maxHeight, child.height);
     }
+
+    this.height = maxHeight + this.margin.verticalTotal;
   }
 
   generateComponent(document, data) {
@@ -33,10 +37,6 @@ export default class BaseContainerComponent extends BaseLayoutComponent {
 
     for (let child of this.children) {
       child.generateComponent(document, dataBindingSource);
-
-      if (document.renderNextPage) {
-        return;
-      }
     }
   }
 }
