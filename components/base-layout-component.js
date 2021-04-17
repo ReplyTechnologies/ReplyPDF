@@ -23,7 +23,7 @@ export default class BaseLayoutComponent extends BaseComponent {
   }
 
   _generateDebugLayout(document) {
-    if (!document.debug) {
+    if (!document.debug && !this.debug) {
       return;
     }
 

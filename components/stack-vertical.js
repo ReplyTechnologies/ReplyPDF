@@ -1,6 +1,6 @@
 import BaseContainerComponent from './base-container-component.js';
 
-export class StackHorizontal extends BaseContainerComponent {
+export class StackVertical extends BaseContainerComponent {
   constructor(properties) {
     super(properties);
   }
@@ -14,21 +14,21 @@ export class StackHorizontal extends BaseContainerComponent {
   }
 
   layoutComponent(document) {
-    let offsetX = 0;
-    let maxHeight = 0;
+    let offsetY = 0;
+    let maxWidth = 0;
 
     for (let child of this.children) {
-      child.originX = offsetX + this.originX + this.x + this.margin.left;
-      child.originY = this.originY + this.y + this.margin.top;
+      child.originX = this.originX + this.x + this.margin.left;
+      child.originY = offsetY + this.originY + this.y + this.margin.top;
 
       child.layoutComponent(document);
 
-      offsetX += child.width;
-      maxHeight = Math.max(maxHeight, child.height);
+      offsetY += child.height;
+      maxWidth = Math.max(maxWidth, child.width);
     }
 
-    this.height = maxHeight + this.margin.verticalTotal;
-    this.width = offsetX;
+    this.height = offsetY;
+    this.width = maxWidth + this.margin.horizontalTotal;
   }
 
   generateComponent(document, data) {

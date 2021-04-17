@@ -24,7 +24,6 @@ export class Table extends BaseLayoutComponent {
     for (let column of this.columns) {
       column.width = column.width || 1;
     }
-
   }
 
   generateComponent(document, data) {
@@ -35,8 +34,6 @@ export class Table extends BaseLayoutComponent {
       // invalid data binding
       return;
     }
-
-
 
     // calculate relative width unit
     const absoluteWidthTotal = _(this.columns)
