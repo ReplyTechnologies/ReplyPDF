@@ -64,10 +64,13 @@ export class Table extends BaseLayoutComponent {
         column._width *= relativeWidthUnit;
       }
 
+
+
       const cell = new Container({
         width: column._width,
         verticalAlignment: Alignment.fill,
         border: column.headerBorder || this.headerBorder,
+        backgroundColor: 'orange',
         children: [
           new Text({
             margin: new Offset(5),

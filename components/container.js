@@ -127,7 +127,7 @@ export class Container extends BaseContainerComponent {
 
     document
       .strokeColor(borderSide.color)
-      .lineCap('round')
+      .lineCap('butt')
       .moveTo(x1, y1)
       .lineTo(x2, y2)
       .stroke();

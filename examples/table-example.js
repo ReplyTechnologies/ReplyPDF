@@ -38,6 +38,7 @@ export default {
           binding: 'tableValues',
           headerStyle: {
             fontWeight: FontWeight.bold,
+            backgroundColor: 'orange',
           },
           headerBorder: new Border({
             left: new BorderSide({ thickness: 1 }),

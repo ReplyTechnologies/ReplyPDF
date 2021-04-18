@@ -53,6 +53,7 @@ export default {
               margin: new Offset(10),
               text: 'This is no longer important',
               strikethrough: true,
+              italic: true,
             }),
           ],
         })

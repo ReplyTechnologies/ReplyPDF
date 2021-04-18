@@ -23,6 +23,8 @@ export default class BaseLayoutComponent extends BaseComponent {
     this.verticalAlignment = properties.verticalAlignment || Alignment.fill;
     this.horizontalAlignment = properties.horizontalAlignment || Alignment.fill;
 
+    this.backgroundColor = properties.backgroundColor;
+
     this.link = properties.link;
 
     this._link = undefined;
@@ -42,6 +44,16 @@ export default class BaseLayoutComponent extends BaseComponent {
     super.generateComponent(document, data);
 
     this._generateDebugLayout(document);
+
+    if (this.backgroundColor) {
+      document
+        .rect(
+          this.originX + this.x + this.margin.left,
+          this.originY + this.y + this.margin.top,
+          this.width - this.margin.horizontalTotal,
+          this.height - this.margin.verticalTotal)
+        .fill(this.backgroundColor);
+    }
 
     if (this._link) {
       document.link(
