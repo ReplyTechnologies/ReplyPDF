@@ -1,6 +1,5 @@
 import BaseComponent from './base-component.js';
-import { Offset } from './properties/offset.js';
-import { Positioning } from './properties/index.js';
+import { Positioning, Offset, Alignment } from './properties/index.js';
 
 export default class BaseLayoutComponent extends BaseComponent {
   constructor(properties) {
@@ -20,6 +19,34 @@ export default class BaseLayoutComponent extends BaseComponent {
     this.margin = properties.margin || new Offset();
 
     this.positioning = properties.positioning || Positioning.absolute;
+
+    this.verticalAlignment = properties.verticalAlignment || Alignment.fill;
+    this.horizontalAlignment = properties.horizontalAlignment || Alignment.fill;
+
+    this.link = properties.link;
+
+    this._link = undefined;
+  }
+
+  initializeComponent(data) {
+    const dataBindingSource = this.getBinding(data);
+    this._link = this.getStringBinding(data, this.link);
+  }
+
+  layoutComponent(document) { }
+
+  generateComponent(document, data) {
+    this._generateDebugLayout(document);
+
+    if (this._link) {
+      document.link(
+        this.originX + this.x + this.margin.left,
+        this.originY + this.y + this.margin.top,
+        this.width - this.margin.horizontalTotal,
+        this.height - this.margin.verticalTotal,
+        this._link
+      );
+    }
   }
 
   _generateDebugLayout(document) {
@@ -52,5 +79,4 @@ export default class BaseLayoutComponent extends BaseComponent {
       .stroke();
   }
 
-  layoutComponent(document) {}
 }

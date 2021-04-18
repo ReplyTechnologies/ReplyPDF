@@ -1,3 +1,4 @@
+export * from './alignment.js';
 export * from './border.js';
 export * from './border-side.js';
 export * from './font-weight.js';

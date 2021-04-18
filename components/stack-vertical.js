@@ -27,7 +27,7 @@ export class StackVertical extends BaseContainerComponent {
       maxWidth = Math.max(maxWidth, child.width);
     }
 
-    this.height = offsetY;
+    this.height = offsetY + this.margin.verticalTotal;
     this.width = maxWidth + this.margin.horizontalTotal;
   }
 
@@ -35,6 +35,8 @@ export class StackVertical extends BaseContainerComponent {
     this._generateDebugLayout(document);
 
     const dataBindingSource = this.getBinding(data);
+
+    // TODO Danie: check for next page rendering and component continuation
 
     for (let child of this.children) {
       child.generateComponent(document, dataBindingSource);

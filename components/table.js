@@ -1,6 +1,6 @@
 import BaseLayoutComponent from './base-layout-component.js';
 import { Container, Text } from './index.js';
-import { Border, Offset, TextAlignment } from './properties/index.js';
+import { Alignment, Border, Offset, TextAlignment } from './properties/index.js';
 import { StackHorizontal } from './stack-horizontal.js';
 import { default as _ } from 'lodash';
 
@@ -51,7 +51,6 @@ export class Table extends BaseLayoutComponent {
     // create horizontal stack for heading components
     const headingComponents = [];
     const headings = new StackHorizontal({
-      width: this.width,
       children: headingComponents,
     });
 
@@ -64,12 +63,14 @@ export class Table extends BaseLayoutComponent {
       }
 
       const cell = new Container({
-        margin: new Offset(5),
         width: column._width,
+        verticalAlignment: Alignment.fill,
         border: column.headerBorder || this.headerBorder,
         children: [
           new Text({
+            margin: new Offset(5),
             textAlignment: column.textAlignment,
+            horizontalAlignment: Alignment.fill,
             text: column.text,
           }),
         ],
@@ -104,12 +105,13 @@ export class Table extends BaseLayoutComponent {
         }
 
         const cell = new Container({
-          margin: new Offset(5),
           width: column._width,
           border: column.cellBorder || this.cellBorder,
           children: [
             new Text({
+              margin: new Offset(5),
               textAlignment: column.textAlignment,
+              horizontalAlignment: Alignment.fill,
               text: textValue,
             }),
           ],

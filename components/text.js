@@ -1,39 +1,51 @@
 import BaseTextComponent from './base-text-component.js';
-import { FontWeight } from './properties/index.js';
+import { Alignment, FontWeight } from './properties/index.js';
 
 export class Text extends BaseTextComponent {
   constructor(properties) {
     super(properties);
 
+    this.verticalAlignment = properties.verticalAlignment || Alignment.start;
+    this.horizontalAlignment = properties.horizontalAlignment || Alignment.start;
+
+    this.link = properties.link;
+    this.linkStyle = {
+      color: '#1a0dab',
+      underline: true,
+    };
+    if (properties.linkStyle) {
+      Object.assign(this.linkStyle, properties.linkStyle);
+    }
+
+    this.color = properties.color || 'black';
+    this.underline = properties.underline;
+
     this._text = '';
+    this._defaultFontWidthOffset = 1;
   }
 
   initializeComponent(data) {
-    this._text = this.text;
-
-    if (data && typeof(this._text) == 'string') {
-      while (this._text.indexOf('{{') != -1 && this._text.indexOf('}}') != -1) {
-        const startIndex = this._text.indexOf('{{');
-        const endIndex = this._text.indexOf('}}') + 2;
-        const bindingResult = this.getBinding(data, this._text.substring(startIndex, endIndex));
-        this._text = this._text.substring(0, startIndex) + bindingResult + this._text.substring(endIndex);
-      }
-    }
+    const dataBindingSource = this.getBinding(data);
+    this._text = this.getStringBinding(dataBindingSource, this.text);
   }
 
   layoutComponent(document) {
     document
       .fontSize(this.fontSize)
-      .font(this.fontFamily + (this.fontWeight == FontWeight.bold ? '-Bold' : ''))
+      .font(this.fontFamily + (this.fontWeight == FontWeight.bold ? '-Bold' : ''));
 
-    if (this.width == 0) {
+    if (!this.width) {
       this.width = document
-        .widthOfString(this._text) + this.margin.horizontalTotal;
+        .widthOfString(this._text) + this.margin.horizontalTotal + this._defaultFontWidthOffset;
     }
 
-    if (this.height == 0) {
+    if (!this.height) {
       this.height = document
-        .heightOfString(this._text, this.width - this.margin.horizontalTotal) + this.margin.verticalTotal;
+        .heightOfString(this._text, {
+          width: this.width - this.margin.horizontalTotal,
+          ellipsis: this.ellipsis,
+          lineBreak: this.lineBreak,
+        }) + this.margin.verticalTotal;
     }
   }
 
@@ -43,15 +55,36 @@ export class Text extends BaseTextComponent {
     document
       .fontSize(this.fontSize)
       .font(this.fontFamily + (this.fontWeight == FontWeight.bold ? '-Bold' : ''))
+      .fillColor(this.link && this.linkStyle.color || this.color)
       .text(this._text,
         this.originX + this.x + this.margin.left,
         this.originY + this.y + this.margin.top, {
           width: this.width - this.margin.horizontalTotal,
           align: this.textAlignment,
-          ellipsis: '',
-          lineBreak: false,
-          height: this.fontSize
+          ellipsis: this.ellipsis,
+          lineBreak: this.lineBreak,
         }
       );
+
+    if (this.underline || (this._link && this.linkStyle.underline)) {
+      document.underline(
+        this.originX + this.x + this.margin.left,
+        this.originY + this.y + this.margin.top,
+        this.width - this.margin.horizontalTotal,
+        this.height - this.margin.verticalTotal, {
+          color: this._link && this.linkStyle.color || this.color,
+        }
+      );
+    }
+
+    if (this._link) {
+      document.link(
+        this.originX + this.x + this.margin.left,
+        this.originY + this.y + this.margin.top,
+        this.width - this.margin.horizontalTotal,
+        this.height - this.margin.verticalTotal,
+        this._link
+      )
+    }
   }
 }

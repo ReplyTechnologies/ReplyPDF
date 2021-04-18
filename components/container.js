@@ -1,5 +1,5 @@
 import BaseContainerComponent from './base-container-component.js';
-import { Border } from './properties/index.js';
+import { Alignment, Border } from './properties/index.js';
 
 export class Container extends BaseContainerComponent {
   constructor(properties) {
@@ -13,21 +13,19 @@ export class Container extends BaseContainerComponent {
     let maxHeight = 0;
 
     for (let child of this.children) {
-      if (this.width) {
+
+      if (this.width && !child.width && child.horizontalAlignment === Alignment.fill) {
         child.width = this.width - this.margin.horizontalTotal;
       }
 
-      if (this.height) {
+      if (this.height && !child.height && child.verticalAlignment === Alignment.fill) {
         child.height = this.height - this.margin.verticalTotal;
       }
 
-      child.originX = this.originX + this.x + this.margin.left;
-      child.originY = this.originY + this.y + this.margin.top;
-
       child.layoutComponent(document);
 
-      maxHeight = Math.max(maxHeight, child.height);
       maxWidth = Math.max(maxWidth, child.width);
+      maxHeight = Math.max(maxHeight, child.height);
     }
 
     if (!this.width) {
@@ -37,29 +35,63 @@ export class Container extends BaseContainerComponent {
     if (!this.height) {
       this.height = maxHeight + this.margin.verticalTotal;
     }
+
+    for (let child of this.children) {
+      switch (child.verticalAlignment) {
+        case Alignment.start:
+          child.originY = this.originY + this.y + this.margin.top;
+          break;
+        case Alignment.end:
+          child.originY = this.originY + this.y + this.height - this.margin.bottom - child.height;
+          break;
+        case Alignment.middle:
+          child.originY = this.originY + this.y + (this.height / 2) - (child.height / 2);
+          break;
+        case Alignment.fill:
+          child.originY = this.originY + this.y + this.margin.top;
+          break;
+      }
+
+      switch (child.horizontalAlignment) {
+        case Alignment.start:
+          child.originX = this.originX + this.x + this.margin.left;
+          break;
+        case Alignment.end:
+          child.originX = this.originX + this.x + this.width - this.margin.right - child.width;
+          break;
+        case Alignment.middle:
+          child.originX = this.originX + this.x + (this.width / 2) - (child.width / 2)
+          break;
+        case Alignment.fill:
+          child.originX = this.originX + this.x + this.margin.left;
+          break;
+      }
+
+      child.layoutComponent(document);
+    }
   }
 
   generateComponent(document, data) {
     super.generateComponent(document, data);
 
     const topLeft = {
-      x: this.originX + this.x,
-      y: this.originY + this.y,
+      x: this.originX + this.x + this.margin.left,
+      y: this.originY + this.y + this.margin.top,
     };
 
     const topRight = {
-      x: this.originX + this.x + this.width,
-      y: this.originY + this.y,
+      x: this.originX + this.x + this.width - this.margin.right,
+      y: this.originY + this.y + this.margin.top,
     };
 
     const bottomLeft = {
-      x: this.originX + this.x,
-      y: this.originY + this.y + this.height,
+      x: this.originX + this.x + this.margin.left,
+      y: this.originY + this.y + this.height - this.margin.bottom,
     };
 
     const bottomRight = {
-      x: this.originX + this.x + this.width,
-      y: this.originY + this.y + this.height,
+      x: this.originX + this.x + this.width - this.margin.right,
+      y: this.originY + this.y + this.height - this.margin.bottom,
     };
 
     this._drawBorderSide(document, this.border.left, topLeft.x, topLeft.y, bottomLeft.x, bottomLeft.y);
@@ -75,7 +107,7 @@ export class Container extends BaseContainerComponent {
 
     document
       .strokeColor(borderSide.color)
-      .lineCap('butt')
+      .lineCap('round')
       .moveTo(x1, y1)
       .lineTo(x2, y2)
       .stroke();

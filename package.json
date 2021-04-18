@@ -10,7 +10,11 @@
   "author": "Reply Technologies",
   "license": "ISC",
   "dependencies": {
+    "is-url": "^1.2.4",
+    "is-xml": "^0.1.0",
     "lodash": "^4.17.21",
-    "pdfkit": "^0.12.1"
+    "pdfkit": "^0.12.1",
+    "svg-to-pdfkit": "^0.1.8",
+    "sync-request": "^6.1.0"
   }
 }

@@ -85,7 +85,7 @@ export default {
       debug: true,
     });
 
-    doc.pipe(fs.createWriteStream('output-stack-horizontal-example.pdf'));
+    doc.pipe(fs.createWriteStream('output-stacking-example.pdf'));
     doc.end();
   }
 }

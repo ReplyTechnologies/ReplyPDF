@@ -27,6 +27,9 @@ export class Page extends BaseContainerComponent {
       .rect(0, 0, this.size.width, this.size.height)
       .stroke();
 
+    const headerHeight = this.header && this.header.height || 0;
+    const footerHeight = this.footer && this.footer.height || 0;
+
     // area for header
     document
       .strokeColor('blue')
@@ -34,7 +37,7 @@ export class Page extends BaseContainerComponent {
         this.margin.left,
         this.margin.top,
         this.size.width - this.margin.horizontalTotal,
-        this.header.height
+        headerHeight
       )
       .stroke();
 
@@ -43,9 +46,9 @@ export class Page extends BaseContainerComponent {
       .strokeColor('purple')
       .rect(
         this.margin.left,
-        this.size.height - this.margin.bottom - this.footer.height,
+        this.size.height - this.margin.bottom - footerHeight,
         this.size.width - this.margin.horizontalTotal,
-        this.footer.height
+        footerHeight
       )
       .stroke();
 
@@ -54,14 +57,18 @@ export class Page extends BaseContainerComponent {
       .strokeColor('green')
       .rect(
         this.margin.left,
-        this.margin.top + this.header.height,
+        this.margin.top + headerHeight,
         this.size.width - this.margin.horizontalTotal,
-        this.size.height - this.margin.verticalTotal - this.header.height - this.footer.height
+        this.size.height - this.margin.verticalTotal - headerHeight - footerHeight
       )
       .stroke();
   }
 
   generateHeaderComponent(document, data) {
+    if (!this.header) {
+      return;
+    }
+
     this.header.width = this.width - this.margin.horizontalTotal;
     this.header.originX = this.margin.left;
     this.header.originY = this.margin.top;
@@ -72,9 +79,15 @@ export class Page extends BaseContainerComponent {
   }
 
   generateFooterComponent(document, data) {
+    if (!this.footer) {
+      return;
+    }
+
+    const footerHeight = this.footer && this.footer.height || 0;
+
     this.footer.width = this.width - this.margin.horizontalTotal;
     this.footer.originX = this.margin.left;
-    this.footer.originY = this.size.height - this.margin.bottom - this.footer.height;
+    this.footer.originY = this.size.height - this.margin.bottom - footerHeight;
 
     this.footer.initializeComponent(data);
     this.footer.layoutComponent(document);
@@ -84,11 +97,14 @@ export class Page extends BaseContainerComponent {
   generateComponent(document, data) {
     this._generateDebugLayout(document);
 
+    const headerHeight = this.header && this.header.height || 0;
+    const footerHeight = this.footer && this.footer.height || 0;
+
     for (let child of this.children) {
       child.width = this.width - this.margin.horizontalTotal;
-      child.height = this.height - this.margin.verticalTotal - this.header.height - this.footer.height;
+      child.height = this.height - this.margin.verticalTotal - headerHeight - footerHeight;
       child.originX = this.margin.left;
-      child.originY = this.margin.top + this.header.height;
+      child.originY = this.margin.top + headerHeight;
 
       child.initializeComponent(data);
       child.layoutComponent(document);

@@ -1,4 +1,5 @@
 export * from './container.js';
+export * from './image.js';
 export * from './page.js';
 export * from './repeat-vertical.js';
 export * from './stack-horizontal.js';

@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import { Container, Page, Table, Text } from '../components/index.js';
-import { PageSize, Offset, TextAlignment, FontWeight, Border, BorderSide } from '../components/properties/index.js';
+import { PageSize, Offset, TextAlignment, FontWeight, Border, BorderSide, Alignment } from '../components/properties/index.js';
 import { EasyDocs } from '../easy-docs.js';
 
 export default {
@@ -9,9 +9,9 @@ export default {
       size: PageSize.A4,
       margin: new Offset({
         left: 50,
-        top: 25,
+        top: 50,
         right: 50,
-        bottom: 25,
+        bottom: 50,
       }),
       header: new Container({
         height: 50,
@@ -25,9 +25,8 @@ export default {
         height: 50,
         children: [
           new Text({
-            margin: new Offset({
-              top: 25,
-            }),
+            horizontalAlignment: Alignment.end,
+            verticalAlignment: Alignment.end,
             fontSize: 10,
             textAlignment: TextAlignment.right,
             text: 'Page {{pageNumber}} of {{pageCount}}',
@@ -96,13 +95,6 @@ export default {
             }
           ]
         }),
-        // new RepeatVertical({
-        //   binding: 'arrayValues',
-        //   child:
-        //     new Text({
-        //       text: 'Current value:\n{{.}}',
-        //     }),
-        // }),
       ],
     });
 
@@ -120,7 +112,7 @@ export default {
     let doc = EasyDocs.generateDocument({
       data: data,
       template: template,
-      debug: true,
+      debug: false,
     });
 
     doc.pipe(fs.createWriteStream('output-table-example.pdf'));

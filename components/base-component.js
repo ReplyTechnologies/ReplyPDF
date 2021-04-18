@@ -37,4 +37,17 @@ export default class BaseComponent {
 
     return this._getSubBinding(head, parts.splice(1));
   }
+
+  getStringBinding(data, text) {
+    if (data && typeof(text) == 'string') {
+      while (text.indexOf('{{') != -1 && text.indexOf('}}') != -1) {
+        const startIndex = text.indexOf('{{');
+        const endIndex = text.indexOf('}}') + 2;
+        const bindingResult = this.getBinding(data, text.substring(startIndex, endIndex));
+        text = text.substring(0, startIndex) + bindingResult + text.substring(endIndex);
+      }
+    }
+
+    return text;
+  }
 }

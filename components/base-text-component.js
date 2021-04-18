@@ -10,5 +10,8 @@ export default class BaseTextComponent extends BaseLayoutComponent {
     this.fontSize = properties.fontSize || 10;
     this.fontFamily = properties.fontFamily || 'Helvetica';
     this.fontWeight = properties.fontWeight;
+    this.lineBreak = properties.lineBreak || false;
+    this.ellipsis = properties.ellipsis || false;
+
   }
 }
