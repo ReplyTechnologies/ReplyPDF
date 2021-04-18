@@ -15,6 +15,16 @@ export class Page extends BaseContainerComponent {
     this.children = properties.children || [];
   }
 
+  initializeComponent(data) {
+    super.initializeComponent(data);
+
+    const dataBindingSource = this.getBinding(data);
+
+    for (let child of this.children) {
+      child.initializeComponent(dataBindingSource);
+    }
+  }
+
   generateDebugLayout(document) {
     if (!document.debug) {
       return;
@@ -95,7 +105,7 @@ export class Page extends BaseContainerComponent {
   }
 
   generateComponent(document, data) {
-    this._generateDebugLayout(document);
+    super.generateComponent(document, data);
 
     const headerHeight = this.header && this.header.height || 0;
     const footerHeight = this.footer && this.footer.height || 0;

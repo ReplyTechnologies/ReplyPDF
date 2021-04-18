@@ -7,6 +7,8 @@ export class StackHorizontal extends BaseContainerComponent {
   }
 
   initializeComponent(data) {
+    super.initializeComponent(data);
+
     const dataBindingSource = this.getBinding(data);
 
     for (let child of this.children) {
@@ -51,5 +53,19 @@ export class StackHorizontal extends BaseContainerComponent {
     }
 
     this.width = offsetX;
+  }
+
+  generateComponent(document, data) {
+    super.generateComponent(document, data);
+
+    const dataBindingSource = this.getBinding(data);
+
+    for (let child of this.children) {
+      child.generateComponent(document, dataBindingSource);
+
+      if (document.renderNextPage) {
+        return;
+      }
+    }
   }
 }

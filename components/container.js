@@ -8,6 +8,16 @@ export class Container extends BaseContainerComponent {
     this.border = properties.border || new Border();
   }
 
+  initializeComponent(data) {
+    super.initializeComponent(data);
+
+    const dataBindingSource = this.getBinding(data);
+
+    for (let child of this.children) {
+      child.initializeComponent(dataBindingSource);
+    }
+  }
+
   layoutComponent(document) {
     let maxWidth = 0;
     let maxHeight = 0;
@@ -73,6 +83,16 @@ export class Container extends BaseContainerComponent {
 
   generateComponent(document, data) {
     super.generateComponent(document, data);
+
+    const dataBindingSource = this.getBinding(data);
+
+    for (let child of this.children) {
+      child.generateComponent(document, dataBindingSource);
+
+      if (document.renderNextPage) {
+        return;
+      }
+    }
 
     const topLeft = {
       x: this.originX + this.x + this.margin.left,

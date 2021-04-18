@@ -20,6 +20,8 @@ export class Table extends BaseLayoutComponent {
   }
 
   initializeComponent(data) {
+    super.initializeComponent(data);
+
     // prepare columns
     for (let column of this.columns) {
       column.width = column.width || 1;
@@ -27,7 +29,7 @@ export class Table extends BaseLayoutComponent {
   }
 
   generateComponent(document, data) {
-    this._generateDebugLayout(document);
+    super.generateComponent(document, data);
 
     const values = this.getBinding(data);
     if (!values || !values.length) {

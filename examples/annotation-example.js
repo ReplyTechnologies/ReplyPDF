@@ -37,12 +37,23 @@ export default {
               color: '#1a0dab'
             }),
             new Container({
-              width: 50,
               height: 50,
               border: new Border(new BorderSide({ thickness: 5 })),
               margin: new Offset(10),
               link: 'https://www.google.com',
-            })
+              children: [
+                new Text({
+                  verticalAlignment: Alignment.middle,
+                  horizontalAlignment: Alignment.middle,
+                  text: 'This is text surrounded by a link'
+                }),
+              ],
+            }),
+            new Text({
+              margin: new Offset(10),
+              text: 'This is no longer important',
+              strikethrough: true,
+            }),
           ],
         })
       ],

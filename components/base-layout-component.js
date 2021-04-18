@@ -29,13 +29,18 @@ export default class BaseLayoutComponent extends BaseComponent {
   }
 
   initializeComponent(data) {
+    super.initializeComponent(data);
+
     const dataBindingSource = this.getBinding(data);
-    this._link = this.getStringBinding(data, this.link);
+
+    this._link = this.getStringBinding(dataBindingSource, this.link);
   }
 
   layoutComponent(document) { }
 
   generateComponent(document, data) {
+    super.generateComponent(document, data);
+
     this._generateDebugLayout(document);
 
     if (this._link) {

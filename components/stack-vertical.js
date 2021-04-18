@@ -6,6 +6,8 @@ export class StackVertical extends BaseContainerComponent {
   }
 
   initializeComponent(data) {
+    super.initializeComponent(data);
+
     const dataBindingSource = this.getBinding(data);
 
     for (let child of this.children) {
@@ -32,7 +34,7 @@ export class StackVertical extends BaseContainerComponent {
   }
 
   generateComponent(document, data) {
-    this._generateDebugLayout(document);
+    super.generateComponent(document, data);
 
     const dataBindingSource = this.getBinding(data);
 

@@ -14,6 +14,8 @@ export class Image extends BaseLayoutComponent {
   }
 
   initializeComponent(data) {
+    super.initializeComponent(data);
+
     if (this.binding) {
       this.source = this.getBinding(data);
     }
@@ -25,7 +27,7 @@ export class Image extends BaseLayoutComponent {
   }
 
   generateComponent(document, data) {
-    this._generateDebugLayout(document);
+    super.generateComponent(document, data);
 
     let horizontalAlignmentValue = '';
     switch (this.horizontalAlignment) {

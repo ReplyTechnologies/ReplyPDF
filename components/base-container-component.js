@@ -8,14 +8,6 @@ export default class BaseContainerComponent extends BaseLayoutComponent {
     this.children = properties.children || [];
   }
 
-  initializeComponent(data) {
-    const dataBindingSource = this.getBinding(data);
-
-    for (let child of this.children) {
-      child.initializeComponent(dataBindingSource);
-    }
-  }
-
   layoutComponent(document) {
     for (let child of this.children) {
 
@@ -26,20 +18,6 @@ export default class BaseContainerComponent extends BaseLayoutComponent {
       child.originX = this.originX + this.x + this.margin.left;
 
       child.layoutComponent(document);
-    }
-  }
-
-  generateComponent(document, data) {
-    this._generateDebugLayout(document);
-
-    const dataBindingSource = this.getBinding(data);
-
-    for (let child of this.children) {
-      child.generateComponent(document, dataBindingSource);
-
-      if (document.renderNextPage) {
-        return;
-      }
     }
   }
 }

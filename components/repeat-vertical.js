@@ -8,8 +8,18 @@ export class RepeatVertical extends BaseLayoutComponent {
     this.child = properties.child;
   }
 
+  initializeComponent(data) {
+    super.initializeComponent(data);
+
+    const dataBindingSource = this.getBinding(data);
+
+    for (let child of this.children) {
+      child.initializeComponent(dataBindingSource);
+    }
+  }
+
   generateComponent(document, data) {
-    this._generateDebugLayout(document);
+    super.generateComponent(document, data);
 
     const values = this.getBinding(data);
     if (!values || !values.length) {

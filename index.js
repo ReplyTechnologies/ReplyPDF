@@ -7,5 +7,5 @@ import { default as AnnotationExample } from './examples/annotation-example.js';
 TableExample.generate();
 StackingExample.generate();
 ContainerExample.generate();
-//ImageExample.generate();
+ImageExample.generate();
 AnnotationExample.generate();

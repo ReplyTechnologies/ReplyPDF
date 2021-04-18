@@ -19,13 +19,18 @@ export class Text extends BaseTextComponent {
 
     this.color = properties.color || 'black';
     this.underline = properties.underline;
+    this.strikethrough = properties.strikethrough;
+    this.italic = properties.italic;
 
     this._text = '';
     this._defaultFontWidthOffset = 1;
   }
 
   initializeComponent(data) {
+    super.initializeComponent(data);
+
     const dataBindingSource = this.getBinding(data);
+
     this._text = this.getStringBinding(dataBindingSource, this.text);
   }
 
@@ -50,7 +55,7 @@ export class Text extends BaseTextComponent {
   }
 
   generateComponent(document, data) {
-    this._generateDebugLayout(document);
+    super.generateComponent(document, data);
 
     document
       .fontSize(this.fontSize)
@@ -63,28 +68,10 @@ export class Text extends BaseTextComponent {
           align: this.textAlignment,
           ellipsis: this.ellipsis,
           lineBreak: this.lineBreak,
+          strike: this.strikethrough,
+          oblique: this.italic,
+          underline: this.underline || (this._link && this.linkStyle.underline),
         }
       );
-
-    if (this.underline || (this._link && this.linkStyle.underline)) {
-      document.underline(
-        this.originX + this.x + this.margin.left,
-        this.originY + this.y + this.margin.top,
-        this.width - this.margin.horizontalTotal,
-        this.height - this.margin.verticalTotal, {
-          color: this._link && this.linkStyle.color || this.color,
-        }
-      );
-    }
-
-    if (this._link) {
-      document.link(
-        this.originX + this.x + this.margin.left,
-        this.originY + this.y + this.margin.top,
-        this.width - this.margin.horizontalTotal,
-        this.height - this.margin.verticalTotal,
-        this._link
-      )
-    }
   }
 }
