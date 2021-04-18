@@ -11,10 +11,8 @@ export class Table extends BaseLayoutComponent {
     this.border = properties.border || new Border();
 
     this.headerStyle = properties.headerStyle || {};
-    this.headerBorder = properties.headerBorder || new Border();
-
     this.cellStyle = properties.cellStyle || {};
-    this.cellBorder = properties.cellBorder || new Border();
+    this.alternativeCellStyle = properties.alternativeCellStyle || {};
 
     this.columns = properties.columns || [];
   }
@@ -24,6 +22,8 @@ export class Table extends BaseLayoutComponent {
 
     // prepare columns
     for (let column of this.columns) {
+      column.headerStyle = column.headerStyle || {};
+      column.cellStyle = column.cellStyle || {};
       column.width = column.width || 1;
     }
   }
@@ -64,18 +64,18 @@ export class Table extends BaseLayoutComponent {
         column._width *= relativeWidthUnit;
       }
 
-
-
       const cell = new Container({
         width: column._width,
         verticalAlignment: Alignment.fill,
-        border: column.headerBorder || this.headerBorder,
-        backgroundColor: 'orange',
+        border: column.headerStyle.border || this.headerStyle.border,
+        backgroundColor: column.headerStyle.backgroundColor || this.headerStyle.backgroundColor,
         children: [
           new Text({
             margin: new Offset(5),
-            textAlignment: column.textAlignment,
+            textAlignment: column.headerStyle.textAlignment || this.headerStyle.textAlignment,
+            color: column.headerStyle.color || this.headerStyle.color,
             horizontalAlignment: Alignment.fill,
+            fontWeight: column.headerStyle.fontWeight || this.headerStyle.fontWeight,
             text: column.text,
           }),
         ],
@@ -104,6 +104,19 @@ export class Table extends BaseLayoutComponent {
       });
 
       for (let column of this.columns) {
+        let columnCellStyle = column.cellStyle;
+        let tableCellStyle = this.cellStyle;
+
+        if (index % 2 == 0) {
+          if (column.alternativeCellStyle) {
+            columnCellStyle = column.alternativeCellStyle;
+          }
+
+          if (this.alternativeCellStyle) {
+            tableCellStyle = this.alternativeCellStyle;
+          }
+        }
+
         let textValue = value[column.property];
         if (column.fx) {
           textValue = column.fx(index, value, textValue);
@@ -111,11 +124,14 @@ export class Table extends BaseLayoutComponent {
 
         const cell = new Container({
           width: column._width,
-          border: column.cellBorder || this.cellBorder,
+          border: columnCellStyle.border || tableCellStyle.border,
+          backgroundColor: columnCellStyle.backgroundColor || tableCellStyle.backgroundColor,
           children: [
             new Text({
               margin: new Offset(5),
-              textAlignment: column.textAlignment,
+              textAlignment: columnCellStyle.textAlignment || tableCellStyle.textAlignment,
+              fontWeight: columnCellStyle.fontWeight || tableCellStyle.fontWeight,
+              color: columnCellStyle.color || tableCellStyle.color,
               horizontalAlignment: Alignment.fill,
               text: textValue,
             }),

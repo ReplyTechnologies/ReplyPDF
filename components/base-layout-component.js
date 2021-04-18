@@ -73,7 +73,7 @@ export default class BaseLayoutComponent extends BaseComponent {
 
     document.lineWidth(0.5);
 
-    // absolut area for component
+    // absolute area for component
     document
       .strokeColor('red')
       .rect(

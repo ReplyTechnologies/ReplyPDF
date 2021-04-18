@@ -37,33 +37,59 @@ export default {
         new Table({
           binding: 'tableValues',
           headerStyle: {
+            backgroundColor: 'green',
             fontWeight: FontWeight.bold,
-            backgroundColor: 'orange',
+            border: new Border({
+              left: new BorderSide({ thickness: 1 }),
+              right: new BorderSide({ thickness: 1 }),
+              bottom: new BorderSide({ thickness: 1 }),
+            }),
           },
-          headerBorder: new Border({
-            left: new BorderSide({ thickness: 1 }),
-            right: new BorderSide({ thickness: 1 }),
-            bottom: new BorderSide({ thickness: 1 }),
-          }),
+          cellStyle: {
+            backgroundColor: 'purple',
+            color: 'cyan',
+          },
+          alternativeCellStyle: {
+            backgroundColor: 'cyan',
+            color: 'purple',
+          },
           columns: [
             {
               property: 'id',
-              textAlignment: TextAlignment.center,
               width: 50,
               text: '#',
-              headerBorder: new Border({
-                right: new BorderSide({
-                  thickness: 1
+              headerStyle: {
+                textAlignment: TextAlignment.center,
+                backgroundColor: 'orange',
+                fontWeight: FontWeight.normal,
+                fontSize: 20,
+                border: new Border({
+                  right: new BorderSide({
+                    thickness: 1
+                  }),
+                  bottom: new BorderSide({
+                    thickness: 1
+                  }),
                 }),
-                bottom: new BorderSide({
-                  thickness: 1
+              },
+              cellStyle: {
+                backgroundColor: 'red',
+                color: 'yellow',
+                border: new Border({
+                  right: new BorderSide({
+                    thickness: 1,
+                  }),
                 }),
-              }),
-              cellBorder: new Border({
-                right: new BorderSide({
-                  thickness: 1,
+              },
+              alternativeCellStyle: {
+                backgroundColor: 'pink',
+                color: 'yellow',
+                border: new Border({
+                  right: new BorderSide({
+                    thickness: 1,
+                  }),
                 }),
-              }),
+              }
             },
             {
               property: 'invoice_id',
@@ -81,14 +107,16 @@ export default {
               property: 'amount',
               textAlignment: TextAlignment.right,
               width: 70,
-              headerBorder: new Border({
-                left: new BorderSide({
-                  thickness: 1
+              headerStyle: {
+                border: new Border({
+                  left: new BorderSide({
+                    thickness: 1
+                  }),
+                  bottom: new BorderSide({
+                    thickness: 1
+                  }),
                 }),
-                bottom: new BorderSide({
-                  thickness: 1
-                }),
-              }),
+              },
               text: 'Amount',
               fx: (index, record, value) => {
                 return value.toFixed(2);
