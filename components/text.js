@@ -13,9 +13,7 @@ export class Text extends BaseTextComponent {
       color: '#1a0dab',
       underline: true,
     };
-    if (properties.linkStyle) {
-      Object.assign(this.linkStyle, properties.linkStyle);
-    }
+    Object.assign(this.linkStyle, properties.linkStyle || {});
 
     this.color = properties.color || 'black';
     this.underline = properties.underline;

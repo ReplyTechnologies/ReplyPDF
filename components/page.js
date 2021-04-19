@@ -4,6 +4,7 @@ export class Page extends BaseContainerComponent {
   constructor(properties) {
     super(properties);
 
+    this.firstPageHeader = properties.firstPageHeader;
     this.header = properties.header;
     this.footer = properties.footer;
 
@@ -37,8 +38,8 @@ export class Page extends BaseContainerComponent {
       .rect(0, 0, this.size.width, this.size.height)
       .stroke();
 
-    const headerHeight = this.header && this.header.height || 0;
-    const footerHeight = this.footer && this.footer.height || 0;
+    const headerHeight = this._getHeaderHeight(document);
+    const footerHeight = this._getFooterHeight();
 
     // area for header
     document
@@ -75,17 +76,19 @@ export class Page extends BaseContainerComponent {
   }
 
   generateHeaderComponent(document, data) {
-    if (!this.header) {
+    const header = this._getHeader(document);
+
+    if (!header) {
       return;
     }
 
-    this.header.width = this.width - this.margin.horizontalTotal;
-    this.header.originX = this.margin.left;
-    this.header.originY = this.margin.top;
+    header.width = this.width - this.margin.horizontalTotal;
+    header.originX = this.margin.left;
+    header.originY = this.margin.top;
 
-    this.header.initializeComponent(data);
-    this.header.layoutComponent(document);
-    this.header.generateComponent(document, data);
+    header.initializeComponent(data);
+    header.layoutComponent(document);
+    header.generateComponent(document, data);
   }
 
   generateFooterComponent(document, data) {
@@ -93,7 +96,7 @@ export class Page extends BaseContainerComponent {
       return;
     }
 
-    const footerHeight = this.footer && this.footer.height || 0;
+    const footerHeight = this._getFooterHeight();
 
     this.footer.width = this.width - this.margin.horizontalTotal;
     this.footer.originX = this.margin.left;
@@ -107,8 +110,8 @@ export class Page extends BaseContainerComponent {
   generateComponent(document, data) {
     super.generateComponent(document, data);
 
-    const headerHeight = this.header && this.header.height || 0;
-    const footerHeight = this.footer && this.footer.height || 0;
+    const headerHeight = this._getHeaderHeight(document);
+    const footerHeight = this._getFooterHeight();
 
     for (let child of this.children) {
       child.width = this.width - this.margin.horizontalTotal;
@@ -124,5 +127,24 @@ export class Page extends BaseContainerComponent {
         return;
       }
     }
+  }
+
+
+  _getHeaderHeight(document) {
+    const header = this._getHeader(document);
+    return header && header.height || 0;
+  }
+
+  _getHeader(document) {
+    let headerComponent = this.header;
+    if (document.pageIndex === 0 && this.firstPageHeader) {
+      headerComponent = this.firstPageHeader;
+    }
+
+    return headerComponent;
+  }
+
+  _getFooterHeight() {
+    return this.footer && this.footer.height || 0;
   }
 }

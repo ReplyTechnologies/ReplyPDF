@@ -8,16 +8,6 @@ export class RepeatVertical extends BaseLayoutComponent {
     this.child = properties.child;
   }
 
-  initializeComponent(data) {
-    super.initializeComponent(data);
-
-    const dataBindingSource = this.getBinding(data);
-
-    for (let child of this.children) {
-      child.initializeComponent(dataBindingSource);
-    }
-  }
-
   generateComponent(document, data) {
     super.generateComponent(document, data);
 
@@ -33,21 +23,23 @@ export class RepeatVertical extends BaseLayoutComponent {
       values._index = index;
       const value = values[index];
 
-      this.child.width = this.width - (this.margin.left + this.margin.right);
-      this.child.originX = this.originX + this.margin.left;
-      this.child.originY = offsetY + this.originY + this.margin.top;
+      const child = this.child.clone();
 
-      this.child.initializeComponent(data);
-      this.child.layoutComponent(document);
+      child.width = this.width - this.margin.horizontalTotal;
+      child.originX = this.originX + this.margin.left;
+      child.originY = offsetY + this.originY + this.margin.top;
 
-      if (this.child.originY + this.child.height > this.originY + this.height) {
+      child.initializeComponent(value);
+      child.layoutComponent(document);
+
+      if (child.originY + child.height > this.originY + this.height) {
         document.renderNextPage = true;
         return;
       }
 
-      this.child.generateComponent(document, value);
+      child.generateComponent(document, value);
 
-      offsetY += this.child.height;
+      offsetY += child.height;
     }
   }
 }

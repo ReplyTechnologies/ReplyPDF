@@ -20,4 +20,14 @@ export default class BaseContainerComponent extends BaseLayoutComponent {
       child.layoutComponent(document);
     }
   }
+
+  clone() {
+    const instance = super.clone();
+    instance.children = [];
+    for (let child of this.children) {
+      instance.children.push(child.clone());
+    }
+
+    return instance;
+  }
 }

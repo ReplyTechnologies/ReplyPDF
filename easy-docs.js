@@ -6,10 +6,14 @@ const easyDocs = {
       throw new Error('No template provided');
     }
 
+    if (options.template.constructor.name != 'Page') {
+      throw new Error('Invalid template provided. Template must be of type Page');
+    }
+
     const doc = options.doc || new PDFDocument({
       bufferPages: true,
       size: options.template.size.toArray(),
-      margin: 0,
+      margin: 0
     });
 
     doc.debug = options.debug;
@@ -24,6 +28,8 @@ const easyDocs = {
       });
     }
 
+    documentPage.pageIndex = 0;
+
     do {
       documentPage.renderNextPage = false;
       options.template.generateComponent(documentPage, options.data);
@@ -33,6 +39,7 @@ const easyDocs = {
           size: options.template.size.toArray(),
           margin: 0,
         });
+        documentPage.pageIndex++;
       }
     } while (documentPage.renderNextPage);
 
@@ -40,6 +47,7 @@ const easyDocs = {
     let pages = doc.bufferedPageRange();
     for (let i = pages.start; i < pages.count; i++) {
       doc.switchToPage(i);
+      documentPage.pageIndex = i;
 
       options.pageNumber = i + 1;
       options.pageCount = pages.count;

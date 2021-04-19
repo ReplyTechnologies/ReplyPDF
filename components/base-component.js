@@ -31,7 +31,7 @@ export default class BaseComponent {
   _getSubBinding(data, parts) {
     const head = data[parts[0].trim()];
 
-    if (parts.length == 1 || !head) {
+    if (parts.length == 1 || head === undefined) {
       return head;
     }
 
@@ -39,7 +39,7 @@ export default class BaseComponent {
   }
 
   getStringBinding(data, text) {
-    if (data && typeof(text) == 'string') {
+    if (data !== undefined && typeof(text) == 'string') {
       while (text.indexOf('{{') != -1 && text.indexOf('}}') != -1) {
         const startIndex = text.indexOf('{{');
         const endIndex = text.indexOf('}}') + 2;
@@ -49,5 +49,9 @@ export default class BaseComponent {
     }
 
     return text;
+  }
+
+  clone() {
+    return new this.constructor(this);
   }
 }
