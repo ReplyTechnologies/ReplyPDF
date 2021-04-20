@@ -57,6 +57,11 @@ export default class BaseLayoutComponent extends BaseComponent {
         .fill(this.backgroundColor);
     }
 
+  }
+
+  afterGenerateComponent(document) {
+    super.afterGenerateComponent(document);
+
     if (this._link) {
       document.link(
         this.originX + this.x + this.margin.left,

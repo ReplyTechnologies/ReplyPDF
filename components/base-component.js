@@ -9,6 +9,8 @@ export default class BaseComponent {
 
   generateComponent(document, data) {}
 
+  afterGenerateComponent(document) {}
+
   getBinding(data, binding) {
     if (binding) {
       binding = binding.replace(/{{|}}/g, '');

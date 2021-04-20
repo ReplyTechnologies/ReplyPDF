@@ -21,6 +21,14 @@ export default class BaseContainerComponent extends BaseLayoutComponent {
     }
   }
 
+  afterGenerateComponent(document) {
+    super.afterGenerateComponent(document);
+
+    for (let child of this.children) {
+      child.afterGenerateComponent(document);
+    }
+  }
+
   clone() {
     const instance = super.clone();
     instance.children = [];

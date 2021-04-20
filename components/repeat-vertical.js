@@ -6,6 +6,8 @@ export class RepeatVertical extends BaseLayoutComponent {
     super(properties);
 
     this.child = properties.child;
+
+    this._children = [];
   }
 
   generateComponent(document, data) {
@@ -38,8 +40,17 @@ export class RepeatVertical extends BaseLayoutComponent {
       }
 
       child.generateComponent(document, value);
+      this._children.push(child);
 
       offsetY += child.height;
+    }
+  }
+
+  afterGenerateComponent(document) {
+    super.afterGenerateComponent(document);
+
+    for (let child of this._children) {
+      child.afterGenerateComponent(document);
     }
   }
 }

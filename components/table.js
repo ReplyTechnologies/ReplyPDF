@@ -14,6 +14,8 @@ export class Table extends BaseLayoutComponent {
     this.alternativeCellStyle = properties.alternativeCellStyle || {};
 
     this.columns = properties.columns || [];
+
+    this._children = [];
   }
 
   initializeComponent(data) {
@@ -91,6 +93,7 @@ export class Table extends BaseLayoutComponent {
     headings.initializeComponent(data);
     headings.layoutComponent(document);
     headings.generateComponent(document, data);
+    this._children.push(headings);
 
     let offsetY = headings.height;
 
@@ -153,8 +156,17 @@ export class Table extends BaseLayoutComponent {
       }
 
       row.generateComponent(document, data);
+      this._children.push(row);
 
       offsetY += row.height;
+    }
+  }
+
+  afterGenerateComponent(document) {
+    super.afterGenerateComponent(document);
+
+    for (let child of this._children) {
+      child.afterGenerateComponent(document);
     }
   }
 }
