@@ -1,9 +1,11 @@
-import { path } from 'path';
+import { default as path } from 'path';
 
 export default {
-  entry: './src/index.js',
+  mode: 'production',
+  entry: './easy-docs.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    //type: 'umd',
+    path: path.resolve(process.cwd(), 'dist'),
     filename: 'bundle.js',
   },
 };

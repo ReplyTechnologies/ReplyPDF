@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "node index.js"
+    "test": "node index.js",
+    "build": "webpack --config webpack.config.js"
   },
   "author": "Reply Technologies",
   "license": "ISC",
