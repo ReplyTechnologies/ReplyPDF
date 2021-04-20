@@ -1,5 +1,4 @@
 import BaseLayoutComponent from './base-layout-component.js';
-import { Positioning } from './properties/index.js';
 
 export class RepeatVertical extends BaseLayoutComponent {
   constructor(properties) {
