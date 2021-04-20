@@ -1,8 +1,13 @@
 ## EasyDocs
 
-Templated PDF generation.
+![BADGE_NPM_DOWNLOADS](https://img.shields.io/npm/dw/reply-pdf) ![BADGE_NPM_VERSION](https://img.shields.io/npm/v/reply-pdf) ![BADGE_NPM_LICENCE](https://img.shields.io/npm/l/reply-pdf) [![BADGE_PAYPAL](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate/?hosted_button_id=BVBKNU8NHN2UN)
 
-![Process Infographic](./resources/process_infographic.png)
+
+![BADGE_NPM_DOWNLOADS](https://img.shields.io/npm/dt/jszpl?color=red) ![BADGE_NPM_DOWNLOADS](https://img.shields.io/npm/dw/jszpl) ![BADGE_NPM_VERSION](https://img.shields.io/npm/v/jszpl) ![BADGE_NPM_LICENCE](https://img.shields.io/npm/l/jszpl) [![BADGE_PAYPAL](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate/?hosted_button_id=BVBKNU8NHN2UN)
+
+Templated PDF generation. 
+
+<img src="./resources/process_infographic.png" alt="Process Infographic"  />
 
 ### Table of Contents
 
@@ -19,6 +24,10 @@ Templated PDF generation.
 
 
 ### Properties
+
+
+
+### Component Lifecycle
 
 
 
