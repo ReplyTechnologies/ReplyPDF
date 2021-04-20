@@ -152,7 +152,7 @@ export class Table extends BaseLayoutComponent {
 
       if (offsetY + this.originY + row.height > this.originY + this.height) {
         document.renderNextPage = true;
-        return;
+        break;
       }
 
       row.generateComponent(document, data);
@@ -160,6 +160,7 @@ export class Table extends BaseLayoutComponent {
 
       offsetY += row.height;
     }
+    this.height = offsetY;
   }
 
   afterGenerateComponent(document) {
