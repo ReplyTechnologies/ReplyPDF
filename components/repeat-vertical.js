@@ -5,7 +5,7 @@ export class RepeatVertical extends BaseLayoutComponent {
   constructor(properties) {
     super(properties);
 
-    this.child = properties.child;
+    this.template = properties.template;
 
     this._children = [];
   }
@@ -25,7 +25,7 @@ export class RepeatVertical extends BaseLayoutComponent {
       values._index = index;
       const value = values[index];
 
-      const child = this.child.clone();
+      const child = this.template.clone();
 
       child.width = this.width - this.margin.horizontalTotal;
       child.originX = this.originX + this.margin.left;
