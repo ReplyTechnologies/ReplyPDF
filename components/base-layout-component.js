@@ -93,10 +93,15 @@ export default class BaseLayoutComponent extends BaseComponent {
         y: this.originY + this.y + this.height - this.margin.bottom,
       };
 
-      this._drawBorderSide(document, this.border.left, topLeft.x, topLeft.y, bottomLeft.x, bottomLeft.y);
-      this._drawBorderSide(document, this.border.top, topLeft.x, topLeft.y, topRight.x, topRight.y);
-      this._drawBorderSide(document, this.border.right, topRight.x, topRight.y, bottomRight.x, bottomRight.y);
-      this._drawBorderSide(document, this.border.bottom, bottomLeft.x, bottomLeft.y, bottomRight.x, bottomRight.y);
+      const leftEnlargement = (this.border.left && this.border.left.thickness || 0) / 2;
+      const topEnlargement = (this.border.top && this.border.top.thickness || 0) / 2;
+      const rightEnlargement = (this.border.right && this.border.right.thickness || 0) / 2;
+      const bottomEnlargement = (this.border.bottom && this.border.bottom.thickness || 0) / 2;
+
+      this._drawBorderSide(document, this.border.left, topLeft.x, topLeft.y - topEnlargement, bottomLeft.x, bottomLeft.y + bottomEnlargement);
+      this._drawBorderSide(document, this.border.top, topLeft.x - leftEnlargement, topLeft.y, topRight.x + rightEnlargement, topRight.y);
+      this._drawBorderSide(document, this.border.right, topRight.x, topRight.y - topEnlargement, bottomRight.x, bottomRight.y + bottomEnlargement);
+      this._drawBorderSide(document, this.border.bottom, bottomLeft.x - leftEnlargement, bottomLeft.y, bottomRight.x + rightEnlargement, bottomRight.y);
     }
   }
 
@@ -136,6 +141,7 @@ export default class BaseLayoutComponent extends BaseComponent {
     }
 
     document
+      .lineWidth(borderSide.thickness)
       .strokeColor(borderSide.color)
       .lineCap('butt')
       .moveTo(x1, y1)
