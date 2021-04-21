@@ -10,10 +10,19 @@ const easyDocs = {
       throw new Error('Invalid template provided. Template must be of type Page');
     }
 
+    options.info = options.info || {};
+    options.info.keywords = options.info.keywords || [];
+
     const doc = options.doc || new PDFDocument({
       bufferPages: true,
       size: options.template.size.toArray(),
-      margin: 0
+      margin: 0,
+      info: {
+        Title: options.info.title || '',
+        Author: options.info.author || '',
+        Subject: options.info.subject || '',
+        Keywords: options.info.keywords.join(','),
+      },
     });
 
     doc.debug = options.debug;

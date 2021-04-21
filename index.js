@@ -6,8 +6,8 @@ import { default as AnnotationExample } from './examples/annotation-example.js';
 import { default as HeaderFooterExample } from './examples/header-footer-example.js';
 
 HeaderFooterExample.generate();
-TableExample.generate();
-StackingExample.generate();
-ContainerExample.generate();
-ImageExample.generate();
-AnnotationExample.generate();
+// TableExample.generate();
+// StackingExample.generate();
+// ContainerExample.generate();
+// ImageExample.generate();
+// AnnotationExample.generate();
