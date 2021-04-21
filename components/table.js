@@ -2,7 +2,6 @@ import BaseLayoutComponent from './base-layout-component.js';
 import { Container, Text } from './index.js';
 import { Alignment, Border, Offset, TextAlignment } from './properties/index.js';
 import { StackHorizontal } from './stack-horizontal.js';
-import { default as _ } from 'lodash';
 
 export class Table extends BaseLayoutComponent {
   constructor(properties) {
@@ -15,6 +14,8 @@ export class Table extends BaseLayoutComponent {
     this.alternativeCellStyle = properties.alternativeCellStyle || {};
 
     this.columns = properties.columns || [];
+
+    this._children = [];
   }
 
   initializeComponent(data) {
@@ -37,14 +38,16 @@ export class Table extends BaseLayoutComponent {
       return;
     }
 
-    // calculate relative width unit
-    const absoluteWidthTotal = _(this.columns)
-      .filter((c) => c.width > 1)
-      .sumBy((c) => c.width);
-
-    const relativeWidthTotal = _(this.columns)
-      .filter((c) => c.width <= 1)
-      .sumBy((c) => c.width);
+    // calculate absolute and relative widths
+    let absoluteWidthTotal = 0;
+    let relativeWidthTotal = 0;
+    for (let column of this.columns) {
+      if (column.width > 1) {
+        absoluteWidthTotal += column.width;
+      } else {
+        relativeWidthTotal += column.width;
+      }
+    }
 
     const availableRelativeWidth = this.width - this.margin.horizontalTotal - absoluteWidthTotal;
 
@@ -90,6 +93,7 @@ export class Table extends BaseLayoutComponent {
     headings.initializeComponent(data);
     headings.layoutComponent(document);
     headings.generateComponent(document, data);
+    this._children.push(headings);
 
     let offsetY = headings.height;
 
@@ -148,12 +152,22 @@ export class Table extends BaseLayoutComponent {
 
       if (offsetY + this.originY + row.height > this.originY + this.height) {
         document.renderNextPage = true;
-        return;
+        break;
       }
 
       row.generateComponent(document, data);
+      this._children.push(row);
 
       offsetY += row.height;
+    }
+    this.height = offsetY;
+  }
+
+  afterGenerateComponent(document) {
+    super.afterGenerateComponent(document);
+
+    for (let child of this._children) {
+      child.afterGenerateComponent(document);
     }
   }
 }

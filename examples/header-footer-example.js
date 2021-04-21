@@ -64,7 +64,7 @@ export default {
       children: [
         new RepeatVertical({
           binding: 'arrayValues',
-          child: new Container({
+          template: new Container({
             margin: new Offset({
               top: 5,
             }),

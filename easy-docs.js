@@ -41,7 +41,12 @@ const easyDocs = {
 
     do {
       documentPage.renderNextPage = false;
-      options.template.generateComponent(documentPage, options.data);
+
+      const page = options.template.clone();
+      page.initializeComponent(options.data);
+      page.layoutComponent(documentPage);
+      page.generateComponent(documentPage, options.data);
+      page.afterGenerateComponent(documentPage);
 
       if (documentPage.renderNextPage) {
         documentPage = doc.addPage({

@@ -76,11 +76,13 @@ export class Page extends BaseContainerComponent {
   }
 
   generateHeaderComponent(document, data) {
-    const header = this._getHeader(document);
+    const headerTemplate = this._getHeader(document);
 
-    if (!header) {
+    if (!headerTemplate) {
       return;
     }
+
+    const header = headerTemplate.clone();
 
     header.width = this.width - this.margin.horizontalTotal;
     header.originX = this.margin.left;
@@ -89,6 +91,7 @@ export class Page extends BaseContainerComponent {
     header.initializeComponent(data);
     header.layoutComponent(document);
     header.generateComponent(document, data);
+    header.afterGenerateComponent(document);
   }
 
   generateFooterComponent(document, data) {
@@ -97,14 +100,16 @@ export class Page extends BaseContainerComponent {
     }
 
     const footerHeight = this._getFooterHeight();
+    const footer = this.footer.clone();
 
-    this.footer.width = this.width - this.margin.horizontalTotal;
-    this.footer.originX = this.margin.left;
-    this.footer.originY = this.size.height - this.margin.bottom - footerHeight;
+    footer.width = this.width - this.margin.horizontalTotal;
+    footer.originX = this.margin.left;
+    footer.originY = this.size.height - this.margin.bottom - footerHeight;
 
-    this.footer.initializeComponent(data);
-    this.footer.layoutComponent(document);
-    this.footer.generateComponent(document, data);
+    footer.initializeComponent(data);
+    footer.layoutComponent(document);
+    footer.generateComponent(document, data);
+    footer.afterGenerateComponent(document);
   }
 
   generateComponent(document, data) {

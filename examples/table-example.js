@@ -36,6 +36,7 @@ export default {
       children: [
         new Table({
           binding: 'tableValues',
+          border: new Border(new BorderSide({ thickness: 1 })),
           headerStyle: {
             backgroundColor: 'green',
             fontWeight: FontWeight.bold,
