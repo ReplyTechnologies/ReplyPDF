@@ -108,17 +108,14 @@ export class Table extends BaseLayoutComponent {
       });
 
       for (let column of this.columns) {
-        let columnCellStyle = column.cellStyle;
-        let tableCellStyle = this.cellStyle;
+        let cellStyle = {};
+
+        Object.assign(cellStyle, this.cellStyle || {});
+        Object.assign(cellStyle, column.cellStyle || {});
 
         if (index % 2 == 0) {
-          if (column.alternativeCellStyle) {
-            columnCellStyle = column.alternativeCellStyle;
-          }
-
-          if (this.alternativeCellStyle) {
-            tableCellStyle = this.alternativeCellStyle;
-          }
+          Object.assign(cellStyle, this.alternativeCellStyle || {});
+          Object.assign(cellStyle, column.alternativeCellStyle || {});
         }
 
         let textValue = value[column.property];
@@ -128,14 +125,14 @@ export class Table extends BaseLayoutComponent {
 
         const cell = new Container({
           width: column._width,
-          border: columnCellStyle.border || tableCellStyle.border,
-          backgroundColor: columnCellStyle.backgroundColor || tableCellStyle.backgroundColor,
+          border: cellStyle.border,
+          backgroundColor: cellStyle.backgroundColor,
           children: [
             new Text({
               margin: new Offset(5),
-              textAlignment: columnCellStyle.textAlignment || tableCellStyle.textAlignment,
-              fontWeight: columnCellStyle.fontWeight || tableCellStyle.fontWeight,
-              color: columnCellStyle.color || tableCellStyle.color,
+              textAlignment: cellStyle.textAlignment,
+              fontWeight: cellStyle.fontWeight,
+              color: cellStyle.color,
               horizontalAlignment: Alignment.fill,
               text: textValue,
             }),

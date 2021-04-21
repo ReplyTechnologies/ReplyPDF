@@ -74,6 +74,7 @@ export default {
                 }),
               },
               cellStyle: {
+                textAlignment: TextAlignment.center,
                 backgroundColor: 'red',
                 color: 'yellow',
                 border: new Border({
@@ -106,9 +107,9 @@ export default {
             },
             {
               property: 'amount',
-              textAlignment: TextAlignment.right,
               width: 70,
               headerStyle: {
+                textAlignment: TextAlignment.right,
                 border: new Border({
                   left: new BorderSide({
                     thickness: 1
@@ -117,6 +118,9 @@ export default {
                     thickness: 1
                   }),
                 }),
+              },
+              cellStyle: {
+                textAlignment: TextAlignment.right,
               },
               text: 'Amount',
               fx: (index, record, value) => {
@@ -142,7 +146,7 @@ export default {
     let doc = EasyDocs.generateDocument({
       data: data,
       template: template,
-      debug: false,
+      debug: true,
     });
 
     doc.pipe(fs.createWriteStream('output-table-example.pdf'));
