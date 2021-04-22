@@ -4,11 +4,13 @@ export class Border {
   constructor(properties) {
     properties = properties || {};
 
-    if (properties && properties.constructor.name == 'BorderSide') {
+    if (properties.constructor.name == 'BorderSide') {
       this.left = properties;
       this.top = properties;
       this.right = properties;
       this.bottom = properties;
+    } else if (properties.thickness || properties.color) {
+      this.left = this.top = this.right = this.bottom = new BorderSide(properties);
     } else {
       this.left = properties.left || new BorderSide();
       this.top = properties.top || new BorderSide();
