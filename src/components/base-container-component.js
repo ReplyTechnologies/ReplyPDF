@@ -1,5 +1,4 @@
 import BaseLayoutComponent from './base-layout-component.js';
-import { Alignment } from './properties/index.js';
 
 export default class BaseContainerComponent extends BaseLayoutComponent {
   constructor(properties) {

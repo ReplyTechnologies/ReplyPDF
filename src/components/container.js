@@ -1,5 +1,5 @@
 import BaseContainerComponent from './base-container-component.js';
-import { Alignment, Border } from './properties/index.js';
+import { Alignment } from './enums/index.js';
 
 export class Container extends BaseContainerComponent {
   constructor(properties) {

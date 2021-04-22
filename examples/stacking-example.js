@@ -1,7 +1,8 @@
 import * as fs from 'fs';
-import { Container, Page, StackHorizontal, StackVertical, Table, Text } from '../components/index.js';
-import { PageSize, Offset, TextAlignment, FontWeight, Border, BorderSide } from '../components/properties/index.js';
-import { EasyDocs } from '../easy-docs.js';
+import { Container, Page, StackHorizontal, StackVertical, Text } from '../src/components/index.js';
+import { PageSize, TextAlignment } from '../src/components/enums/index.js';
+import { Offset } from '../src/components/models/index.js';
+import { EasyDocs } from '../src/easy-docs.js';
 
 export default {
   generate() {
@@ -85,7 +86,7 @@ export default {
       debug: true,
     });
 
-    doc.pipe(fs.createWriteStream('output-stacking-example.pdf'));
+    doc.pipe(fs.createWriteStream('examples/outputs/output-stacking-example.pdf'));
     doc.end();
   }
 }

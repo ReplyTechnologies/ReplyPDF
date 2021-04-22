@@ -1,5 +1,5 @@
 import BaseContainerComponent from './base-container-component.js';
-import { Alignment } from './properties/index.js';
+import { Alignment } from './enums/index.js';
 
 export class StackHorizontal extends BaseContainerComponent {
   constructor(properties) {

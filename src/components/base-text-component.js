@@ -1,5 +1,5 @@
 import BaseLayoutComponent from './base-layout-component.js';
-import { TextAlignment } from './properties/index.js';
+import { TextAlignment } from './enums/index.js';
 
 export default class BaseTextComponent extends BaseLayoutComponent {
   constructor(properties) {

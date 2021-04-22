@@ -1,4 +1,4 @@
-import { Size } from './size.js';
+import { Size } from '../models/index.js';
 
 const pageSize = {
   'A0': new Size({ width: 2383.94, height: 3370.39 }),

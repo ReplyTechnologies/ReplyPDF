@@ -1,7 +1,8 @@
 import * as fs from 'fs';
-import { Container, Page, RepeatVertical, StackVertical, Table, Text } from '../components/index.js';
-import { PageSize, Offset, TextAlignment, Border, BorderSide, Alignment } from '../components/properties/index.js';
-import { EasyDocs } from '../easy-docs.js';
+import { Container, Page, RepeatVertical, StackVertical, Text } from '../src/components/index.js';
+import { PageSize, TextAlignment, Alignment } from '../src/components/enums/index.js';
+import { Offset, Border, BorderSide } from '../src/components/models/index.js';
+import { EasyDocs } from '../src/easy-docs.js';
 
 export default {
   generate() {
@@ -98,7 +99,7 @@ export default {
       debug: false,
     });
 
-    doc.pipe(fs.createWriteStream('output-header-footer-example.pdf'));
+    doc.pipe(fs.createWriteStream('examples/outputs/output-header-footer-example.pdf'));
     doc.end();
   }
 }

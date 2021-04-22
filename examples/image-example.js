@@ -1,7 +1,8 @@
 import * as fs from 'fs';
-import { Container, Page, Text, Image, StackVertical, StackHorizontal } from '../components/index.js';
-import { PageSize, Offset, Alignment } from '../components/properties/index.js';
-import { EasyDocs } from '../easy-docs.js';
+import { Container, Page, Text, Image, StackVertical, StackHorizontal } from '../src/components/index.js';
+import { PageSize, Alignment } from '../src/components/enums/index.js';
+import { Offset } from '../src/components/models/index.js';
+import { EasyDocs } from '../src/easy-docs.js';
 
 export default {
   generate() {
@@ -158,7 +159,7 @@ export default {
       debug: true,
     });
 
-    doc.pipe(fs.createWriteStream('output-image-example.pdf'));
+    doc.pipe(fs.createWriteStream('examples/outputs/output-image-example.pdf'));
     doc.end();
   }
 }

@@ -1,5 +1,6 @@
 import BaseComponent from './base-component.js';
-import { Positioning, Offset, Alignment } from './properties/index.js';
+import { Alignment, Positioning } from './enums/index.js';
+import { Offset } from './models/index.js';
 
 export default class BaseLayoutComponent extends BaseComponent {
   constructor(properties) {

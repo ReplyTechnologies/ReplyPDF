@@ -1,5 +1,5 @@
 import BaseLayoutComponent from './base-layout-component.js';
-import { Alignment } from './properties/index.js';
+import { Alignment } from './enums/index.js';
 import { default as isUrl } from 'is-url';
 import { default as request } from 'sync-request';
 import { default as isXml } from 'is-xml';

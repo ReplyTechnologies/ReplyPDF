@@ -1,6 +1,7 @@
 import BaseLayoutComponent from './base-layout-component.js';
 import { Container, Text } from './index.js';
-import { Alignment, Border, Offset, TextAlignment } from './properties/index.js';
+import { Alignment } from './enums/index.js';
+import { Offset } from './models/index.js';
 import { StackHorizontal } from './stack-horizontal.js';
 
 export class Table extends BaseLayoutComponent {

@@ -1,5 +1,5 @@
 import BaseTextComponent from './base-text-component.js';
-import { Alignment, FontWeight } from './properties/index.js';
+import { Alignment, FontWeight } from './enums/index.js';
 
 export class Text extends BaseTextComponent {
   constructor(properties) {
