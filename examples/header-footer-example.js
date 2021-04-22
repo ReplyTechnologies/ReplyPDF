@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import { Container, Page, RepeatVertical, StackVertical, Table, Text } from '../components/index.js';
-import { PageSize, Offset, TextAlignment, FontWeight, Border, BorderSide, Alignment } from '../components/properties/index.js';
+import { PageSize, Offset, TextAlignment, Border, BorderSide, Alignment } from '../components/properties/index.js';
 import { EasyDocs } from '../easy-docs.js';
 
 export default {
@@ -90,6 +90,9 @@ export default {
     };
 
     let doc = EasyDocs.generateDocument({
+      info: {
+        title: 'Header & Footer Sample PDF',
+      },
       data: data,
       template: template,
       debug: false,

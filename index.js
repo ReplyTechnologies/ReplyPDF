@@ -7,7 +7,7 @@ import { default as HeaderFooterExample } from './examples/header-footer-example
 
 HeaderFooterExample.generate();
 TableExample.generate();
-// StackingExample.generate();
-// ContainerExample.generate();
-// ImageExample.generate();
-// AnnotationExample.generate();
+StackingExample.generate();
+ContainerExample.generate();
+ImageExample.generate();
+AnnotationExample.generate();
