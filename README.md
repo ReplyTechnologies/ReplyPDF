@@ -625,7 +625,7 @@ An example of using multiple templates can be found [here](./examples/multiple-t
 
 ### Custom Fonts
 
-Custom fonts can be embedded into the PDF document by supplying font names with accompanying buffers containing the content of the TrueTypeFont. The buffers can be loaded from a file, or from a URL by making a HTTP request. For the `fontWeight` property to function correctly, the bold version of a font should be named after the regular version + '-Bold'.
+Custom fonts can be embedded into the PDF document by supplying font names with accompanying buffers containing the content of the font. The buffers can be loaded from a file or from a URL by making a HTTP request. For the `fontWeight` property to function correctly, the bold version of a font should be named after the regular version + '-Bold'.
 
 Font buffers should be added to the `generateDocument` function parameter as shown in the example below:
 
@@ -680,10 +680,6 @@ var component = new ComponentTypeGoesHere({
 });
 ```
 
-### Editing Existing Documents
-
-// TODO
-
 ### Pitfalls
 
 Components that do not request new pages when content tries to overflow will continue to render content on the same page. The content of these components should ideally be assigned fixed sizes to prevent rendering content off of the page or content that overflows into the footer section.
@@ -699,6 +695,8 @@ Functionality to keep track of rendered templates in order to prevent rendering 
 Improve multiple template rendering process to be able to render different headers and footers for each template.
 
 Add functionality to render content of StackVertical onto a new page when it overflows.
+
+Implement functionality to use existing PDF documents as the base to render the template onto. As this functionality is not supported by PDFKit, the merge functionality may be delegated to [Hummus](https://www.npmjs.com/package/hummus) or [HummusRecipe](https://www.npmjs.com/package/hummus-recipe).
 
 #### New Components
 
