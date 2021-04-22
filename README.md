@@ -509,7 +509,7 @@ Offset constructor requires an object containing the properties listed below. Al
 
 Components can bind to a specific property in a data source and provide that binding to its content. String interpolation can be performed by enclosing the binding string in curly brace sets (`{{binding_string}}`).
 
-[Go to a usage example](./examples/binding-example.js)
+[Go to usage example](./examples/binding-example.js)
 
 ```js
 new Container({
@@ -569,7 +569,7 @@ Charts can be included into the PDF document by including the chart as an image.
 - Quick Chart (https://quickchart.io/)
 - Chart Works (https://www.chartworks.io/charts/image)
 
-An example of including a chart into a PDF can be found [here](link/to/chart-example.js).
+An example of including a chart into a PDF can be found [here](./examples/chart-example.js).
 
 ### Debugging
 

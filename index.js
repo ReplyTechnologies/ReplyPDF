@@ -5,6 +5,7 @@ import { default as ImageExample } from './examples/image-example.js';
 import { default as AnnotationExample } from './examples/annotation-example.js';
 import { default as HeaderFooterExample } from './examples/header-footer-example.js';
 import { default as BindingExample } from './examples/binding-example.js';
+import { default as ChartExample } from './examples/chart-example.js';
 
 HeaderFooterExample.generate();
 TableExample.generate();
@@ -13,3 +14,4 @@ ContainerExample.generate();
 ImageExample.generate();
 AnnotationExample.generate();
 BindingExample.generate();
+ChartExample.generate();
