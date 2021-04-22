@@ -47,31 +47,31 @@ export class Container extends BaseContainerComponent {
     for (let child of this.children) {
       switch (child.verticalAlignment) {
         case Alignment.start:
-          child.originY = this.originY + this.y + this.margin.top;
+          child._originY = this._originY + this.y + this.margin.top;
           break;
         case Alignment.end:
-          child.originY = this.originY + this.y + this.height - this.margin.bottom - child.height;
+          child._originY = this._originY + this.y + this.height - this.margin.bottom - child.height;
           break;
         case Alignment.middle:
-          child.originY = this.originY + this.y + (this.height / 2) - (child.height / 2);
+          child._originY = this._originY + this.y + (this.height / 2) - (child.height / 2);
           break;
         case Alignment.fill:
-          child.originY = this.originY + this.y + this.margin.top;
+          child._originY = this._originY + this.y + this.margin.top;
           break;
       }
 
       switch (child.horizontalAlignment) {
         case Alignment.start:
-          child.originX = this.originX + this.x + this.margin.left;
+          child._originX = this._originX + this.x + this.margin.left;
           break;
         case Alignment.end:
-          child.originX = this.originX + this.x + this.width - this.margin.right - child.width;
+          child._originX = this._originX + this.x + this.width - this.margin.right - child.width;
           break;
         case Alignment.middle:
-          child.originX = this.originX + this.x + (this.width / 2) - (child.width / 2)
+          child._originX = this._originX + this.x + (this.width / 2) - (child.width / 2)
           break;
         case Alignment.fill:
-          child.originX = this.originX + this.x + this.margin.left;
+          child._originX = this._originX + this.x + this.margin.left;
           break;
       }
 

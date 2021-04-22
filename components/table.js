@@ -7,8 +7,6 @@ export class Table extends BaseLayoutComponent {
   constructor(properties) {
     super(properties);
 
-    this.border = properties.border || new Border();
-
     this.headerStyle = properties.headerStyle || {};
     this.cellStyle = properties.cellStyle || {};
     this.alternativeCellStyle = properties.alternativeCellStyle || {};
@@ -87,8 +85,8 @@ export class Table extends BaseLayoutComponent {
     }
 
     // layout and render heading
-    headings.originX = this.originX + this.x + this.margin.left;
-    headings.originY = this.originY + this.y + this.margin.top;
+    headings._originX = this._originX + this.x + this.margin.left;
+    headings._originY = this._originY + this.y + this.margin.top;
 
     headings.initializeComponent(data);
     headings.layoutComponent(document);
@@ -141,13 +139,13 @@ export class Table extends BaseLayoutComponent {
         rowComponents.push(cell);
       }
 
-      row.originX = this.originX + this.x + this.margin.left;
-      row.originY = offsetY + this.originY + this.y + this.margin.top;
+      row._originX = this._originX + this.x + this.margin.left;
+      row._originY = offsetY + this._originY + this.y + this.margin.top;
 
       row.initializeComponent(data);
       row.layoutComponent(document);
 
-      if (offsetY + this.originY + row.height > this.originY + this.height) {
+      if (offsetY + this._originY + row.height > this._originY + this.height) {
         document.renderNextPage = true;
         break;
       }

@@ -27,13 +27,13 @@ export class RepeatVertical extends BaseLayoutComponent {
       const child = this.template.clone();
 
       child.width = this.width - this.margin.horizontalTotal;
-      child.originX = this.originX + this.margin.left;
-      child.originY = offsetY + this.originY + this.margin.top;
+      child._originX = this._originX + this.margin.left;
+      child._originY = offsetY + this._originY + this.margin.top;
 
       child.initializeComponent(value);
       child.layoutComponent(document);
 
-      if (child.originY + child.height > this.originY + this.height) {
+      if (child._originY + child.height > this._originY + this.height) {
         document.renderNextPage = true;
         return;
       }

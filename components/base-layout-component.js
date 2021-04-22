@@ -10,9 +10,10 @@ export default class BaseLayoutComponent extends BaseComponent {
     this.x = properties.x || 0;
     this.y = properties.y || 0;
 
-    this.originX = 0;
-    this.originY = 0;
+    this._originX = 0;
+    this._originY = 0;
 
+    // TODO Danie: planned for later implementation
     this.column = properties.column || 0;
     this.row = properties.row || 0;
 
@@ -20,6 +21,7 @@ export default class BaseLayoutComponent extends BaseComponent {
 
     this.border = properties.border;
 
+    // TODO Danie: planned for later implementation
     this.positioning = properties.positioning || Positioning.absolute;
 
     this.verticalAlignment = properties.verticalAlignment || Alignment.fill;
@@ -50,8 +52,8 @@ export default class BaseLayoutComponent extends BaseComponent {
     if (this.backgroundColor) {
       document
         .rect(
-          this.originX + this.x + this.margin.left,
-          this.originY + this.y + this.margin.top,
+          this._originX + this.x + this.margin.left,
+          this._originY + this.y + this.margin.top,
           this.width - this.margin.horizontalTotal,
           this.height - this.margin.verticalTotal)
         .fill(this.backgroundColor);
@@ -64,8 +66,8 @@ export default class BaseLayoutComponent extends BaseComponent {
 
     if (this._link) {
       document.link(
-        this.originX + this.x + this.margin.left,
-        this.originY + this.y + this.margin.top,
+        this._originX + this.x + this.margin.left,
+        this._originY + this.y + this.margin.top,
         this.width - this.margin.horizontalTotal,
         this.height - this.margin.verticalTotal,
         this._link
@@ -74,23 +76,23 @@ export default class BaseLayoutComponent extends BaseComponent {
 
     if (this.border) {
       const topLeft = {
-        x: this.originX + this.x + this.margin.left,
-        y: this.originY + this.y + this.margin.top,
+        x: this._originX + this.x + this.margin.left,
+        y: this._originY + this.y + this.margin.top,
       };
 
       const topRight = {
-        x: this.originX + this.x + this.width - this.margin.right,
-        y: this.originY + this.y + this.margin.top,
+        x: this._originX + this.x + this.width - this.margin.right,
+        y: this._originY + this.y + this.margin.top,
       };
 
       const bottomLeft = {
-        x: this.originX + this.x + this.margin.left,
-        y: this.originY + this.y + this.height - this.margin.bottom,
+        x: this._originX + this.x + this.margin.left,
+        y: this._originY + this.y + this.height - this.margin.bottom,
       };
 
       const bottomRight = {
-        x: this.originX + this.x + this.width - this.margin.right,
-        y: this.originY + this.y + this.height - this.margin.bottom,
+        x: this._originX + this.x + this.width - this.margin.right,
+        y: this._originY + this.y + this.height - this.margin.bottom,
       };
 
       const leftEnlargement = (this.border.left && this.border.left.thickness || 0) / 2;
@@ -116,8 +118,8 @@ export default class BaseLayoutComponent extends BaseComponent {
     document
       .strokeColor('red')
       .rect(
-        this.originX + this.x,
-        this.originY + this.y,
+        this._originX + this.x,
+        this._originY + this.y,
         this.width,
         this.height
       )
@@ -127,8 +129,8 @@ export default class BaseLayoutComponent extends BaseComponent {
     document
       .strokeColor('green')
       .rect(
-        this.originX + this.x + this.margin.left,
-        this.originY + this.y + this.margin.top,
+        this._originX + this.x + this.margin.left,
+        this._originY + this.y + this.margin.top,
         this.width - this.margin.horizontalTotal,
         this.height - this.margin.verticalTotal
       )

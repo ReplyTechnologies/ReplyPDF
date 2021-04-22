@@ -12,8 +12,6 @@ export class Page extends BaseContainerComponent {
 
     this.width = this.size.width;
     this.height = this.size.height;
-
-    this.children = properties.children || [];
   }
 
   initializeComponent(data) {
@@ -85,8 +83,8 @@ export class Page extends BaseContainerComponent {
     const header = headerTemplate.clone();
 
     header.width = this.width - this.margin.horizontalTotal;
-    header.originX = this.margin.left;
-    header.originY = this.margin.top;
+    header._originX = this.margin.left;
+    header._originY = this.margin.top;
 
     header.initializeComponent(data);
     header.layoutComponent(document);
@@ -102,9 +100,9 @@ export class Page extends BaseContainerComponent {
     const footerHeight = this._getFooterHeight();
     const footer = this.footer.clone();
 
-    footer.width = this.width - this.margin.horizontalTotal;
-    footer.originX = this.margin.left;
-    footer.originY = this.size.height - this.margin.bottom - footerHeight;
+    footer.width = this.size.width - this.margin.horizontalTotal;
+    footer._originX = this.margin.left;
+    footer._originY = this.size.height - this.margin.bottom - footerHeight;
 
     footer.initializeComponent(data);
     footer.layoutComponent(document);
@@ -119,10 +117,10 @@ export class Page extends BaseContainerComponent {
     const footerHeight = this._getFooterHeight();
 
     for (let child of this.children) {
-      child.width = this.width - this.margin.horizontalTotal;
+      child.width = this.size.width - this.margin.horizontalTotal;
       child.height = this.height - this.margin.verticalTotal - headerHeight - footerHeight;
-      child.originX = this.margin.left;
-      child.originY = this.margin.top + headerHeight;
+      child._originX = this.margin.left;
+      child._originY = this.margin.top + headerHeight;
 
       child.initializeComponent(data);
       child.layoutComponent(document);

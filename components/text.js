@@ -8,7 +8,6 @@ export class Text extends BaseTextComponent {
     this.verticalAlignment = properties.verticalAlignment || Alignment.start;
     this.horizontalAlignment = properties.horizontalAlignment || Alignment.start;
 
-    this.link = properties.link;
     this.linkStyle = {
       color: '#1a0dab',
       underline: true,
@@ -60,8 +59,8 @@ export class Text extends BaseTextComponent {
       .font(this.fontFamily + (this.fontWeight == FontWeight.bold ? '-Bold' : ''))
       .fillColor(this.link && this.linkStyle.color || this.color)
       .text(this._text,
-        this.originX + this.x + this.margin.left,
-        this.originY + this.y + this.margin.top, {
+        this._originX + this.x + this.margin.left,
+        this._originY + this.y + this.margin.top, {
           width: this.width - this.margin.horizontalTotal,
           align: this.textAlignment,
           ellipsis: this.ellipsis,

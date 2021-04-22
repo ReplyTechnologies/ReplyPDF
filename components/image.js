@@ -66,8 +66,8 @@ export class Image extends BaseLayoutComponent {
       SVGtoPDF(
         document,
         this.source,
-        this.originX + this.x + this.margin.left,
-        this.originY + this.y + this.margin.top, {
+        this._originX + this.x + this.margin.left,
+        this._originY + this.y + this.margin.top, {
           width: this.width,
           height: this.height,
         }
@@ -76,8 +76,8 @@ export class Image extends BaseLayoutComponent {
       // render image normally
       document.image(
         this.source,
-        this.originX + this.x + this.margin.left,
-        this.originY + this.y + this.margin.top, {
+        this._originX + this.x + this.margin.left,
+        this._originY + this.y + this.margin.top, {
           fit: !this.stretch && [this.width, this.height],
           width: this.stretch && this.width,
           height: this.stretch && this.height,

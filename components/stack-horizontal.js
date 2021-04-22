@@ -21,8 +21,8 @@ export class StackHorizontal extends BaseContainerComponent {
     let maxHeight = 0;
 
     for (let child of this.children) {
-      child.originX = offsetX + this.originX + this.x + this.margin.left;
-      child.originY = this.originY + this.y + this.margin.top;
+      child._originX = offsetX + this._originX + this.x + this.margin.left;
+      child._originY = this._originY + this.y + this.margin.top;
 
       child.layoutComponent(document);
 
@@ -35,16 +35,16 @@ export class StackHorizontal extends BaseContainerComponent {
     for (let child of this.children) {
       switch (child.verticalAlignment) {
         case Alignment.start:
-          child.originY = this.originY + this.y + this.margin.top;
+          child._originY = this._originY + this.y + this.margin.top;
           break;
         case Alignment.end:
-          child.originY = this.originY + this.y + this.height - this.margin.bottom - child.height;
+          child._originY = this._originY + this.y + this.height - this.margin.bottom - child.height;
           break;
         case Alignment.middle:
-          child.originY = this.originY + this.y + (this.height / 2) - (child.height / 2);
+          child._originY = this._originY + this.y + (this.height / 2) - (child.height / 2);
           break;
         case Alignment.fill:
-          child.originY = this.originY + this.y + this.margin.top;
+          child._originY = this._originY + this.y + this.margin.top;
           child.height = maxHeight;
           break;
       }

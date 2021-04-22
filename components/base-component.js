@@ -2,7 +2,8 @@ export default class BaseComponent {
   constructor(properties) {
     this.binding = properties.binding;
     this.debug = properties.debug;
-    this.parent = undefined;
+
+    this._parent = undefined;
   }
 
   initializeComponent(data) {}

@@ -14,8 +14,8 @@ export default class BaseContainerComponent extends BaseLayoutComponent {
       child.width = this.width - this.margin.horizontalTotal;
       child.height = this.height - this.margin.verticalTotal;
 
-      child.originY = this.originY + this.y + this.margin.top;
-      child.originX = this.originX + this.x + this.margin.left;
+      child._originY = this._originY + this.y + this.margin.top;
+      child._originX = this._originX + this.x + this.margin.left;
 
       child.layoutComponent(document);
     }

@@ -20,8 +20,8 @@ export class StackVertical extends BaseContainerComponent {
     let maxWidth = 0;
 
     for (let child of this.children) {
-      child.originX = this.originX + this.x + this.margin.left;
-      child.originY = offsetY + this.originY + this.y + this.margin.top;
+      child._originX = this._originX + this.x + this.margin.left;
+      child._originY = offsetY + this._originY + this.y + this.margin.top;
 
       child.layoutComponent(document);
 
