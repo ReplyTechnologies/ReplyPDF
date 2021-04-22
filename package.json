@@ -5,7 +5,7 @@
   "main": "src/reply-pdf.js",
   "type": "module",
   "scripts": {
-    "test": "node test.js",
+    "test": "node test.js"
   },
   "author": "Reply Technologies",
   "license": "mit",
