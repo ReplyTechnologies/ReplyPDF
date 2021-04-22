@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import { Container, Page, Text, Image, StackVertical, StackHorizontal } from '../src/components/index.js';
 import { PageSize, Alignment } from '../src/components/enums/index.js';
 import { Offset } from '../src/components/models/index.js';
-import { EasyDocs } from '../src/easy-docs.js';
+import { ReplyPDF } from '../src/reply-pdf.js';
 
 export default {
   generate() {
@@ -153,7 +153,7 @@ export default {
       svgImageUrl: svgImageUrl,
     };
 
-    let doc = EasyDocs.generateDocument({
+    let doc = ReplyPDF.generateDocument({
       data: data,
       template: template,
       debug: false,

@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import { Page, StackVertical, Text } from '../src/components/index.js';
 import { PageSize, FontWeight } from '../src/components/enums/index.js';
 import { Offset } from '../src/components/models/index.js';
-import { EasyDocs } from '../src/easy-docs.js';
+import { ReplyPDF } from '../src/reply-pdf.js';
 
 export default {
   generate() {
@@ -45,7 +45,7 @@ export default {
       ],
     });
 
-    let doc = EasyDocs.generateDocument({
+    let doc = ReplyPDF.generateDocument({
       fonts: {
         'Robinette': fs.readFileSync('examples/fonts/Robinette.ttf'),
         'GrandAutoDemo': fs.readFileSync('examples/fonts/GrandAutoDemoRegular.ttf'),

@@ -1,6 +1,6 @@
 import { default as PDFDocument } from 'pdfkit';
 
-const easyDocs = {
+const replyPDF = {
   generateDocument(options) {
     if (!options.template) {
       throw new Error('No template provided');
@@ -84,4 +84,4 @@ const easyDocs = {
   }
 };
 
-export { easyDocs as EasyDocs };
+export { replyPDF as ReplyPDF };

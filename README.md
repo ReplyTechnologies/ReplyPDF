@@ -1,9 +1,6 @@
-## EasyDocs
+## ReplyPDF
 
-![BADGE_NPM_DOWNLOADS](https://img.shields.io/npm/dw/reply-pdf) ![BADGE_NPM_VERSION](https://img.shields.io/npm/v/reply-pdf) ![BADGE_NPM_LICENCE](https://img.shields.io/npm/l/reply-pdf) [![BADGE_PAYPAL](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate/?hosted_button_id=BVBKNU8NHN2UN)
-
-
-![BADGE_NPM_DOWNLOADS](https://img.shields.io/npm/dt/jszpl?color=purple) ![BADGE_NPM_DOWNLOADS](https://img.shields.io/npm/dw/jszpl) ![BADGE_NPM_VERSION](https://img.shields.io/npm/v/jszpl) ![BADGE_NPM_LICENCE](https://img.shields.io/npm/l/jszpl) [![BADGE_PAYPAL](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate/?hosted_button_id=BVBKNU8NHN2UN)
+![BADGE_NPM_DOWNLOADS](https://img.shields.io/npm/dt/reply-pdf)![BADGE_NPM_DOWNLOADS](https://img.shields.io/npm/dw/reply-pdf)![BADGE_NPM_VERSION](https://img.shields.io/npm/v/reply-pdf) ![BADGE_NPM_LICENCE](https://img.shields.io/npm/l/reply-pdf) [![BADGE_PAYPAL](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate/?hosted_button_id=BVBKNU8NHN2UN)
 
 <img src="./resources/process_infographic.svg" alt="Process Infographic"  />
 
@@ -13,7 +10,7 @@ If you ever had to create a PDF document you would be familiar with the struggle
 
 ### Installation
 
-**NodeJS**
+**Node**
 
 ```
 npm install reply-pdf
@@ -610,12 +607,12 @@ const template2 = new Page({
     ],
 });
 ...
-let doc = EasyDocs.generateDocument({
+let doc = ReplyPDF.generateDocument({
     data: data1,
     template: template1,
 });
 
-doc = EasyDocs.generateDocument({
+doc = ReplyPDF.generateDocument({
     doc: doc,
     template: template2,
 });
@@ -630,7 +627,7 @@ Custom fonts can be embedded into the PDF document by supplying font names with 
 Font buffers should be added to the `generateDocument` function parameter as shown in the example below:
 
 ```js
-let doc = EasyDocs.generateDocument({
+let doc = ReplyPDF.generateDocument({
     fonts: {
         'Robinette': fs.readFileSync('examples/fonts/Robinette.ttf'),
         'GrandAutoDemo': fs.readFileSync('examples/fonts/GrandAutoDemoRegular.ttf'),
@@ -663,7 +660,7 @@ Debugging can be enabled on a document or component level. When debugging is ena
 **Enabling debugging on document level:**
 
 ```javascript
-let doc = EasyDocs.generateDocument({
+let doc = ReplyPDF.generateDocument({
     ...
     debug: true,
     ...
@@ -678,6 +675,14 @@ var component = new ComponentTypeGoesHere({
     debug: true,
     ...
 });
+```
+
+### Tests
+
+The file [tests.js](./tests.js) contains code to run all the examples in this project. Each example generates a PDF file as output. To execute the tests, run the following command:
+
+```sh
+npm test
 ```
 
 ### Pitfalls

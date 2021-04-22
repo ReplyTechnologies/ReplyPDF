@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import { Container, Page, RepeatVertical, StackHorizontal, StackVertical, Text } from '../src/components/index.js';
 import { Alignment, PageSize, TextAlignment } from '../src/components/enums/index.js';
 import { Border, BorderSide, Offset } from '../src/components/models/index.js';
-import { EasyDocs } from '../src/easy-docs.js';
+import { ReplyPDF } from '../src/reply-pdf.js';
 
 export default {
   generate() {
@@ -102,13 +102,13 @@ export default {
       date: (new Date()).toLocaleDateString(),
     };
 
-    let doc = EasyDocs.generateDocument({
+    let doc = ReplyPDF.generateDocument({
       data: data1,
       template: template1,
       debug: false,
     });
 
-    doc = EasyDocs.generateDocument({
+    doc = ReplyPDF.generateDocument({
       doc: doc,
       data: data2,
       template: template2,

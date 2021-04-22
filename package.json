@@ -1,11 +1,11 @@
 {
-  "name": "easydocs",
+  "name": "reply-pdf",
   "version": "0.0.1",
   "description": "simplified pdf generation",
-  "main": "index.js",
+  "main": "src/reply-pdf.js",
   "type": "module",
   "scripts": {
-    "test": "node index.js",
+    "test": "node test.js",
     "build": "webpack --config webpack.config.js"
   },
   "author": "Reply Technologies",
