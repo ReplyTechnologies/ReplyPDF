@@ -94,7 +94,7 @@ export default {
                   stretch: true,
                   source: 'https://picsum.photos/100/400',
                 }),
-              ],
+               ],
             }),
             new StackVertical({
               margin: new Offset(10),
@@ -156,7 +156,7 @@ export default {
     let doc = EasyDocs.generateDocument({
       data: data,
       template: template,
-      debug: true,
+      debug: false,
     });
 
     doc.pipe(fs.createWriteStream('examples/outputs/output-image-example.pdf'));

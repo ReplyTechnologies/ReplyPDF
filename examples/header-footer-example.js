@@ -17,7 +17,7 @@ export default {
       firstPageHeader: new Container({
         height: 150,
         backgroundColor: '#fcc',
-        border: new Border(new BorderSide({ thickness: 1 })),
+        border: new Border(),
         children: [
           new StackVertical({
             margin: new Offset(10),
@@ -35,7 +35,7 @@ export default {
       header: new Container({
         height: 50,
         backgroundColor: '#cfc',
-        border: new Border(new BorderSide({ thickness: 1 })),
+        border: new Border(),
         children: [
           new StackVertical({
             margin: new Offset(10),
@@ -69,7 +69,7 @@ export default {
             margin: new Offset({
               top: 5,
             }),
-            border: new Border(new BorderSide({ thickness: 1 })),
+            border: new Border(),
             children: [
               new Text({
                 margin: new Offset(5),

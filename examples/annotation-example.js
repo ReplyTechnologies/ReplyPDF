@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import { Container, Page, StackVertical, Text } from '../src/components/index.js';
-import { PageSize, Alignment } from '../src/components/enums/index.js';
+import { PageSize, Alignment, FontWeight } from '../src/components/enums/index.js';
 import { Offset, Border, BorderSide } from '../src/components/models/index.js';
 import { EasyDocs } from '../src/easy-docs.js';
 
@@ -14,6 +14,7 @@ export default {
           children: [
             new Text({
               margin: new Offset(10),
+              fontWeight: FontWeight.bold,
               text: 'Go to Google',
               link: 'https://www.google.com'
             }),
@@ -39,7 +40,7 @@ export default {
             }),
             new Container({
               height: 50,
-              border: new Border(new BorderSide({ thickness: 5 })),
+              border: new Border(new BorderSide({ thickness: 1 })),
               margin: new Offset(10),
               link: 'https://www.google.com',
               children: [

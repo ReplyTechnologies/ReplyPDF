@@ -96,7 +96,7 @@ export default {
     let doc = EasyDocs.generateDocument({
       data: data,
       template: template,
-      debug: true,
+      debug: false,
     });
 
     doc.pipe(fs.createWriteStream('examples/outputs/output-container-example.pdf'));

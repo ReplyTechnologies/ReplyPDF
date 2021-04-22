@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import { Container, Page, StackHorizontal, StackVertical, Text } from '../src/components/index.js';
 import { PageSize, TextAlignment } from '../src/components/enums/index.js';
-import { Offset } from '../src/components/models/index.js';
+import { Border, BorderSide, Offset } from '../src/components/models/index.js';
 import { EasyDocs } from '../src/easy-docs.js';
 
 export default {
@@ -13,7 +13,7 @@ export default {
         height: 50,
         children: [
           new Text({
-            text: 'Sample PDF document - Stack Horizontal',
+            text: 'Sample PDF document - Stacking',
           }),
         ],
       }),
@@ -37,12 +37,12 @@ export default {
               children: [
                 new Text({ text: '1', width: 50 }),
                 new Text({ text: '2' }),
-                new Text({ text: '3', margin: new Offset(15) }),
-                new Container({
-                  children: [
-                    new Text({ text: '4' }),
-                  ],
+                new Text({
+                  backgroundColor: 'orange',
+                  text: '3',
+                  margin: new Offset(15)
                 }),
+                new Text({ text: '4' }),
                 new Text({ text: '5' }),
               ],
             }),
@@ -50,17 +50,16 @@ export default {
               children: [
                 new Text({ text: '1', height: 50 }),
                 new Text({ text: '2' }),
-                new Text({ text: '3', margin: new Offset(15) }),
-                new Container({
-                  children: [
-                    new Text({ text: '4' }),
-                  ],
+                new Text({
+                  backgroundColor: 'pink',
+                  text: '3',
+                  margin: new Offset(15)
                 }),
+                new Text({ text: '4' }),
                 new Text({ text: '5' }),
               ],
             }),
             new StackHorizontal({
-              debug: true,
               children: [
                 new Text({ text: '1', width: 100 }),
                 new Text({ text: '2' }),
@@ -83,7 +82,7 @@ export default {
     let doc = EasyDocs.generateDocument({
       data: data,
       template: template,
-      debug: true,
+      debug: false,
     });
 
     doc.pipe(fs.createWriteStream('examples/outputs/output-stacking-example.pdf'));
