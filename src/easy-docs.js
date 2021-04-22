@@ -10,6 +10,7 @@ const easyDocs = {
       throw new Error('Invalid template provided. Template must be of type Page');
     }
 
+
     options.info = options.info || {};
     options.info.keywords = options.info.keywords || [];
 
@@ -24,6 +25,12 @@ const easyDocs = {
         Keywords: options.info.keywords.join(','),
       },
     });
+
+    if (options.fonts) {
+      for (let fontName in options.fonts) {
+        doc.registerFont(fontName, options.fonts[fontName]);
+      }
+    }
 
     doc.debug = options.debug;
 

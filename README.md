@@ -547,15 +547,30 @@ const data = {
 
 ![component_example_binding](./resources/component_example_binding.png)
 
-### Header
+### Header & Footer
 
-Header templates are applied to the `firstPageHeader` and `header` properties of a Page template. If `firstPageHeader` has a value, its template will be rendered on the first page of the document, subsequent pages will use `header` if present. The header template must have an explicit `height` value set.
+Header templates should set in the `firstPageHeader` and `header` properties of a Page component. If `firstPageHeader` has a value, its template will be rendered on the first page of the document, subsequent pages will use `header` if present. The header template must have an explicit `height` value set.
 
-An example of a header can be found [here](./examples/header-footer.js).
+The footer template should be set in the `footer` property of a Page component. The footer template must have an explicit `height` value set.
 
-### Footer
+Components within the header and footer templates can bind to the `pageNumber` and `pageCount` properties of the data source to display the current page information.
 
-An example of a footer can be found [here](./examples/header-footer.js).
+```js
+...
+footer: new Container({
+    height: 50,
+    children: [
+        new Text({
+            text: 'Page {{pageNumber}} of {{pageCount}}',
+        }),
+    ],
+}),
+...
+```
+
+![example_footer_page_number](./resources/example_footer_page_number.png)
+
+An example of a header and footer can be found [here](./examples/header-footer.js).
 
 ### Multiple Templates
 
@@ -563,7 +578,24 @@ dadsrf
 
 ### Custom Fonts
 
-asdf
+Custom fonts can be embedded into the PDF document by supplying font names with accompanying buffers containing the content of the TrueTypeFont. The buffers can be loaded from a file, or from a URL by making a HTTP request. For the `fontWeight` property to function correctly, the bold version of a font should be named after the regular version + '-Bold'.
+
+Font buffers should be added to the `generateDocument` function parameter as shown in the example below:
+
+```js
+let doc = EasyDocs.generateDocument({
+    fonts: {
+        'Robinette': fs.readFileSync('examples/fonts/Robinette.ttf'),
+        'GrandAutoDemo': fs.readFileSync('examples/fonts/GrandAutoDemoRegular.ttf'),
+        'PlayfairDisplay': fs.readFileSync('examples/fonts/PlayfairDisplay-Regular.ttf'),
+        'PlayfairDisplay-Bold': fs.readFileSync('examples/fonts/PlayfairDisplay-Bold.ttf'),
+    },
+    template: template,
+    debug: false,
+});
+```
+
+An example of using custom fonts can be found [here](./examples/custom-font-example.js).
 
 ### Charts
 
