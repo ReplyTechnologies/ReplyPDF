@@ -63,11 +63,14 @@ const easyDocs = {
       doc.switchToPage(i);
       documentPage.pageIndex = i;
 
-      options.pageNumber = i + 1;
-      options.pageCount = pages.count;
+      const page = options.template.clone();
 
-      options.template.generateHeaderComponent(documentPage, options);
-      options.template.generateFooterComponent(documentPage, options);
+      options.data = options.data || {};
+      options.data.pageNumber = i + 1;
+      options.data.pageCount = pages.count;
+
+      page.generateHeaderComponent(documentPage, options.data);
+      page.generateFooterComponent(documentPage, options.data);
     }
 
     return doc;

@@ -509,7 +509,9 @@ Offset constructor requires an object containing the properties listed below. Al
 
 Components can bind to a specific property in a data source and provide that binding to its content. String interpolation can be performed by enclosing the binding string in curly brace sets (`{{binding_string}}`).
 
-[Go to usage example](./examples/binding-example.js)
+For the purposes of binding page information to the header and footer components, the data source should not contain properties named `pageNumber` or `pageCount`.
+
+An example of binding can be found [here](./examples/binding-example.js).
 
 ```js
 new Container({
@@ -547,11 +549,13 @@ const data = {
 
 ### Header
 
-asdf
+Header templates are applied to the `firstPageHeader` and `header` properties of a Page template. If `firstPageHeader` has a value, its template will be rendered on the first page of the document, subsequent pages will use `header` if present. The header template must have an explicit `height` value set.
+
+An example of a header can be found [here](./examples/header-footer.js).
 
 ### Footer
 
-aasdf
+An example of a footer can be found [here](./examples/header-footer.js).
 
 ### Multiple Templates
 

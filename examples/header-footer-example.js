@@ -23,7 +23,7 @@ export default {
             margin: new Offset(10),
             children: [
               new Text({
-                text: 'Sample PDF document - Header & Footer',
+                text: 'Sample PDF document - Header & Footer - {{date}}',
               }),
               new Text({
                 text: 'First Page Header',
@@ -41,7 +41,7 @@ export default {
             margin: new Offset(10),
             children: [
               new Text({
-                text: 'Sample PDF document - Header & Footer',
+                text: 'Sample PDF document - Header & Footer - {{date}}',
               }),
               new Text({
                 text: 'Normal Page Header',
@@ -53,6 +53,12 @@ export default {
       footer: new Container({
         height: 50,
         children: [
+          new Text({
+            horizontalAlignment: Alignment.start,
+            verticalAlignment: Alignment.end,
+            fontSize: 10,
+            text: '{{date}}',
+          }),
           new Text({
             horizontalAlignment: Alignment.end,
             verticalAlignment: Alignment.end,
@@ -88,6 +94,7 @@ export default {
 
     const data = {
       arrayValues: array,
+      date: (new Date()).toLocaleDateString(),
     };
 
     let doc = EasyDocs.generateDocument({
