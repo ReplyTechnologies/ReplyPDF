@@ -59,7 +59,7 @@ export default {
                 new Image({
                   width: 100,
                   height: 100,
-                  source: process.cwd() + '/sample-image.jpg'
+                  source: process.cwd() + '/examples/images/sample-image.jpg'
                 }),
                 new Text({
                   text: 'Image from base64 binding:',
