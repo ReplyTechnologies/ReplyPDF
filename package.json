@@ -6,10 +6,9 @@
   "type": "module",
   "scripts": {
     "test": "node test.js",
-    "build": "webpack --config webpack.config.js"
   },
   "author": "Reply Technologies",
-  "license": "ISC",
+  "license": "mit",
   "dependencies": {
     "is-url": "^1.2.4",
     "is-xml": "^0.1.0",
