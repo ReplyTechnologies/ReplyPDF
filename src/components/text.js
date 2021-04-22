@@ -26,9 +26,7 @@ export class Text extends BaseTextComponent {
   initializeComponent(data) {
     super.initializeComponent(data);
 
-    const dataBindingSource = this.getBinding(data);
-
-    this._text = this.getStringBinding(dataBindingSource, this.text);
+    this._text = this.getStringBinding(data, this.text);
   }
 
   layoutComponent(document) {

@@ -24,55 +24,6 @@ export class Page extends BaseContainerComponent {
     }
   }
 
-  generateDebugLayout(document) {
-    if (!document.debug) {
-      return;
-    }
-
-    document.lineWidth(0.5);
-
-    document
-      .strokeColor('red')
-      .rect(0, 0, this.size.width, this.size.height)
-      .stroke();
-
-    const headerHeight = this._getHeaderHeight(document);
-    const footerHeight = this._getFooterHeight();
-
-    // area for header
-    document
-      .strokeColor('blue')
-      .rect(
-        this.margin.left,
-        this.margin.top,
-        this.size.width - this.margin.horizontalTotal,
-        headerHeight
-      )
-      .stroke();
-
-    // area for footer
-    document
-      .strokeColor('purple')
-      .rect(
-        this.margin.left,
-        this.size.height - this.margin.bottom - footerHeight,
-        this.size.width - this.margin.horizontalTotal,
-        footerHeight
-      )
-      .stroke();
-
-    // area for content
-    document
-      .strokeColor('green')
-      .rect(
-        this.margin.left,
-        this.margin.top + headerHeight,
-        this.size.width - this.margin.horizontalTotal,
-        this.size.height - this.margin.verticalTotal - headerHeight - footerHeight
-      )
-      .stroke();
-  }
-
   generateHeaderComponent(document, data) {
     const headerTemplate = this._getHeader(document);
 
@@ -118,7 +69,7 @@ export class Page extends BaseContainerComponent {
 
     for (let child of this.children) {
       child.width = this.size.width - this.margin.horizontalTotal;
-      child.height = this.height - this.margin.verticalTotal - headerHeight - footerHeight;
+      child.height = this.size.height - this.margin.verticalTotal - headerHeight - footerHeight;
       child._originX = this.margin.left;
       child._originY = this.margin.top + headerHeight;
 
