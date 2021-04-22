@@ -1,7 +1,7 @@
 import * as fs from 'fs';
-import { Container, Page, StackVertical, Text } from '../src/components/index.js';
-import { PageSize, Alignment, FontWeight } from '../src/components/enums/index.js';
-import { Offset, Border, BorderSide } from '../src/components/models/index.js';
+import { Page, StackVertical, Text } from '../src/components/index.js';
+import { PageSize, FontWeight } from '../src/components/enums/index.js';
+import { Offset } from '../src/components/models/index.js';
 import { EasyDocs } from '../src/easy-docs.js';
 
 export default {

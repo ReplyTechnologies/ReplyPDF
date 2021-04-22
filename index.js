@@ -7,6 +7,7 @@ import { default as HeaderFooterExample } from './examples/header-footer-example
 import { default as BindingExample } from './examples/binding-example.js';
 import { default as ChartExample } from './examples/chart-example.js';
 import { default as CustomFontExample } from './examples/custom-font-example.js';
+import { default as MultipleTemplateExample } from './examples/multiple-template-example.js';
 
 HeaderFooterExample.generate();
 TableExample.generate();
@@ -17,3 +18,4 @@ AnnotationExample.generate();
 BindingExample.generate();
 ChartExample.generate();
 CustomFontExample.generate();
+MultipleTemplateExample.generate();

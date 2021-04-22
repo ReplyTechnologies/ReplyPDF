@@ -574,7 +574,54 @@ An example of a header and footer can be found [here](./examples/header-footer.j
 
 ### Multiple Templates
 
-dadsrf
+Rendering multiple templates to a single document can be achieved by defining multiple Page templates, and passing the resulting `doc` as a parameter to the next rendering. Only the last template should define header and footer content, preceding templates should contain empty components which define only the `height` property. All headers and footers should share the same respective `height` values. As an alternative to creating empty header and footer components, the preceding pages may specify a larger margin to consume the space.
+
+```js
+const template1 = new Page({
+    size: PageSize.A4,
+    margin: new Offset(50),
+    header: new Container({
+        height: 50,
+    }),
+    footer: new Container({
+        height: 50,
+    }),
+    children: [
+        ...
+    ],
+});
+const template2 = new Page({
+    size: PageSize.A4,
+    margin: new Offset(50),
+    header: new Container({
+        height: 50,
+        children: [
+            ...
+        ],
+    }),
+    footer: new Container({
+        height: 50,
+        children: [
+            ...
+        ],
+    }),
+    children: [
+        ...
+    ],
+});
+...
+let doc = EasyDocs.generateDocument({
+    data: data1,
+    template: template1,
+});
+
+doc = EasyDocs.generateDocument({
+    doc: doc,
+    template: template2,
+});
+```
+
+An example of using multiple templates can be found [here](./examples/multiple-template-example.js).
 
 ### Custom Fonts
 
@@ -635,7 +682,7 @@ var component = new ComponentTypeGoesHere({
 
 ### Editing Existing Documents
 
-adsfds
+// TODO
 
 ### Pitfalls
 
@@ -648,6 +695,8 @@ Image rendering from URL is performed by making synchronous http calls. You may 
 #### General Enhancements
 
 Functionality to keep track of rendered templates in order to prevent rendering duplicate content when a document with multiple pages is created.
+
+Improve multiple template rendering process to be able to render different headers and footers for each template.
 
 Add functionality to render content of StackVertical onto a new page when it overflows.
 
