@@ -1,6 +1,6 @@
 ## ReplyPDF
 
-![BADGE_NPM_DOWNLOADS](https://img.shields.io/npm/dt/reply-pdf)![BADGE_NPM_DOWNLOADS](https://img.shields.io/npm/dw/reply-pdf)![BADGE_NPM_VERSION](https://img.shields.io/npm/v/reply-pdf) ![BADGE_NPM_LICENCE](https://img.shields.io/npm/l/reply-pdf) [![BADGE_PAYPAL](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate/?hosted_button_id=BVBKNU8NHN2UN)
+![BADGE_NPM_DOWNLOADS](https://img.shields.io/npm/dt/reply-pdf) ![BADGE_NPM_DOWNLOADS](https://img.shields.io/npm/dw/reply-pdf) ![BADGE_NPM_VERSION](https://img.shields.io/npm/v/reply-pdf) ![BADGE_NPM_LICENCE](https://img.shields.io/npm/l/reply-pdf) [![BADGE_PAYPAL](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate/?hosted_button_id=BVBKNU8NHN2UN)
 
 <img src="./resources/process_infographic.svg" alt="Process Infographic"  />
 
