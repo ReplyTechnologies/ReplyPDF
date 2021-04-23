@@ -1,6 +1,6 @@
 {
   "name": "@replytechnologies/reply-pdf",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "simplified pdf generation",
   "main": "src/reply-pdf.js",
   "exports": {
@@ -18,7 +18,7 @@
     "url": "https://github.com/ReplyTechnologies/ReplyPDF.git"
   },
   "keywords": [
-    "pdf", "template", "reply"
+    "pdf", "template", "reply", "reply-pdf", "generate"
   ],
   "funding": "https://www.paypal.com/donate/?hosted_button_id=BVBKNU8NHN2UN",
   "license": "MIT",

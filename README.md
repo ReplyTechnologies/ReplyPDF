@@ -1,6 +1,6 @@
 ## ReplyPDF
 
-![BADGE_NPM_DOWNLOADS](https://img.shields.io/npm/dt/reply-pdf) ![BADGE_NPM_DOWNLOADS](https://img.shields.io/npm/dw/reply-pdf) ![BADGE_NPM_VERSION](https://img.shields.io/npm/v/reply-pdf) ![BADGE_NPM_LICENCE](https://img.shields.io/npm/l/reply-pdf) [![BADGE_PAYPAL](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate/?hosted_button_id=BVBKNU8NHN2UN)
+![BADGE_NPM_DOWNLOADS](https://img.shields.io/npm/dt/@replytechnologies/reply-pdf) ![BADGE_NPM_DOWNLOADS](https://img.shields.io/npm/dw/@replytechnologies/reply-pdf) ![BADGE_NPM_VERSION](https://img.shields.io/npm/v/@replytechnologies/reply-pdf) ![BADGE_NPM_LICENCE](https://img.shields.io/npm/l/@replytechnologies/reply-pdf) [![BADGE_PAYPAL](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate/?hosted_button_id=BVBKNU8NHN2UN)
 
 <img src="./resources/process_infographic.svg" alt="Process Infographic"  />
 
@@ -13,7 +13,7 @@ If you ever had to create a PDF document you would be familiar with the struggle
 **Node**
 
 ```sh
-npm install reply-pdf
+npm install @replytechnologies/reply-pdf
 ```
 
 **Web**
@@ -27,7 +27,7 @@ npm install reply-pdf
 **Node.js <= 12**
 
 ```js
-const ReplyPDF = require('reply-pdf');
+const ReplyPDF = require('@replytechnologies/reply-pdf');
 const { ...components... } = ReplyPDF.components;
 const { ...enums... } = ReplyPDF.enums;
 const { ...models... } = ReplyPDF.models;
@@ -36,10 +36,10 @@ const { ...models... } = ReplyPDF.models;
 **Node.js > 12**
 
 ```js
-const ReplyPDF = require('reply-pdf');
-const { ...components... } = require('reply-pdf/components');
-const { ...enums... } = require('reply-pdf/enums');
-const { ...models... } = require('reply-pdf/models');
+const ReplyPDF = require('@replytechnologies/reply-pdf');
+const { ...components... } = require('@replytechnologies/reply-pdf/components');
+const { ...enums... } = require('@replytechnologies/reply-pdf/enums');
+const { ...models... } = require('@replytechnologies/reply-pdf/models');
 ```
 
 ### Under the Hood
