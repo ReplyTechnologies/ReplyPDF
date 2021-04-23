@@ -1,6 +1,6 @@
-import { BorderSide } from './border-side.js';
+const BorderSide = require('./border-side.js');
 
-export class Border {
+module.exports = class Border {
   constructor(properties) {
     properties = properties || {};
 

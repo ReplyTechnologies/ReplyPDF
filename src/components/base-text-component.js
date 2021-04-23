@@ -1,7 +1,7 @@
-import BaseLayoutComponent from './base-layout-component.js';
-import { TextAlignment } from './enums/index.js';
+const BaseLayoutComponent = require('./base-layout-component.js');
+const { TextAlignment } = require('./enums');
 
-export default class BaseTextComponent extends BaseLayoutComponent {
+module.exports = class BaseTextComponent extends BaseLayoutComponent {
   constructor(properties) {
     super(properties);
 

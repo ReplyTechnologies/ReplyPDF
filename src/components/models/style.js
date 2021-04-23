@@ -1,4 +1,4 @@
-class Style {
+module.exports = class Style {
   constructor(properties) {
     this.border = properties.border;
 

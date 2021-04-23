@@ -1,4 +1,4 @@
-export class BorderSide {
+module.exports = class BorderSide {
   constructor(properties) {
     properties = properties || {};
 

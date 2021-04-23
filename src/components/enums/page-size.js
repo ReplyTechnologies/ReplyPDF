@@ -1,6 +1,6 @@
-import { Size } from '../models/index.js';
+const { Size } = require('../models/index.js');
 
-const pageSize = {
+module.exports = {
   'A0': new Size({ width: 2383.94, height: 3370.39 }),
   'A1': new Size({ width: 1683.78, height: 2383.94 }),
   'A2': new Size({ width: 1190.55, height: 1683.78 }),
@@ -52,5 +52,3 @@ const pageSize = {
   '2A0': new Size({ width: 3370.39, height: 4767.87 }),
   'FOLIO': new Size({ width: 612.00, height: 936.00 }),
 };
-
-export { pageSize as PageSize };

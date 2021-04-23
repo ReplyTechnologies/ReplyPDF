@@ -1,7 +1,7 @@
-import { default as PDFDocument } from 'pdfkit';
+const PDFDocument = require('pdfkit');
 
-const replyPDF = {
-  generateDocument(options) {
+module.exports = {
+  generateDocument: (options) => {
     if (!options.template) {
       throw new Error('No template provided');
     }
@@ -9,7 +9,6 @@ const replyPDF = {
     if (options.template.constructor.name != 'Page') {
       throw new Error('Invalid template provided. Template must be of type Page');
     }
-
 
     options.info = options.info || {};
     options.info.keywords = options.info.keywords || [];
@@ -83,5 +82,3 @@ const replyPDF = {
     return doc;
   }
 };
-
-export { replyPDF as ReplyPDF };

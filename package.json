@@ -3,7 +3,12 @@
   "version": "0.0.1",
   "description": "simplified pdf generation",
   "main": "src/reply-pdf.js",
-  "type": "module",
+  "exports": {
+    ".": "./src/reply-pdf.js",
+    "./components": "./src/components/index.js",
+    "./models": "./src/components/models/index.js",
+    "./enums": "./src/components/enums/index.js"
+  },
   "scripts": {
     "test": "node test.js"
   },

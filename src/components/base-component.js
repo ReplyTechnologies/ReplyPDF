@@ -1,4 +1,4 @@
-export default class BaseComponent {
+module.exports = class BaseComponent {
   constructor(properties) {
     this.binding = properties.binding;
     this.debug = properties.debug;

@@ -1,5 +1,7 @@
-export * from './alignment.js';
-export * from './font-weight.js';
-export * from './page-size.js';
-export * from './positioning.js';
-export * from './text-alignment.js';
+module.exports = {
+  Alignment: require('./alignment.js'),
+  FontWeight: require('./font-weight.js'),
+  PageSize: require('./page-size.js'),
+  Positioning: require('./positioning.js'),
+  TextAlignment: require('./text-alignment.js'),
+}

@@ -1,6 +1,4 @@
-const fontWeight = {
+module.exports = {
   bold: 'bold',
   normal: 'normal'
 };
-
-export { fontWeight as FontWeight };

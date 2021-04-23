@@ -1,6 +1,6 @@
-import BaseContainerComponent from './base-container-component.js';
+const BaseContainerComponent = require('./base-container-component.js');
 
-export class StackVertical extends BaseContainerComponent {
+module.exports = class StackVertical extends BaseContainerComponent {
   constructor(properties) {
     super(properties);
   }

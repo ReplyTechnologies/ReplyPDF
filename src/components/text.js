@@ -1,7 +1,7 @@
-import BaseTextComponent from './base-text-component.js';
-import { Alignment, FontWeight } from './enums/index.js';
+const BaseTextComponent = require('./base-text-component.js');
+const { Alignment, FontWeight } = require('./enums');
 
-export class Text extends BaseTextComponent {
+module.exports = class Text extends BaseTextComponent {
   constructor(properties) {
     super(properties);
 

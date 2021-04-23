@@ -1,4 +1,4 @@
-class Column {
+module.exports = class Column {
   constructor(properties) {
     this.property = properties.property;
     this.text = properties.text;

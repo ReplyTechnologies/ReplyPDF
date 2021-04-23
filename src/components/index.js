@@ -1,8 +1,10 @@
-export * from './container.js';
-export * from './image.js';
-export * from './page.js';
-export * from './repeat-vertical.js';
-export * from './stack-horizontal.js';
-export * from './stack-vertical.js';
-export * from './table.js';
-export * from './text.js';
+module.exports = {
+  Container: require('./container.js'),
+  Image: require('./image.js'),
+  Page: require('./page.js'),
+  RepeatVertical: require('./repeat-vertical.js'),
+  StackHorizontal: require('./stack-horizontal.js'),
+  StackVertical: require('./stack-vertical.js'),
+  Table: require('./table.js'),
+  Text: require('./text.js'),
+};

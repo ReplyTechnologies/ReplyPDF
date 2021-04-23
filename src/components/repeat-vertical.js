@@ -1,6 +1,6 @@
-import BaseLayoutComponent from './base-layout-component.js';
+const BaseLayoutComponent = require('./base-layout-component.js');
 
-export class RepeatVertical extends BaseLayoutComponent {
+module.exports = class RepeatVertical extends BaseLayoutComponent {
   constructor(properties) {
     super(properties);
 

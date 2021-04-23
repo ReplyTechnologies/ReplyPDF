@@ -1,4 +1,6 @@
-export * from './border.js';
-export * from './border-side.js';
-export * from './offset.js';
-export * from './size.js';
+module.exports = {
+  Border: require('./border.js'),
+  BorderSide: require('./border-side.js'),
+  Offset: require('./offset.js'),
+  Size: require('./size.js'),
+};

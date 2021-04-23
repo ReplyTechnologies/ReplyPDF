@@ -1,11 +1,11 @@
-import * as fs from 'fs';
-import { Container, Page, Table, Text } from '../src/components/index.js';
-import { PageSize, TextAlignment, FontWeight, Alignment } from '../src/components/enums/index.js';
-import { Offset, Border, BorderSide } from '../src/components/models/index.js';
-import { ReplyPDF } from '../src/reply-pdf.js';
+const fs = require('fs');
+const { Container, Page, Table, Text } = require('../src/components/index.js');
+const { PageSize, TextAlignment, FontWeight, Alignment } = require('../src/components/enums/index.js');
+const { Offset, Border, BorderSide } = require('../src/components/models/index.js');
+const ReplyPDF = require('../src/reply-pdf.js');
 
-export default {
-  generate() {
+module.exports = {
+  generate: () => {
     const template = new Page({
       size: PageSize.A4,
       margin: new Offset({

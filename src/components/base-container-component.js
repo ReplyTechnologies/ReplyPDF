@@ -1,6 +1,6 @@
-import BaseLayoutComponent from './base-layout-component.js';
+const BaseLayoutComponent = require('./base-layout-component.js');
 
-export default class BaseContainerComponent extends BaseLayoutComponent {
+module.exports = class BaseContainerComponent extends BaseLayoutComponent {
   constructor(properties) {
     super(properties);
 

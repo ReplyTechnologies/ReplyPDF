@@ -1,7 +1,5 @@
-const positioning = {
+module.exports = {
   absolute: 'absolute',
   fixed: 'fixed',
   inline: 'inline',
 };
-
-export { positioning as Positioning };

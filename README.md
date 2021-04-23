@@ -12,14 +12,16 @@ If you ever had to create a PDF document you would be familiar with the struggle
 
 **Node**
 
-```
+Requires Node.js version > 12
+
+```sh
 npm install reply-pdf
 ```
 
 **Web**
 
-```
-Web installation not available yet
+```js
+// Web installation not available yet
 ```
 
 ### Under the Hood
@@ -613,7 +615,8 @@ let doc = ReplyPDF.generateDocument({
 });
 
 doc = ReplyPDF.generateDocument({
-    doc: doc,
+    doc: doc, // provide existing document object
+    data: data2,
     template: template2,
 });
 ```

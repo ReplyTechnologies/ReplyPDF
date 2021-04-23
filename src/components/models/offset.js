@@ -1,4 +1,4 @@
-export class Offset {
+module.exports = class Offset {
   constructor(value) {
     this.left = 0;
     this.top = 0;

@@ -1,11 +1,11 @@
-import BaseLayoutComponent from './base-layout-component.js';
-import { Alignment } from './enums/index.js';
-import { default as isUrl } from 'is-url';
-import { default as request } from 'sync-request';
-import { default as isXml } from 'is-xml';
-import { default as SVGtoPDF } from 'svg-to-pdfkit';
+const BaseLayoutComponent = require('./base-layout-component.js');
+const { Alignment } = require('./enums/index.js');
+const isUrl = require('is-url');
+const request = require('sync-request');
+const isXml = require('is-xml');
+const SVGtoPDF = require('svg-to-pdfkit');
 
-export class Image extends BaseLayoutComponent {
+module.exports = class Image extends BaseLayoutComponent {
   constructor(properties) {
     super(properties);
 

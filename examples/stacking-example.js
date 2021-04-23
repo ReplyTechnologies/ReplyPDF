@@ -1,11 +1,11 @@
-import * as fs from 'fs';
-import { Container, Page, StackHorizontal, StackVertical, Text } from '../src/components/index.js';
-import { PageSize, TextAlignment } from '../src/components/enums/index.js';
-import { Border, BorderSide, Offset } from '../src/components/models/index.js';
-import { ReplyPDF } from '../src/reply-pdf.js';
+const fs = require('fs');
+const { Container, Page, StackHorizontal, StackVertical, Text } = require('../src/components/index.js');
+const { PageSize, TextAlignment } = require('../src/components/enums/index.js');
+const { Border, Offset } = require('../src/components/models/index.js');
+const ReplyPDF = require('../src/reply-pdf.js');
 
-export default {
-  generate() {
+module.exports = {
+  generate: () => {
     const template = new Page({
       size: PageSize.A4,
       margin: new Offset(50),
@@ -82,7 +82,7 @@ export default {
     let doc = ReplyPDF.generateDocument({
       data: data,
       template: template,
-      debug: false,
+      debug: true,
     });
 
     doc.pipe(fs.createWriteStream('examples/outputs/output-stacking-example.pdf'));

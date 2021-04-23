@@ -1,7 +1,7 @@
-import BaseContainerComponent from './base-container-component.js';
-import { Alignment } from './enums/index.js';
+const BaseContainerComponent = require('./base-container-component.js');
+const { Alignment } = require('./enums');
 
-export class Container extends BaseContainerComponent {
+module.exports = class Container extends BaseContainerComponent {
   constructor(properties) {
     super(properties);
   }

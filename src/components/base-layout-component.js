@@ -1,8 +1,8 @@
-import BaseComponent from './base-component.js';
-import { Alignment, Positioning } from './enums/index.js';
-import { Offset } from './models/index.js';
+const BaseComponent = require('./base-component.js');
+const { Alignment, Positioning } = require('./enums');
+const { Offset } = require('./models');
 
-export default class BaseLayoutComponent extends BaseComponent {
+module.exports = class BaseLayoutComponent extends BaseComponent {
   constructor(properties) {
     super(properties);
 

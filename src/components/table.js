@@ -1,10 +1,11 @@
-import BaseLayoutComponent from './base-layout-component.js';
-import { Container, Text } from './index.js';
-import { Alignment } from './enums/index.js';
-import { Offset } from './models/index.js';
-import { StackHorizontal } from './stack-horizontal.js';
+const BaseLayoutComponent = require('./base-layout-component.js');
+const Container = require('./container.js');
+const Text = require('./text.js');
+const StackHorizontal = require('./stack-horizontal.js');
+const { Alignment } = require('./enums');
+const { Offset } = require('./models');
 
-export class Table extends BaseLayoutComponent {
+module.exports = class Table extends BaseLayoutComponent {
   constructor(properties) {
     super(properties);
 
