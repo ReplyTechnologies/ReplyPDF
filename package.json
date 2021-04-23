@@ -13,7 +13,12 @@
     "test": "node test.js"
   },
   "author": "Reply Technologies",
-  "license": "mit",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ReplyTechnologies/ReplyPDF.git"
+  },
+  "funding": "https://www.paypal.com/donate/?hosted_button_id=BVBKNU8NHN2UN",
+  "license": "MIT",
   "dependencies": {
     "is-url": "^1.2.4",
     "is-xml": "^0.1.0",
