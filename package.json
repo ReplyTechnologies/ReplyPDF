@@ -17,6 +17,9 @@
     "type": "git",
     "url": "https://github.com/ReplyTechnologies/ReplyPDF.git"
   },
+  "keywords": [
+    "pdf", "template", "reply"
+  ],
   "funding": "https://www.paypal.com/donate/?hosted_button_id=BVBKNU8NHN2UN",
   "license": "MIT",
   "dependencies": {

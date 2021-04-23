@@ -1,6 +1,12 @@
 const PDFDocument = require('pdfkit');
+const components = require('./components/index.js');
+const models = require('./components/models/index.js');
+const enums = require('./components/enums/index.js');
 
 module.exports = {
+  components: components,
+  models: models,
+  enums: enums,
   generateDocument: (options) => {
     if (!options.template) {
       throw new Error('No template provided');

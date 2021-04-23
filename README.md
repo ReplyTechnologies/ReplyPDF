@@ -12,8 +12,6 @@ If you ever had to create a PDF document you would be familiar with the struggle
 
 **Node**
 
-Requires Node.js version > 12
-
 ```sh
 npm install reply-pdf
 ```
@@ -22,6 +20,26 @@ npm install reply-pdf
 
 ```js
 // Web installation not available yet
+```
+
+### Usage
+
+**Node.js <= 12**
+
+```js
+const ReplyPDF = require('reply-pdf');
+const { ...components... } = ReplyPDF.components;
+const { ...enums... } = ReplyPDF.enums;
+const { ...models... } = ReplyPDF.models;
+```
+
+**Node.js > 12**
+
+```js
+const ReplyPDF = require('reply-pdf');
+const { ...components... } = require('reply-pdf/components');
+const { ...enums... } = require('reply-pdf/enums');
+const { ...models... } = require('reply-pdf/models');
 ```
 
 ### Under the Hood
