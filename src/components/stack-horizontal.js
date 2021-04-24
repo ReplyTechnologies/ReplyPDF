@@ -31,6 +31,7 @@ module.exports = class StackHorizontal extends BaseContainerComponent {
     }
 
     this.height = maxHeight + this.margin.verticalTotal;
+    this.width = offsetX;
 
     for (let child of this.children) {
       switch (child.verticalAlignment) {
@@ -52,7 +53,6 @@ module.exports = class StackHorizontal extends BaseContainerComponent {
       child.layoutComponent(document);
     }
 
-    this.width = offsetX;
   }
 
   generateComponent(document, data) {
