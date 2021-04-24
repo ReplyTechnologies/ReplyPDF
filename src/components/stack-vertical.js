@@ -1,7 +1,7 @@
-const BaseContainerComponent = require('./base-container-component.js');
+const BaseStackComponent = require('./base-stack-component.js');
 const { Alignment } = require('./enums/index.js');
 
-module.exports = class StackVertical extends BaseContainerComponent {
+module.exports = class StackVertical extends BaseStackComponent {
   constructor(properties) {
     super(properties);
   }
@@ -20,7 +20,14 @@ module.exports = class StackVertical extends BaseContainerComponent {
     let offsetY = 0;
     let maxWidth = 0;
 
+    let firstChild = true;
     for (let child of this.children) {
+      if (firstChild) {
+        firstChild = false;
+      } else {
+        offsetY += this.spacing;
+      }
+
       child._originX = this._originX + this.x + this.margin.left;
       child._originY = offsetY + this._originY + this.y + this.margin.top;
 

@@ -32,6 +32,7 @@ module.exports = {
         new StackVertical({
           children: [
             new StackHorizontal({
+              spacing: 15,
               children: [
                 new Text({ text: '1', width: 50 }),
                 new Text({
@@ -51,6 +52,7 @@ module.exports = {
               ],
             }),
             new StackVertical({
+              spacing: 20,
               children: [
                 new Text({ text: '1', height: 50 }),
                 new Text({
@@ -70,6 +72,7 @@ module.exports = {
               ],
             }),
             new StackHorizontal({
+              horizontalAlignment: Alignment.fill,
               children: [
                 new Text({ text: '1', width: 100 }),
                 new Text({ text: '2' }),

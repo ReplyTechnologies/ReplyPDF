@@ -8,6 +8,8 @@
 
 If you ever had to create a PDF document you would be familiar with the struggles to get headers, footers, and tables to layout correctly. This library aims to remove the complexity of creating PDF documents by providing purpose built components that handle rendering and data binding.
 
+**Interactive demo coming soon**
+
 ### Installation
 
 **Node**
@@ -16,15 +18,9 @@ If you ever had to create a PDF document you would be familiar with the struggle
 npm install @replytechnologies/reply-pdf
 ```
 
-**Web**
-
-```js
-// Web installation not available yet
-```
-
 ### Usage
 
-**Node.js <= 12**
+**CommonJS: Node.js <= 12**
 
 ```js
 const ReplyPDF = require('@replytechnologies/reply-pdf');
@@ -33,13 +29,22 @@ const { ...enums... } = ReplyPDF.enums;
 const { ...models... } = ReplyPDF.models;
 ```
 
-**Node.js > 12**
+**CommonJS: Node.js > 12**
 
 ```js
 const ReplyPDF = require('@replytechnologies/reply-pdf');
 const { ...components... } = require('@replytechnologies/reply-pdf/components');
 const { ...enums... } = require('@replytechnologies/reply-pdf/enums');
 const { ...models... } = require('@replytechnologies/reply-pdf/models');
+```
+
+**EJS: Node.js > 12**
+
+```js
+import ReplyPDF from '@replytechnologies/reply-pdf';
+import { ...components... } from '@replytechnologies/reply-pdf/components';
+import { ...enums... } from '@replytechnologies/reply-pdf/enums';
+import { ...models... } from '@replytechnologies/reply-pdf/models';
 ```
 
 ### Under the Hood
@@ -91,6 +96,16 @@ Hierarchy: `BaseComponent / BaseLayoutComponent / BaseContainerComponent`
 | Property | Type        | Description                            |
 | -------- | ----------- | -------------------------------------- |
 | `children` | [[BaseComponent](./)] | Array of children to render as content |
+
+#### BaseStackComponent
+
+[BaseStackComponent](./src/components/base-stack-component.js) registers properties and functions shared by all components that perform stacking of child components.
+
+Hierarchy: `BaseComponent / BaseLayoutComponent / BaseContainerComponent / BaseStackComponent`
+
+| Property | Type        | Description                            |
+| -------- | ----------- | -------------------------------------- |
+| `spacing` | number | Spacing between child components |
 
 #### BaseTextComponent
 
@@ -153,7 +168,7 @@ const template = new Page({
 
 #### Container
 
-[Container](./src/components/container.js) provides functionality to render child components according to the values of their respective `verticalAlignment` and `horizontalAlignment` values. 
+[Container](./src/components/container.js) provides functionality to render child components according to the values of their respective `verticalAlignment` and `horizontalAlignment` values.
 
 Hierarchy: `BaseComponent / BaseLayoutComponent / BaseContainerComponent / Component`
 
@@ -197,7 +212,7 @@ const container = new Container({
 
 [StackHorizontal](./src/components/stack-horizontal.js) provides functionality to layout its children horizontally. StackHorizontal is sized automatically according to the size of its children. StackHorizontal does not overflow children into a new row, and does not request a new page when content reaches the end of the page.
 
-Hierarchy: `BaseComponent / BaseLayoutComponent / BaseContainerComponent / StackHorizontal`
+Hierarchy: `BaseComponent / BaseLayoutComponent / BaseContainerComponent / BaseStackComponent / StackHorizontal`
 
 **Example**
 
@@ -225,7 +240,7 @@ new StackHorizontal({
 
 [StackVertical](./src/components/stack-vertical.js) provides functionality to layout its children vertically. StackVertival is sized automatically according to the size of its children. StackVertical does not overflow children into a new column, and does not request a new page when content reaches the end of the page.
 
-Hierarchy: `BaseComponent / BaseLayoutComponent / BaseContainerComponent / StackVertical`
+Hierarchy: `BaseComponent / BaseLayoutComponent / BaseContainerComponent / BaseStackComponent / StackVertical`
 
 **Example**
 
@@ -740,6 +755,5 @@ Implement functionality to use existing PDF documents as the base to render the 
 | --------------- | ------------------------------------------------------------ |
 | Table           | - Render column content based on a template, currently renders all cells as text<br />- Configuration to prevent reprinting of header on new pages, currently headers are repeated on each new page |
 | Image           | - Restructure image loading process to enable asynchronous calls to read data from a URL |
-| StackHorizontal | - Add functionality to specify spacing between components    |
-| StackVertical   | - Add functionality to specify spacing between components<br />- Add functionality to overflow children into a new page |
+| StackVertical   | - Add functionality to overflow children into a new page |
 
