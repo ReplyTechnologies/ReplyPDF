@@ -1,16 +1,16 @@
-## ReplyPDF
+# ReplyPDF
 
 ![BADGE_NPM_DOWNLOADS](https://img.shields.io/npm/dt/@replytechnologies/reply-pdf) ![BADGE_NPM_DOWNLOADS](https://img.shields.io/npm/dw/@replytechnologies/reply-pdf) ![BADGE_NPM_VERSION](https://img.shields.io/npm/v/@replytechnologies/reply-pdf) ![BADGE_NPM_LICENCE](https://img.shields.io/npm/l/@replytechnologies/reply-pdf) [![BADGE_PAYPAL](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate/?hosted_button_id=BVBKNU8NHN2UN)
 
 <img src="./resources/process_infographic.svg" alt="Process Infographic"  />
 
-### About
+## About
 
 If you ever had to create a PDF document you would be familiar with the struggles to get headers, footers, and tables to layout correctly. This library aims to remove the complexity of creating PDF documents by providing purpose built components that handle rendering and data binding.
 
 **Interactive demo coming soon**
 
-### Installation
+## Installation
 
 **Node**
 
@@ -18,7 +18,7 @@ If you ever had to create a PDF document you would be familiar with the struggle
 npm install @replytechnologies/reply-pdf
 ```
 
-### Usage
+## Usage
 
 **CommonJS: Node.js <= 12**
 
@@ -47,17 +47,17 @@ import { ...enums... } from '@replytechnologies/reply-pdf/enums';
 import { ...models... } from '@replytechnologies/reply-pdf/models';
 ```
 
-### Under the Hood
+## Under the Hood
 
 [PDFKit](https://pdfkit.org): renders native elements to the PDF document.
 
 [SVG-To-PDFKit](https://www.npmjs.com/package/svg-to-pdfkit): renders SVG images to the PDF document.
 
-### Components
+## Components
 
 ![component_hierarchy](./resources/component_hierarchy.svg)
 
-#### BaseComponent
+### BaseComponent
 
 [BaseComponent](./src/components/base-component.js) registers properties and functions shared by all components
 
@@ -68,7 +68,7 @@ Hierarchy: `BaseComponent`
 | `binding` | string | Property of the provided data object to use as data source for bindings |
 | `debug`   | bool   | Indicates whether the component should render rectangles for outline and margin |
 
-#### BaseLayoutComponent
+### BaseLayoutComponent
 
 [BaseLayoutComponent](./src/components/base-layout-component.js) registers properties and functions shared by all components that have a physical layout on the document.
 
@@ -87,7 +87,7 @@ Hierarchy: `BaseComponent / BaseLayoutComponent`
 | `backgroundColor`     | string          | Color of background fill           |
 | `link`                | string          | Link to navigate to on click                 |
 
-#### BaseContainerComponent
+### BaseContainerComponent
 
 [BaseContainerComponent](./src/components/base-container-component.js) registers properties and functions shared by all components that contain explicit child elements.
 
@@ -97,7 +97,7 @@ Hierarchy: `BaseComponent / BaseLayoutComponent / BaseContainerComponent`
 | -------- | ----------- | -------------------------------------- |
 | `children` | [[BaseComponent](./)] | Array of children to render as content |
 
-#### BaseStackComponent
+### BaseStackComponent
 
 [BaseStackComponent](./src/components/base-stack-component.js) registers properties and functions shared by all components that perform stacking of child components.
 
@@ -108,7 +108,7 @@ Hierarchy: `BaseComponent / BaseLayoutComponent / BaseContainerComponent / BaseS
 | `spacing` | number | Spacing between child components |
 | `layout` | [Layout](./src/enums/layout.js) | Layout mode of child components |
 
-#### BaseTextComponent
+### BaseTextComponent
 
 [BaseTextComponent](./src/components/base-text-component.js) registers properties and functions shared by all text oriented components.
 
@@ -124,7 +124,7 @@ Hierarchy: `BaseComponent / BaseLayoutComponent / BaseTextComponent`
 | `lineBreak`     | bool              | Indicates whether text is allowed to span <br />multiple lines |
 | `ellipsis`      | string            | Indicates the character(s) to append to the end of a string when `lineBreak` is set to false and the text tries to wrap into the next line |
 
-#### Page
+### Page
 
 [Page](./src/components/page.js) should always be the base component of a template. All child components of a page are provided with the entire page content size to render within.
 
@@ -139,7 +139,7 @@ Hierarchy: `BaseComponent / BaseLayoutComponent / BaseContainerComponent / Page`
 
 **Example**
 
-[Go to usage example](./examples/header-footer-example.js)
+[Go to usage example](./examples/header-footer-example.js) | [Go to sample PDF](./examples/outputs/output-header-footer-example.pdf)
 
 ```js
 const template = new Page({
@@ -167,7 +167,7 @@ const template = new Page({
 
 ![component_example_page](./resources/component_example_page.png)
 
-#### Container
+### Container
 
 [Container](./src/components/container.js) provides functionality to render child components according to the values of their respective `verticalAlignment` and `horizontalAlignment` values.
 
@@ -175,7 +175,7 @@ Hierarchy: `BaseComponent / BaseLayoutComponent / BaseContainerComponent / Compo
 
 **Example**
 
-[Go to usage example](./examples/container-example.js)
+[Go to usage example](./examples/container-example.js) | [Go to sample PDF](./examples/outputs/output-container-example.pdf)
 
 ```javascript
 const container = new Container({
@@ -209,7 +209,7 @@ const container = new Container({
 
 ![component_example_container](./resources/component_example_container.png)
 
-#### StackHorizontal
+### StackHorizontal
 
 [StackHorizontal](./src/components/stack-horizontal.js) provides functionality to layout its children horizontally. StackHorizontal is sized automatically according to the size of its children. StackHorizontal does not overflow children into a new row, and does not request a new page when content reaches the end of the page.
 
@@ -217,7 +217,7 @@ Hierarchy: `BaseComponent / BaseLayoutComponent / BaseContainerComponent / BaseS
 
 **Example**
 
-[Go to usage example](./examples/stacking-example.js)
+[Go to usage example](./examples/stacking-example.js) | [Go to sample PDF](./examples/outputs/output-stacking-example.pdf)
 
 ```js
 new StackHorizontal({
@@ -237,7 +237,7 @@ new StackHorizontal({
 
 ![component_example_stack_horizontal](./resources/component_example_stack_horizontal.png)
 
-#### StackVertical
+### StackVertical
 
 [StackVertical](./src/components/stack-vertical.js) provides functionality to layout its children vertically. StackVertival is sized automatically according to the size of its children. StackVertical does not overflow children into a new column, and does not request a new page when content reaches the end of the page.
 
@@ -245,7 +245,7 @@ Hierarchy: `BaseComponent / BaseLayoutComponent / BaseContainerComponent / BaseS
 
 **Example**
 
-[Go to usage example](./examples/stacking-example.js)
+[Go to usage example](./examples/stacking-example.js) | [Go to sample PDF](./examples/outputs/output-stacking-example.pdf)
 
 ```js
 new StackVertical({
@@ -265,7 +265,7 @@ new StackVertical({
 
 ![component_example_stack_vertical](./resources/component_example_stack_vertical.png)
 
-#### Text
+### Text
 
 [Text](./src/components/text.js) provides functionality to render text to the document.
 
@@ -281,7 +281,7 @@ Hierarchy: `BaseComponent / BaseLayoutComponent / BaseTextComponent / Text`
 
 **Example**
 
-[Go to usage example](./examples/annotation-example.js)
+[Go to usage example](./examples/annotation-example.js) | [Go to sample PDF](./examples/outputs/output-annotation-example.pdf)
 
 ```js
  new Text({
@@ -294,7 +294,7 @@ Hierarchy: `BaseComponent / BaseLayoutComponent / BaseTextComponent / Text`
 
 ![component_example_text](./resources/component_example_text.png)
 
-#### Image
+### Image
 
 [Image](./src/components/image.js) provides functionality to render an image from a file, string (SVG), buffer, or URL. Base64 strings need to be converted into a Buffer before they can be consumed by an Image component.
 
@@ -307,7 +307,7 @@ Hierarchy: `BaseComponent / BaseLayoutComponent / Image`
 
 **Example**
 
-[Go to usage example](./examples/image-example.js)
+[Go to usage example](./examples/image-example.js) | [Go to sample PDF](./examples/outputs/output-image-example.pdf)
 
 ```js
 const image = new Image({
@@ -319,7 +319,7 @@ const image = new Image({
 
 ![component_example_image](./resources/component_example_image.png)
 
-#### RepeatVertical
+### RepeatVertical
 
 [RepeatVertical](./src/components/repeat-vertical.js) provides functionality to repeat a template for each value of a provided binding array. RepeatVertical requests new pages when its component generation functionality reaches the end of a page.
 
@@ -331,7 +331,7 @@ Hierarchy: `BaseComponent / BaseLayoutComponent / RepeatVertical`
 
 **Example**
 
-[Go to usage example](./examples/header-footer-example.js)
+[Go to usage example](./examples/header-footer-example.js) | [Go to sample PDF](./examples/outputs/output-header-footer-example.pdf)
 
 ```js
 new RepeatVertical({
@@ -362,7 +362,7 @@ const data = {
 
 ![component_example_repeat_vertical](./resources/component_example_repeat_vertical.png)
 
-#### Table
+### Table
 
 [Table](./src/components/table.js) provides functionality to render a table to the document. Table requests new pages when its component generation functionality reaches the end of a page. Components without specified widths are sized automatically according to available space.
 
@@ -377,7 +377,7 @@ Hierarchy: `BaseComponent / BaseLayoutComponent / Table`
 
 **Example**
 
-[Go to usage example](./examples/table-example.js)
+[Go to usage example](./examples/table-example.js) | [Go to sample PDF](./examples/outputs/output-table-example.pdf)
 
 ```js
 new Table({
@@ -432,9 +432,9 @@ const data = {
 
 ![component_example_table](./resources/component_example_table.png)
 
-### Enums
+## Enums
 
-#### Alignment
+### Alignment
 
 ```javascript
 Alignment.start
@@ -443,14 +443,14 @@ Alignment.middle
 Alignment.fill
 ```
 
-#### FontWeight
+### FontWeight
 
 ```javascript
 FontWeight.bold
 FontWeight.normal
 ```
 
-#### Layout
+### Layout
 
 ```javascript
 Layout.none
@@ -458,7 +458,7 @@ Layout.spaceEvenly
 Layout.sizeEvenly
 ```
 
-#### TextAlignment
+### TextAlignment
 
 ```javascript
 TextAlignment.left
@@ -467,7 +467,7 @@ TextAlignment.center
 TextAlignment.justify
 ```
 
-#### PageSize
+### PageSize
 
 PageSize defines preset page dimensions to apply to the `size` property of a Page component.
 
@@ -485,9 +485,9 @@ PageSize defines preset page dimensions to apply to the `size` property of a Pag
 | `PageSize.A9`  | `PageSize.B9`  | `PageSize.C9`  | `PageSize.SRA4` |                      |
 | `PageSize.A10` | `PageSize.B10` | `PageSize.C10` |                 |                      |
 
-### Models
+## Models
 
-#### Border
+### Border
 
 Border constructor requires an object containing the properties listed below. Alternatively the Border constructor can be supplied with a single parameter of type or schema `BorderSide` to apply to all sides of the border.
 
@@ -498,14 +498,14 @@ Border constructor requires an object containing the properties listed below. Al
 | `right`  | [BorderSide]() | Right border to render  |
 | `bottom` | [BorderSide]() | Bottom border to render |
 
-#### BorderSide
+### BorderSide
 
 | Property    | Type   | Description                  |
 | ----------- | ------ | ---------------------------- |
 | `thickness` | number | Thickness of the border side |
 | `color`     | string | Color of the border side     |
 
-#### Column
+### Column
 
 | Property               | Type                                      | Description                                                  |
 | ---------------------- | ----------------------------------------- | ------------------------------------------------------------ |
@@ -517,7 +517,7 @@ Border constructor requires an object containing the properties listed below. Al
 | `alternativeCellStyle` | [Style](./src/components/models/style.js) | Style to apply to data cells of even rows of the column      |
 | `fx`                   | function                                  | Preprocessor function to run before data is displayed<br />`(index, record, value) => alteredValue` |
 
-#### Offset
+### Offset
 
 Offset constructor requires an object containing the properties listed below. Alternatively the Offset constructor can be supplied with a single parameter of type `number` to apply to all sides of the offset.
 
@@ -528,14 +528,14 @@ Offset constructor requires an object containing the properties listed below. Al
 | `right`  | number | Right offset to apply  |
 | `bottom` | number | Bottom offset to apply |
 
-#### Size
+### Size
 
 | Property | Type   | Description  |
 | -------- | ------ | ------------ |
 | `width`  | number | Width value  |
 | `height` | number | Height value |
 
-#### Style
+### Style
 
 | Property          | Type                                                      | Description                     |
 | ----------------- | --------------------------------------------------------- | ------------------------------- |
@@ -546,7 +546,7 @@ Offset constructor requires an object containing the properties listed below. Al
 | `fontWeight`      | [FontWeight](./src/components/enums/font-weight.js)       | Font weight value               |
 | `textAlignment`   | [TextAlignment](./src/components/enums/text-alignment.js) | Horizontal text alignment value |
 
-### Binding
+## Binding
 
 Components can bind to a specific property in a data source and provide that binding to its content. String interpolation can be performed by enclosing the binding string in curly brace sets (`{{binding_string}}`).
 
@@ -588,7 +588,7 @@ const data = {
 
 ![component_example_binding](./resources/component_example_binding.png)
 
-### Header & Footer
+## Header & Footer
 
 Header templates should set in the `firstPageHeader` and `header` properties of a Page component. If `firstPageHeader` has a value, its template will be rendered on the first page of the document, subsequent pages will use `header` if present. The header template must have an explicit `height` value set.
 
@@ -611,9 +611,9 @@ footer: new Container({
 
 ![example_footer_page_number](./resources/example_footer_page_number.png)
 
-An example of a header and footer can be found [here](./examples/header-footer.js).
+An example of a header and footer can be found [here](./examples/header-footer.js) ([PDF](./examples/outputs/output-header-footer-example.pdf)).
 
-### Multiple Templates
+## Multiple Templates
 
 Rendering multiple templates to a single document can be achieved by defining multiple Page templates, and passing the resulting `doc` as a parameter to the next rendering. Only the last template should define header and footer content, preceding templates should contain empty components which define only the `height` property. All headers and footers should share the same respective `height` values. As an alternative to creating empty header and footer components, the preceding pages may specify a larger margin to consume the space.
 
@@ -663,9 +663,9 @@ doc = ReplyPDF.generateDocument({
 });
 ```
 
-An example of using multiple templates can be found [here](./examples/multiple-template-example.js).
+An example of using multiple templates can be found [here](./examples/multiple-template-example.js)  ([PDF](./examples/outputs/output-multiple-template-example.pdf)).
 
-### Custom Fonts
+## Custom Fonts
 
 Custom fonts can be embedded into the PDF document by supplying font names with accompanying buffers containing the content of the font. The buffers can be loaded from a file or from a URL by making a HTTP request. For the `fontWeight` property to function correctly, the bold version of a font should be named after the regular version + '-Bold'.
 
@@ -686,7 +686,7 @@ let doc = ReplyPDF.generateDocument({
 
 An example of using custom fonts can be found [here](./examples/custom-font-example.js).
 
-### Charts
+## Charts
 
 Charts can be included into the PDF document by including the chart as an image. Chart images can be generated by using some of the chart-to-image services listed below:
 
@@ -694,13 +694,17 @@ Charts can be included into the PDF document by including the chart as an image.
 - Quick Chart (https://quickchart.io/)
 - Chart Works (https://www.chartworks.io/charts/image)
 
-An example of including a chart into a PDF can be found [here](./examples/chart-example.js).
+An example of including a chart into a PDF can be found [here](./examples/chart-example.js) ( [PDF](./examples/outputs/output-chart-example.pdf)).
 
-### Debugging
+## Debugging
 
 Debugging can be enabled on a document or component level. When debugging is enabled, a green border is drawn around the component outline, and a red border around the component margin.
 
 ![debugging_example](./resources/debugging_example.png)
+
+When enabling debugging on component level, an annotation is added to the document describing the component and layout information.
+
+![debugging_annotations](./resources/debugging_annotations.png)
 
 **Enabling debugging on document level:**
 
@@ -722,23 +726,23 @@ var component = new ComponentTypeGoesHere({
 });
 ```
 
-### Tests
+## Tests
 
-The file [tests.js](./tests.js) contains code to run all the examples in this project. Each example generates a PDF file as output. To execute the tests, run the following command:
+The file [tests.js](./tests.js) contains code to run all the examples in this project. Each example generates a PDF file as output into the [examples/outputs](./examples/outputs) directory. To execute the tests, run the following command after cloning:
 
 ```sh
 npm test
 ```
 
-### Pitfalls
+## Pitfalls
 
 Components that do not request new pages when content tries to overflow will continue to render content on the same page. The content of these components should ideally be assigned fixed sizes to prevent rendering content off of the page or content that overflows into the footer section.
 
 Image rendering from URL is performed by making synchronous http calls. You may experience delays when building a document with a large number of URL based images.
 
-### Roadmap
+## Roadmap
 
-#### General Enhancements
+### General Enhancements
 
 Functionality to keep track of rendered templates in order to prevent rendering duplicate content when a document with multiple pages is created.
 
@@ -748,7 +752,7 @@ Add functionality to render content of StackVertical onto a new page when it ove
 
 Implement functionality to use existing PDF documents as the base to render the template onto. As this functionality is not supported by PDFKit, the merge functionality may be delegated to [Hummus](https://www.npmjs.com/package/hummus) or [HummusRecipe](https://www.npmjs.com/package/hummus-recipe).
 
-#### New Components
+### New Components
 
 *StackGridHorizontal*: Layout children horizontally to fill available space, then move down and continue layout
 
@@ -758,7 +762,7 @@ Implement functionality to use existing PDF documents as the base to render the 
 
 *PageBreak*: Continue content rendering on a new page
 
-#### Component Enhancements
+### Component Enhancements
 
 | Component       | Enhancements                                                 |
 | --------------- | ------------------------------------------------------------ |
