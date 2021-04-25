@@ -1,5 +1,5 @@
 const BaseStackComponent = require('./base-stack-component.js');
-const { Alignment } = require('./enums');
+const { Alignment, Layout } = require('./enums/index.js');
 
 module.exports = class StackHorizontal extends BaseStackComponent {
   constructor(properties) {
@@ -16,50 +16,87 @@ module.exports = class StackHorizontal extends BaseStackComponent {
     }
   }
 
-  layoutComponent(document) {
-    let offsetX = 0;
-    let maxHeight = 0;
+  _layoutComponent(document, spacing, layout) {
+    layout = layout || Layout.none;
+
+    let offsetX =  this._originX + this.x + this.margin.left;
 
     let firstChild = true;
     for (let child of this.children) {
       if (firstChild) {
         firstChild = false;
       } else {
-        offsetX += this.spacing;
+        if (layout === Layout.none) {
+          offsetX += spacing;
+        }
       }
 
-      child._originX = offsetX + this._originX + this.x + this.margin.left;
-      child._originY = this._originY + this.y + this.margin.top;
+      child._originX = offsetX;
 
-      child.layoutComponent(document);
-
-      offsetX += child.width;
-      maxHeight = Math.max(maxHeight, child.height);
-    }
-
-    this.height = maxHeight + this.margin.verticalTotal;
-    this.width = offsetX;
-
-    for (let child of this.children) {
       switch (child.verticalAlignment) {
         case Alignment.start:
           child._originY = this._originY + this.y + this.margin.top;
           break;
+
         case Alignment.end:
           child._originY = this._originY + this.y + this.height - this.margin.bottom - child.height;
           break;
+
         case Alignment.middle:
           child._originY = this._originY + this.y + (this.height / 2) - (child.height / 2);
           break;
+
         case Alignment.fill:
           child._originY = this._originY + this.y + this.margin.top;
-          child.height = maxHeight;
+          child.height = this.height;
           break;
       }
 
       child.layoutComponent(document);
+
+      offsetX += child.width;
     }
 
+    return offsetX;
+  }
+
+  layoutComponent(document) {
+    this._layoutChildren(document);
+
+    if (!this.height) {
+      this.height = this._contentHeight + this.margin.verticalTotal;
+    }
+
+    let layoutOffsetX = this._layoutComponent(document, this.spacing, this.layout);
+
+    if (!this.width) {
+      this.width = layoutOffsetX + this.margin.horizontalTotal;
+    }
+
+    if (this.children.length > 1) {
+
+      switch (this.layout) {
+        case Layout.spaceEvenly:
+          let availableSpace = this.width - layoutOffsetX;
+          let spacing = availableSpace / (this.children.length - 1);
+          layoutOffsetX = this._layoutComponent(document, spacing);
+          break;
+
+        case Layout.sizeEvenly:
+          let childWidth = (this.width - this.margin.horizontalTotal - (this.spacing * (this.children.length - 1))) / this.children.length;
+          let offsetX = this._originX + this.x + this.margin.left;
+          for (let child of this.children) {
+            child._originX = offsetX;
+
+            child.width = childWidth;
+
+            child.layoutComponent(document);
+
+            offsetX += child.width + this.spacing;
+          }
+          break;
+      }
+    }
   }
 
   generateComponent(document, data) {

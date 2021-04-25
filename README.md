@@ -38,7 +38,7 @@ const { ...enums... } = require('@replytechnologies/reply-pdf/enums');
 const { ...models... } = require('@replytechnologies/reply-pdf/models');
 ```
 
-**EJS: Node.js > 12**
+**EJS**
 
 ```js
 import ReplyPDF from '@replytechnologies/reply-pdf';
@@ -106,6 +106,7 @@ Hierarchy: `BaseComponent / BaseLayoutComponent / BaseContainerComponent / BaseS
 | Property | Type        | Description                            |
 | -------- | ----------- | -------------------------------------- |
 | `spacing` | number | Spacing between child components |
+| `layout` | [Layout](./src/enums/layout.js) | Layout mode of child components |
 
 #### BaseTextComponent
 
@@ -449,6 +450,14 @@ FontWeight.bold
 FontWeight.normal
 ```
 
+#### Layout
+
+```javascript
+Layout.none
+Layout.spaceEvenly
+Layout.sizeEvenly
+```
+
 #### TextAlignment
 
 ```javascript
@@ -755,5 +764,3 @@ Implement functionality to use existing PDF documents as the base to render the 
 | --------------- | ------------------------------------------------------------ |
 | Table           | - Render column content based on a template, currently renders all cells as text<br />- Configuration to prevent reprinting of header on new pages, currently headers are repeated on each new page |
 | Image           | - Restructure image loading process to enable asynchronous calls to read data from a URL |
-| StackVertical   | - Add functionality to overflow children into a new page |
-

@@ -1,6 +1,6 @@
 const fs = require('fs');
 const { Container, Page, StackHorizontal, StackVertical, Text } = require('../src/components/index.js');
-const { PageSize, TextAlignment, Alignment } = require('../src/components/enums/index.js');
+const { PageSize, TextAlignment, Alignment, Layout } = require('../src/components/enums/index.js');
 const { Border, Offset } = require('../src/components/models/index.js');
 const ReplyPDF = require('../src/reply-pdf.js');
 
@@ -30,59 +30,146 @@ module.exports = {
       }),
       children: [
         new StackVertical({
+          spacing: 5,
           children: [
+            new Text({
+              text: 'Default:'
+            }),
+            new StackHorizontal({
+              children: [
+                new Text({ text: '11', width: 100 }),
+                new Text({ text: '12', verticalAlignment: Alignment.end, }),
+                new Text({ text: '13', margin: new Offset(10), backgroundColor: 'skyblue' }),
+                new Text({ text: '14', verticalAlignment: Alignment.middle }),
+                new Text({ text: '15' }),
+              ],
+            }),
+            new Text({
+              text: 'Space Between (20pt):'
+            }),
+            new StackHorizontal({
+              spacing: 20,
+              children: [
+                new Text({ text: '11', width: 100 }),
+                new Text({ text: '12', verticalAlignment: Alignment.end, }),
+                new Text({ text: '13', margin: new Offset(10), backgroundColor: 'skyblue' }),
+                new Text({ text: '14', verticalAlignment: Alignment.middle }),
+                new Text({ text: '15' }),
+              ],
+            }),
+            new Text({
+              text: 'Space Evenly:'
+            }),
+            new StackHorizontal({
+              layout: Layout.spaceEvenly,
+              children: [
+                new Text({ text: '11', width: 100 }),
+                new Text({ text: '12', verticalAlignment: Alignment.end, }),
+                new Text({ text: '13', margin: new Offset(10), backgroundColor: 'skyblue' }),
+                new Text({ text: '14', verticalAlignment: Alignment.middle }),
+                new Text({ text: '15' }),
+              ],
+            }),
+            new Text({
+              text: 'Size Evenly:'
+            }),
+            new StackHorizontal({
+              layout: Layout.sizeEvenly,
+              children: [
+                new Text({ text: '11', width: 100 }),
+                new Text({ text: '12', verticalAlignment: Alignment.end, }),
+                new Text({ text: '13', margin: new Offset(10), backgroundColor: 'skyblue' }),
+                new Text({ text: '14', verticalAlignment: Alignment.middle }),
+                new Text({ text: '15' }),
+              ],
+            }),
+            new Text({
+              text: 'Size Evenly with spacing (20pt):'
+            }),
             new StackHorizontal({
               spacing: 15,
+              layout: Layout.sizeEvenly,
               children: [
-                new Text({ text: '1', width: 50 }),
+                new Text({ text: '11', width: 100 }),
+                new Text({ text: '12', verticalAlignment: Alignment.end, }),
+                new Text({ text: '13', margin: new Offset(10), backgroundColor: 'skyblue' }),
+                new Text({ text: '14', verticalAlignment: Alignment.middle }),
+                new Text({ text: '15' }),
+              ],
+            }),
+            new StackHorizontal({
+              spacing: 20,
+              children: [
+                new StackVertical({
+                  children: [
+                    new Text({ text: 'A', height: 50 }),
+                    new Text({ horizontalAlignment: Alignment.middle, text: 'B' }),
+                    new Text({ backgroundColor: 'lime', text: 'C', margin: new Offset(10) }),
+                    new Text({ horizontalAlignment: Alignment.end, text: 'D' }),
+                    new Text({ text: 'E' }),
+                  ],
+                }),
+                new StackVertical({
+                  spacing: 20,
+                  children: [
+                    new Text({ text: 'A', height: 50 }),
+                    new Text({ horizontalAlignment: Alignment.middle, text: 'B' }),
+                    new Text({ backgroundColor: 'lime', text: 'C', margin: new Offset(10) }),
+                    new Text({ horizontalAlignment: Alignment.end, text: 'D' }),
+                    new Text({ text: 'E' }),
+                  ],
+                }),
+                new StackVertical({
+                  layout: Layout.spaceEvenly,
+                  children: [
+                    new Text({ text: 'A', height: 50 }),
+                    new Text({ horizontalAlignment: Alignment.middle, text: 'B' }),
+                    new Text({ backgroundColor: 'lime', text: 'C', margin: new Offset(10) }),
+                    new Text({ horizontalAlignment: Alignment.end, text: 'D' }),
+                    new Text({ text: 'E' }),
+                  ],
+                }),
+                new StackVertical({
+                  layout: Layout.sizeEvenly,
+                  children: [
+                    new Text({ text: 'A', height: 50 }),
+                    new Text({ horizontalAlignment: Alignment.middle, text: 'B' }),
+                    new Text({ backgroundColor: 'lime', text: 'C', margin: new Offset(10) }),
+                    new Text({ horizontalAlignment: Alignment.end, text: 'D' }),
+                    new Text({ text: 'E' }),
+                  ],
+                }),
+                new StackVertical({
+                  spacing: 20,
+                  layout: Layout.sizeEvenly,
+                  children: [
+                    new Text({ text: 'A', height: 50 }),
+                    new Text({ horizontalAlignment: Alignment.middle, text: 'B' }),
+                    new Text({ backgroundColor: 'lime', text: 'C', margin: new Offset(10) }),
+                    new Text({ horizontalAlignment: Alignment.end, text: 'D' }),
+                    new Text({ text: 'E' }),
+                  ],
+                }),
+              ],
+            }),
+            new StackHorizontal({
+              spacing: 50,
+              children: [
+                new Text({ text: 'V', width: 50 }),
                 new Text({
                   verticalAlignment: Alignment.middle,
-                  text: '2'
+                  text: 'W'
                 }),
                 new Text({
                   backgroundColor: 'orange',
-                  text: '3',
-                  margin: new Offset(15)
+                  text: 'X',
+                  margin: new Offset(10)
                 }),
                 new Text({
                   verticalAlignment: Alignment.end,
-                  text: '4'
+                  text: 'Y'
                 }),
-                new Text({ text: '5' }),
-              ],
-            }),
-            new StackVertical({
-              spacing: 20,
-              children: [
-                new Text({ text: '1', height: 50 }),
-                new Text({
-                  horizontalAlignment: Alignment.middle,
-                  text: '2'
-                }),
-                new Text({
-                  backgroundColor: 'pink',
-                  text: '3',
-                  margin: new Offset(15)
-                }),
-                new Text({
-                  horizontalAlignment: Alignment.end,
-                  text: '4'
-                }),
-                new Text({ text: '5' }),
-              ],
-            }),
-            new StackHorizontal({
-              horizontalAlignment: Alignment.fill,
-              children: [
-                new Text({ text: '1', width: 100 }),
-                new Text({ text: '2' }),
-                new Text({ text: '3', margin: new Offset(15) }),
-                new Container({
-                  children: [
-                    new Text({ text: '4' }),
-                  ],
-                }),
-                new Text({ text: '5' }),
+                new Text({ text: 'Z' }),
               ],
             }),
           ],

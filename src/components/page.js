@@ -1,4 +1,5 @@
 const BaseContainerComponent = require('./base-container-component.js');
+const { Alignment } = require('./enums/index.js');
 
 module.exports = class Page extends BaseContainerComponent {
   constructor(properties) {
@@ -21,6 +22,24 @@ module.exports = class Page extends BaseContainerComponent {
 
     for (let child of this.children) {
       child.initializeComponent(dataBindingSource);
+    }
+  }
+
+  layoutComponent(document) {
+    const headerHeight = this._getHeaderHeight(document);
+    const footerHeight = this._getFooterHeight();
+
+    for (let child of this.children) {
+      child.horizontalAlignment = Alignment.fill;
+      child.verticalAlignment = Alignment.fill;
+
+      child.width = this.width - this.margin.horizontalTotal;
+      child.height = this.height - this.margin.verticalTotal - headerHeight - footerHeight;
+
+      child._originX = this.margin.left;
+      child._originY = this.margin.top + headerHeight;
+
+      child.layoutComponent(document);
     }
   }
 
@@ -64,17 +83,7 @@ module.exports = class Page extends BaseContainerComponent {
   generateComponent(document, data) {
     super.generateComponent(document, data);
 
-    const headerHeight = this._getHeaderHeight(document);
-    const footerHeight = this._getFooterHeight();
-
     for (let child of this.children) {
-      child.width = this.size.width - this.margin.horizontalTotal;
-      child.height = this.size.height - this.margin.verticalTotal - headerHeight - footerHeight;
-      child._originX = this.margin.left;
-      child._originY = this.margin.top + headerHeight;
-
-      child.initializeComponent(data);
-      child.layoutComponent(document);
       child.generateComponent(document, data);
 
       if (document.renderNextPage) {

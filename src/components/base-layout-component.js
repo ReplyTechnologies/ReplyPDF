@@ -136,6 +136,22 @@ module.exports = class BaseLayoutComponent extends BaseComponent {
         this.height - this.margin.verticalTotal
       )
       .stroke();
+
+    if (this.debug) {
+      document
+        .note(
+          this._originX + this.x,
+          this._originY + this.y,
+          this.width,
+          this.height,
+          JSON.stringify({
+            type: this.constructor.name,
+            width: this.width,
+            height: this.height,
+            x: this._originX + this.x,
+            y: this._originY + this.y
+          }, null, 2));
+    }
   }
 
   _drawBorderSide(document, borderSide, x1, y1, x2, y2) {
