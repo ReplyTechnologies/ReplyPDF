@@ -8,7 +8,7 @@
 
 If you ever had to create a PDF document you would be familiar with the struggles to get headers, footers, and tables to layout correctly. This library aims to remove the complexity of creating PDF documents by providing purpose built components that handle rendering and data binding.
 
-**Interactive demo coming soon**
+*Interactive demo coming soon*
 
 ## Installation
 
@@ -19,6 +19,8 @@ npm install @replytechnologies/reply-pdf
 ```
 
 ## Usage
+
+### Import
 
 **CommonJS: Node.js <= 12**
 
@@ -46,6 +48,34 @@ import { ...components... } from '@replytechnologies/reply-pdf/components';
 import { ...enums... } from '@replytechnologies/reply-pdf/enums';
 import { ...models... } from '@replytechnologies/reply-pdf/models';
 ```
+
+### PDF Generation
+
+The basic steps that should be taken to generate a PDF are outlined in the example below:
+
+```js
+// create document template
+const template = new Page({ ...options... });
+
+// create binding data
+const data = { ..binding data... };
+
+// generate PDF
+let doc = ReplyPDF.generateDocument({
+    data: data,
+    template: template
+});
+
+// handle document object (review PDFKit documentation for alternatives)
+doc.pipe(fs.createWriteStream(outputFilePath));
+
+// close document object
+doc.close();
+```
+
+### PDF usage
+
+The output object returned from `ReplyPDF.generateDocument({...})` is of type `PDFDocument`. For different methods of handling the returned object, refer to the PDFKit documentation found [here](https://pdfkit.org).
 
 ## Under the Hood
 
