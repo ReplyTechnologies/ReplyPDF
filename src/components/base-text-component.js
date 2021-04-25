@@ -12,5 +12,6 @@ module.exports = class BaseTextComponent extends BaseLayoutComponent {
     this.fontWeight = properties.fontWeight;
     this.lineBreak = properties.lineBreak || false;
     this.ellipsis = properties.ellipsis || false;
+    //this.rotation = properties.rotation || 0;
   }
 }

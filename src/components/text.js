@@ -52,6 +52,12 @@ module.exports = class Text extends BaseTextComponent {
   generateComponent(document, data) {
     super.generateComponent(document, data);
 
+    // if (this.rotation) {
+    //   document.rotate(this.rotation, {
+    //     origin: [ this._originX + this.x , this._originY + this.y ]
+    //   });
+    // }
+
     document
       .fontSize(this.fontSize)
       .font(this.fontFamily + (this.fontWeight == FontWeight.bold ? '-Bold' : ''))
@@ -68,5 +74,11 @@ module.exports = class Text extends BaseTextComponent {
           underline: this.underline || (this._link && this.linkStyle.underline),
         }
       );
+
+    // if (this.rotation) {
+    //   document.rotate(this.rotation * (-1), {
+    //     origin: [ this._originX + this.x , this._originY + this.y ]
+    //   });
+    // }
   }
 }
