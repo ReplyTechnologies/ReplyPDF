@@ -19,7 +19,7 @@ module.exports = class StackHorizontal extends BaseStackComponent {
   _layoutComponent(document, spacing, layout) {
     layout = layout || Layout.none;
 
-    let offsetX =  this._originX + this.x + this.margin.left;
+    let offsetX = 0;
 
     let firstChild = true;
     for (let child of this.children) {
@@ -31,7 +31,7 @@ module.exports = class StackHorizontal extends BaseStackComponent {
         }
       }
 
-      child._originX = offsetX;
+      child._originX = offsetX + this._originX + this.x + this.margin.left;
 
       switch (child.verticalAlignment) {
         case Alignment.start:
@@ -77,7 +77,7 @@ module.exports = class StackHorizontal extends BaseStackComponent {
 
       switch (this.layout) {
         case Layout.spaceEvenly:
-          let availableSpace = this.width - layoutOffsetX;
+          let availableSpace = this.width - this.margin.horizontalTotal - layoutOffsetX;
           let spacing = availableSpace / (this.children.length - 1);
           layoutOffsetX = this._layoutComponent(document, spacing);
           break;
@@ -106,10 +106,6 @@ module.exports = class StackHorizontal extends BaseStackComponent {
 
     for (let child of this.children) {
       child.generateComponent(document, dataBindingSource);
-
-      if (document.renderNextPage) {
-        return;
-      }
     }
   }
 }

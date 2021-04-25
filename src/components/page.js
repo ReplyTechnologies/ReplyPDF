@@ -30,9 +30,6 @@ module.exports = class Page extends BaseContainerComponent {
     const footerHeight = this._getFooterHeight();
 
     for (let child of this.children) {
-      child.horizontalAlignment = Alignment.fill;
-      child.verticalAlignment = Alignment.fill;
-
       child.width = this.width - this.margin.horizontalTotal;
       child.height = this.height - this.margin.verticalTotal - headerHeight - footerHeight;
 

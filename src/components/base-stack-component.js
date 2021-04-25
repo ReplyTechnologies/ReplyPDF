@@ -17,6 +17,10 @@ module.exports = class BaseStackComponent extends BaseContainerComponent {
     let maxHeight = 0;
 
     for (let child of this.children) {
+      if (child._fillParent) {
+        child.width = this.width;
+        child.height = this.height;
+      }
 
       child.layoutComponent(document);
 

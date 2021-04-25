@@ -1,6 +1,7 @@
 const BaseLayoutComponent = require('./base-layout-component.js');
 const Container = require('./container.js');
 const Text = require('./text.js');
+const StackVertical = require('./stack-vertical.js');
 const StackHorizontal = require('./stack-horizontal.js');
 const { Alignment } = require('./enums');
 const { Offset } = require('./models');
@@ -9,17 +10,24 @@ module.exports = class Table extends BaseLayoutComponent {
   constructor(properties) {
     super(properties);
 
+    this._fillParent = true;
+
     this.headerStyle = properties.headerStyle || {};
     this.cellStyle = properties.cellStyle || {};
     this.alternativeCellStyle = properties.alternativeCellStyle || {};
 
     this.columns = properties.columns || [];
 
-    this._children = [];
+    this._content = undefined;
+
+    this._dataSource = [];
+    this._renderNextPage = false;
   }
 
   initializeComponent(data) {
     super.initializeComponent(data);
+
+    this._dataSource = this.getBinding(data);
 
     // prepare columns
     for (let column of this.columns) {
@@ -29,30 +37,7 @@ module.exports = class Table extends BaseLayoutComponent {
     }
   }
 
-  generateComponent(document, data) {
-    super.generateComponent(document, data);
-
-    const values = this.getBinding(data);
-    if (!values || !values.length) {
-      // invalid data binding
-      return;
-    }
-
-    // calculate absolute and relative widths
-    let absoluteWidthTotal = 0;
-    let relativeWidthTotal = 0;
-    for (let column of this.columns) {
-      if (column.width > 1) {
-        absoluteWidthTotal += column.width;
-      } else {
-        relativeWidthTotal += column.width;
-      }
-    }
-
-    const availableRelativeWidth = this.width - this.margin.horizontalTotal - absoluteWidthTotal;
-
-    const relativeWidthUnit = availableRelativeWidth / relativeWidthTotal;
-
+  _createTableHeader() {
     // create horizontal stack for heading components
     const headingComponents = [];
     const headings = new StackHorizontal({
@@ -61,12 +46,6 @@ module.exports = class Table extends BaseLayoutComponent {
 
     // create heading cells
     for (let column of this.columns) {
-      column._width = column.width;
-
-      if (column._width <= 1) {
-        column._width *= relativeWidthUnit;
-      }
-
       const cell = new Container({
         width: column._width,
         verticalAlignment: Alignment.fill,
@@ -86,85 +65,203 @@ module.exports = class Table extends BaseLayoutComponent {
       headingComponents.push(cell);
     }
 
-    // layout and render heading
-    headings._originX = this._originX + this.x + this.margin.left;
-    headings._originY = this._originY + this.y + this.margin.top;
+    return headings;
+  }
 
-    headings.initializeComponent(data);
-    headings.layoutComponent(document);
-    headings.generateComponent(document, data);
-    this._children.push(headings);
+  _createTableRow(index, record) {
+    const rowComponents = [];
+    const row = new StackHorizontal({
+      children: rowComponents,
+    });
 
-    let offsetY = headings.height;
+    for (let column of this.columns) {
+      let cellStyle = {};
 
-    // create table content
-    for (let index = values._index || 0; index < values.length; index++) {
-      values._index = index;
-      const value = values[index];
+      Object.assign(cellStyle, this.cellStyle || {});
+      Object.assign(cellStyle, column.cellStyle || {});
 
-      const rowComponents = [];
-      const row = new StackHorizontal({
-        children: rowComponents,
+      if (index % 2 == 0) {
+        Object.assign(cellStyle, this.alternativeCellStyle || {});
+        Object.assign(cellStyle, column.alternativeCellStyle || {});
+      }
+
+      let textValue = record[column.property];
+      if (column.fx) {
+        textValue = column.fx(index, record, textValue);
+      }
+
+      const cell = new Container({
+        width: column._width,
+        border: cellStyle.border,
+        backgroundColor: cellStyle.backgroundColor,
+        children: [
+          new Text({
+            margin: new Offset(5),
+            textAlignment: cellStyle.textAlignment,
+            fontWeight: cellStyle.fontWeight,
+            color: cellStyle.color,
+            horizontalAlignment: Alignment.fill,
+            text: textValue,
+          }),
+        ],
+      });
+      rowComponents.push(cell);
+    }
+
+    return row;
+  }
+
+  layoutComponent(document) {
+    // calculate absolute and relative widths
+    let absoluteWidthTotal = 0;
+    let relativeWidthTotal = 0;
+    for (let column of this.columns) {
+      if (column.width > 1) {
+        absoluteWidthTotal += column.width;
+      } else {
+        relativeWidthTotal += column.width;
+      }
+    }
+
+    const availableRelativeWidth = this.width - this.margin.horizontalTotal - absoluteWidthTotal;
+
+    const relativeWidthUnit = availableRelativeWidth / relativeWidthTotal;
+
+    for (let column of this.columns) {
+      column._width = column.width;
+
+      if (column._width <= 1) {
+        column._width *= relativeWidthUnit;
+      }
+    }
+
+    if (!this._content) {
+      let tableComponents = [];
+      this._content = new Container({
+        x: this.x,
+        y: this.y,
+        children: [
+          new StackVertical({
+            children: tableComponents
+          })
+        ]
       });
 
-      for (let column of this.columns) {
-        let cellStyle = {};
+      let offsetY = 0;
 
-        Object.assign(cellStyle, this.cellStyle || {});
-        Object.assign(cellStyle, column.cellStyle || {});
+      const header = this._createTableHeader();
+      tableComponents.push(header);
 
-        if (index % 2 == 0) {
-          Object.assign(cellStyle, this.alternativeCellStyle || {});
-          Object.assign(cellStyle, column.alternativeCellStyle || {});
+      header.width = this.width - this.margin.horizontalTotal;
+
+      header.initializeComponent({});
+      header.layoutComponent(document);
+
+      offsetY += header.height;
+
+      // create table content
+      for (let index = this._dataSource._index || 0; index < this._dataSource.length; index++) {
+        this._dataSource._index = index;
+        const record = this._dataSource[index];
+
+        const row = this._createTableRow(index, record);
+
+        row.width = this.width - this.margin.horizontalTotal;
+
+        row.initializeComponent(record);
+        row.layoutComponent(document);
+
+        offsetY += row.height;
+
+        if (offsetY > this.height - this.margin.verticalTotal) {
+          this._renderNextPage = true;
+          break;
         }
 
-        let textValue = value[column.property];
-        if (column.fx) {
-          textValue = column.fx(index, value, textValue);
-        }
-
-        const cell = new Container({
-          width: column._width,
-          border: cellStyle.border,
-          backgroundColor: cellStyle.backgroundColor,
-          children: [
-            new Text({
-              margin: new Offset(5),
-              textAlignment: cellStyle.textAlignment,
-              fontWeight: cellStyle.fontWeight,
-              color: cellStyle.color,
-              horizontalAlignment: Alignment.fill,
-              text: textValue,
-            }),
-          ],
-        });
-        rowComponents.push(cell);
+        tableComponents.push(row);
       }
-
-      row._originX = this._originX + this.x + this.margin.left;
-      row._originY = offsetY + this._originY + this.y + this.margin.top;
-
-      row.initializeComponent(data);
-      row.layoutComponent(document);
-
-      if (offsetY + this._originY + row.height > this._originY + this.height) {
-        document.renderNextPage = true;
-        break;
-      }
-
-      row.generateComponent(document, data);
-      this._children.push(row);
-
-      offsetY += row.height;
     }
-    this.height = offsetY;
+
+    this._content._originX = this._originX;
+    this._content._originY = this._originY;
+
+    this._content.initializeComponent({});
+    this._content.layoutComponent(document);
+
+    this.width = this._content.width;
+    this.height = this._content.height;
+  }
+
+  generateComponent(document, data) {
+    super.generateComponent(document, data);
+
+    this._content.generateComponent(document, data);
+
+    document.renderNextPage = this._renderNextPage;
+
+
+
+    //   // calculate absolute and relative widths
+    //   let absoluteWidthTotal = 0;
+    //   let relativeWidthTotal = 0;
+    //   for (let column of this.columns) {
+    //     if (column.width > 1) {
+    //       absoluteWidthTotal += column.width;
+    //     } else {
+    //       relativeWidthTotal += column.width;
+    //     }
+    //   }
+
+    //   const availableRelativeWidth = this.width - this.margin.horizontalTotal - absoluteWidthTotal;
+
+    //   const relativeWidthUnit = availableRelativeWidth / relativeWidthTotal;
+
+    //   for (let column of this.columns) {
+    //     column._width = column.width;
+    //     if (column._width <= 1) {
+    //       column._width *= relativeWidthUnit;
+    //     }
+    //   }
+
+
+
+    //   // layout and render heading
+    //   headings._originX = this._originX + this.x + this.margin.left;
+    //   headings._originY = this._originY + this.y + this.margin.top;
+
+    //   headings.initializeComponent(data);
+    //   headings.layoutComponent(document);
+    //   headings.generateComponent(document, data);
+    //   this._children.push(headings);
+
+    //   let offsetY = headings.height;
+
+
+
+    //   row._originX = this._originX + this.x + this.margin.left;
+    //   row._originY = offsetY + this._originY + this.y + this.margin.top;
+
+    //   row.initializeComponent(data);
+    //   row.layoutComponent(document);
+
+    //   if (offsetY + this._originY + row.height > this._originY + this.height) {
+    //     if (document.pageIndex == 50) {
+    //       return;
+    //     }
+    //     document.renderNextPage = true;
+    //     break;
+    //   }
+
+    //   row.generateComponent(document, data);
+    //   this._children.push(row);
+
+    //   offsetY += row.height;
+    // }
+    //   this.height = offsetY;
   }
 
   afterGenerateComponent(document) {
     super.afterGenerateComponent(document);
-
-    for (let child of this._children) {
-      child.afterGenerateComponent(document);
-    }
+    this._content.afterGenerateComponent(document);
   }
 }

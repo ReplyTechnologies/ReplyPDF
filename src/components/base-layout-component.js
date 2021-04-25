@@ -14,9 +14,7 @@ module.exports = class BaseLayoutComponent extends BaseComponent {
     this._originX = 0;
     this._originY = 0;
 
-    // TODO Danie: planned for later implementation
-    this.column = properties.column || 0;
-    this.row = properties.row || 0;
+    this._fillParent = false;
 
     this.margin = properties.margin || new Offset();
 
@@ -63,6 +61,10 @@ module.exports = class BaseLayoutComponent extends BaseComponent {
   }
 
   afterGenerateComponent(document) {
+    if (!this._rendered) {
+      return;
+    }
+
     super.afterGenerateComponent(document);
 
     if (this._link) {

@@ -4,11 +4,14 @@ module.exports = class BaseComponent {
     this.debug = properties.debug;
 
     this._parent = undefined;
+    this._rendered = false;
   }
 
   initializeComponent(data) {}
 
-  generateComponent(document, data) {}
+  generateComponent(document, data) {
+    this._rendered = true;
+  }
 
   afterGenerateComponent(document) {}
 

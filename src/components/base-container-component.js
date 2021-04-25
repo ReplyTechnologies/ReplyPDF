@@ -21,6 +21,10 @@ module.exports = class BaseContainerComponent extends BaseLayoutComponent {
   }
 
   afterGenerateComponent(document) {
+    if (!this._rendered) {
+      return;
+    }
+
     super.afterGenerateComponent(document);
 
     for (let child of this.children) {

@@ -1,6 +1,6 @@
 const fs = require('fs');
-const { Container, Page, Table, Text } = require('../src/components/index.js');
-const { PageSize, TextAlignment, FontWeight, Alignment } = require('../src/components/enums/index.js');
+const { Container, Page, Table, Text, StackVertical, StackHorizontal } = require('../src/components/index.js');
+const { PageSize, TextAlignment, FontWeight, Alignment, Layout } = require('../src/components/enums/index.js');
 const { Offset, Border, BorderSide } = require('../src/components/models/index.js');
 const ReplyPDF = require('../src/reply-pdf.js');
 
@@ -35,46 +35,70 @@ module.exports = {
         ],
       }),
       children: [
-        new Table({
-          binding: 'tableValues',
-          border: new Border(new BorderSide({ thickness: 1 })),
-          headerStyle: {
-            fontWeight: FontWeight.bold,
-            border: new Border(),
-          },
-          alternativeCellStyle: {
-            backgroundColor: '#ccc',
-          },
-          columns: [
-            {
-              property: 'id',
-              width: 50,
-              text: '#',
-            },
-            {
-              property: 'invoice_id',
-              text: 'Invoice',
-              fx: (index, record, value) => {
-                return '#' + value.toString().padStart(6, '0');
+        new StackVertical({
+          children: [
+            new Table({
+              binding: 'tableValues',
+              border: new Border(new BorderSide({ thickness: 1 })),
+              headerStyle: {
+                fontWeight: FontWeight.bold,
+                border: new Border(),
               },
-            },
-            {
-              property: 'date_created',
-              width: 100,
-              text: 'Date',
-            },
-            {
-              property: 'amount',
-              width: 70,
-              cellStyle: {
-                textAlignment: TextAlignment.right,
+              alternativeCellStyle: {
+                backgroundColor: '#ccc',
               },
-              text: 'Amount',
-              fx: (index, record, value) => {
-                return value.toFixed(2);
-              }
-            }
-          ]
+              columns: [
+                {
+                  property: 'id',
+                  width: 50,
+                  text: '#',
+                },
+                {
+                  property: 'invoice_id',
+                  text: 'Invoice',
+                  fx: (index, record, value) => {
+                    return '#' + value.toString().padStart(6, '0');
+                  },
+                },
+                {
+                  property: 'date_created',
+                  width: 100,
+                  text: 'Date',
+                },
+                {
+                  property: 'amount',
+                  width: 70,
+                  headerStyle: {
+                    textAlignment: TextAlignment.right,
+                  },
+                  cellStyle: {
+                    textAlignment: TextAlignment.right,
+                  },
+                  text: 'Amount',
+                  fx: (index, record, value) => {
+                    return value.toFixed(2);
+                  }
+                }
+              ]
+            }),
+            new StackHorizontal({
+              border: new Border(),
+              height: 20,
+              layout: Layout.spaceEvenly,
+              children: [
+                new Text({
+                  margin: new Offset(5),
+                  fontWeight: FontWeight.bold,
+                  text: "Total"
+                }),
+                new Text({
+                  margin: new Offset(5),
+                  fontWeight: FontWeight.bold,
+                  text: "500.00"
+                }),
+              ]
+            }),
+          ],
         }),
       ],
     });

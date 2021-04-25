@@ -101,10 +101,12 @@ module.exports = class StackVertical extends BaseStackComponent {
 
     const dataBindingSource = this.getBinding(data);
 
-    // TODO Danie: check for next page rendering and component continuation
-
     for (let child of this.children) {
       child.generateComponent(document, dataBindingSource);
+
+      if (document.renderNextPage) {
+        return;
+      }
     }
   }
 }
