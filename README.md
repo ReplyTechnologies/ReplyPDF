@@ -758,7 +758,7 @@ var component = new ComponentTypeGoesHere({
 
 ## Tests
 
-The file [tests.js](./tests.js) contains code to run all the examples in this project. Each example generates a PDF file as output into the [examples/outputs](./examples/outputs) directory. To execute the tests, run the following command after cloning:
+The file [test.js](./test.js) contains code to run all the examples in this project. Each example generates a PDF file as output into the [examples/outputs](./examples/outputs) directory. To execute the tests, run the following command after cloning:
 
 ```sh
 npm test
