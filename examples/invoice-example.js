@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { Container, Page, Table, StackHorizontal, StackVertical, Text } = require('../src/components/index.js');
+const { Container, Page, Table, StackVertical, Text } = require('../src/components/index.js');
 const { PageSize, Alignment, TextAlignment, FontWeight } = require('../src/components/enums/index.js');
 const { Offset, Border } = require('../src/components/models/index.js');
 const ReplyPDF = require('../src/reply-pdf.js');
@@ -20,7 +20,7 @@ module.exports = {
           new StackVertical({
             verticalAlignment: Alignment.fill,
             horizontalAlignment: Alignment.fill,
-            spacing: 5,
+            spacing: 2,
             children: [
               new Text({
                 text: 'Invoice #{{invoice.number}}',
@@ -45,7 +45,7 @@ module.exports = {
             ]
           }),
           new StackVertical({
-            spacing: 5,
+            spacing: 2,
             children: [
               new Text({
                 horizontalAlignment: Alignment.end,
@@ -79,7 +79,7 @@ module.exports = {
             verticalAlignment: Alignment.end,
             fontSize: 10,
             color: '#777',
-            text: 'EasyShop',
+            text: 'Cookie CO',
           }),
         ],
       }),
@@ -100,7 +100,7 @@ module.exports = {
                 {
                   property: 'id',
                   text: '#',
-                  width: 50,
+                  width: 30,
                   fx: (index, record, value) => {
                     return index + 1;
                   }
@@ -112,7 +112,7 @@ module.exports = {
                 {
                   property: 'sellingPrice',
                   text: 'Unit Price',
-                  width: 75,
+                  width: 70,
                   headerStyle: {
                     textAlignment: TextAlignment.right,
                   },
@@ -126,7 +126,7 @@ module.exports = {
                 {
                   property: 'quantity',
                   text: 'Quantity',
-                  width: 75,
+                  width: 70,
                   headerStyle: {
                     textAlignment: TextAlignment.right,
                   },
@@ -137,7 +137,7 @@ module.exports = {
                 },
                 {
                   text: 'Total',
-                  width: 75,
+                  width: 70,
                   headerStyle: {
                     textAlignment: TextAlignment.right,
                   },
@@ -151,26 +151,26 @@ module.exports = {
               ]
             }),
             new Container({
-              height: 30,
+              height: 25,
               border: new Border(),
               children: [
-                // new Container({
-                //   margin: 5,
-                //   children: [
-                //     new Text({
-                //       verticalAlignment: Alignment.middle,
-                //       horizontalAlignment: Alignment.start,
-                //       fontWeight: FontWeight.bold,
-                //       text: 'Total',
-                //     }),
-                //     new Text({
-                //       verticalAlignment: Alignment.middle,
-                //       horizontalAlignment: Alignment.end,
-                //       fontWeight: FontWeight.bold,
-                //       text: '{{invoice.total}}',
-                //     }),
-                //   ]
-                // }),
+                new Container({
+                  margin: new Offset(2),
+                  children: [
+                    new Text({
+                      verticalAlignment: Alignment.middle,
+                      horizontalAlignment: Alignment.start,
+                      fontWeight: FontWeight.bold,
+                      text: 'Total',
+                    }),
+                    new Text({
+                      verticalAlignment: Alignment.middle,
+                      horizontalAlignment: Alignment.end,
+                      fontWeight: FontWeight.bold,
+                      text: '{{invoice.total}}',
+                    }),
+                  ]
+                }),
               ]
             }),
           ],
@@ -184,69 +184,39 @@ module.exports = {
         "products": [
           {
             "id": 312,
-            "invoiceId": 91,
-            "productId": 59,
-            "dateCreated": "2021-04-17T11:03:52.000Z",
             "quantity": 2,
-            "purchasePrice": 14,
             "sellingPrice": 35,
             "productName": "Stencil,A5",
-            "productCode": "00110000059"
           },
           {
             "id": 313,
-            "invoiceId": 91,
-            "productId": 70,
-            "dateCreated": "2021-04-17T11:04:19.000Z",
             "quantity": 5,
-            "purchasePrice": 0,
             "sellingPrice": 15,
             "productName": "Print,Rut,A6",
-            "productCode": "00110000071"
           },
           {
             "id": 311,
-            "invoiceId": 91,
-            "productId": 72,
-            "dateCreated": "2021-04-17T11:03:37.000Z",
             "quantity": 1,
-            "purchasePrice": 0,
             "sellingPrice": 50,
             "productName": "Print,Rut,A4",
-            "productCode": "00110000073"
           },
           {
             "id": 306,
-            "invoiceId": 91,
-            "productId": 74,
-            "dateCreated": "2021-04-17T10:54:34.000Z",
             "quantity": 2,
-            "purchasePrice": 0,
             "sellingPrice": 50,
             "productName": "Akfix",
-            "productCode": "00110000074"
           },
           {
             "id": 304,
-            "invoiceId": 91,
-            "productId": 75,
-            "dateCreated": "2021-04-17T10:54:17.000Z",
             "quantity": 2,
-            "purchasePrice": 0,
             "sellingPrice": 50,
             "productName": "Modge Podge",
-            "productCode": "00110000075"
           },
           {
             "id": 305,
-            "invoiceId": 91,
-            "productId": 76,
-            "dateCreated": "2021-04-17T10:54:26.000Z",
             "quantity": 2,
-            "purchasePrice": 0,
             "sellingPrice": 50,
             "productName": "3D Paste",
-            "productCode": "00110000076"
           }
         ],
         "date": "2021/04/17",
@@ -254,20 +224,20 @@ module.exports = {
       },
       "client": {
         "name": "John Doe",
-        "contactNumber": "N/A",
-        "emailAddress": "N/A"
+        "contactNumber": "000 555 5555 555",
+        "emailAddress": "john@doe.com"
       },
       "shop": {
-        "name": "Cookie Co. - The Cookie People",
-        "contactNumber": "N/A",
-        "emailAddress": "N/A"
+        "name": "Cookie CO - The Cookie People",
+        "contactNumber": "000 555 5555 555",
+        "emailAddress": "info@cookie-co.fake"
       }
     };
 
     let doc = ReplyPDF.generateDocument({
       data: data,
       template: template,
-      debug: true,
+      debug: false,
     });
 
     doc.pipe(fs.createWriteStream('examples/outputs/output-invoice-example.pdf'));

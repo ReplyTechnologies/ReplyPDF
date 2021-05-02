@@ -65,14 +65,14 @@ module.exports = class Text extends BaseTextComponent {
       .text(this._text,
         this._originX + this.x + this.margin.left,
         this._originY + this.y + this.margin.top, {
-          width: this.width - this.margin.horizontalTotal,
-          align: this.textAlignment,
-          ellipsis: this.ellipsis,
-          lineBreak: this.lineBreak,
-          strike: this.strikethrough,
-          oblique: this.italic,
-          underline: this.underline || (this._link && this.linkStyle.underline),
-        }
+        width: this.width - this.margin.horizontalTotal,
+        align: this.textAlignment,
+        ellipsis: this.ellipsis,
+        lineBreak: this.lineBreak,
+        strike: this.strikethrough,
+        oblique: this.italic,
+        underline: this.underline || (this._link && this.linkStyle.underline),
+      }
       );
 
     // if (this.rotation) {

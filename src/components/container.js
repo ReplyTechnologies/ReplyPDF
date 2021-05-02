@@ -22,11 +22,11 @@ module.exports = class Container extends BaseContainerComponent {
 
     for (let child of this.children) {
 
-      if (this.width && !child.width && child.horizontalAlignment === Alignment.fill) {
+      if (this.width && child.horizontalAlignment == Alignment.fill) {
         child.width = this.width - this.margin.horizontalTotal;
       }
 
-      if (this.height && !child.height && child.verticalAlignment === Alignment.fill) {
+      if (this.height && child.verticalAlignment == Alignment.fill) {
         child.height = this.height - this.margin.verticalTotal;
       }
 
