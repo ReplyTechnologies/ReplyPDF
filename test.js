@@ -1,4 +1,5 @@
 const AnnotationExample = require('./examples/annotation-example.js');
+const InvoiceExample = require('./examples/invoice-example.js');
 const TableExample = require('./examples/table-example.js');
 const StackingExample = require('./examples/stacking-example.js');
 const ContainerExample = require('./examples/container-example.js');
@@ -10,6 +11,7 @@ const CustomFontExample = require('./examples/custom-font-example.js');
 const MultipleTemplateExample = require('./examples/multiple-template-example.js');
 
 AnnotationExample.generate();
+InvoiceExample.generate();
 HeaderFooterExample.generate();
 TableExample.generate();
 StackingExample.generate();

@@ -20,7 +20,7 @@ module.exports = class Text extends BaseTextComponent {
     this.italic = properties.italic;
 
     this._text = '';
-    this._defaultFontWidthOffset = 1;
+    this._defaultFontWidthOffset = 0.15 * this.fontSize;
   }
 
   initializeComponent(data) {
