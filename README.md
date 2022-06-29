@@ -305,6 +305,10 @@ new StackVertical({
 
 Hierarchy: `BaseComponent / BaseLayoutComponent / BaseContainerComponent / GridLayout`
 
+| Property  | Type   | Description                                   |
+| --------- | ------ | --------------------------------------------- |
+| `columns` | number | Number of columns in which to display content |
+
 **Example**
 
 [Go to usage example](./examples/grid-layout-example.js) | [Go to sample PDF](./examples/outputs/output-grid-layout-example.pdf)
