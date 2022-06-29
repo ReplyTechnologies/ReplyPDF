@@ -51,10 +51,12 @@ module.exports = {
 
     documentPage.pageIndex = 0;
 
+    let page = options.template;
+
     do {
       documentPage.renderNextPage = false;
 
-      const page = options.template.clone();
+      page = page.clone();
       page.initializeComponent(options.data);
       page.layoutComponent(documentPage);
       page.generateComponent(documentPage, options.data);

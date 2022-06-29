@@ -4,6 +4,10 @@
 
 <img src="./resources/process_infographic.svg" alt="Process Infographic"  />
 
+## Table of Contents
+
+[TOC]
+
 ## About
 
 If you ever had to create a PDF document you would be familiar with the struggles to get headers, footers, and tables to layout correctly. This library aims to remove the complexity of creating PDF documents by providing purpose built components that handle rendering and data binding.
@@ -294,6 +298,36 @@ new StackVertical({
 ```
 
 ![component_example_stack_vertical](./resources/component_example_stack_vertical.png)
+
+### GridLayout
+
+[GridLayout](./src/components/grid-layout.js) provides functionality to layout components horizontally in a specified number of columns. When the number of columns is reached, components are added to a new row. When content reaches the end of the page, it will continue to the next page.
+
+Hierarchy: `BaseComponent / BaseLayoutComponent / BaseContainerComponent / GridLayout`
+
+**Example**
+
+[Go to usage example](./examples/grid-layout-example.js) | [Go to sample PDF](./examples/outputs/output-grid-layout-example.pdf)
+
+```js
+const children = [];
+for (var i = 0; i < 5; i++) {
+    children.push(
+        new Text({
+            margin: new Offset(10),
+            text: `Item: ${i}`,
+            fontSize: 20
+        }),
+    );
+}
+...
+new GridLayout({
+    columns: 3,
+    children: children
+})
+```
+
+![component_example_grid_layout](./resources/component_example_grid_layout.png)
 
 ### Text
 
@@ -774,19 +808,11 @@ Image rendering from URL is performed by making synchronous http calls. You may 
 
 ### General Enhancements
 
-Functionality to keep track of rendered templates in order to prevent rendering duplicate content when a document with multiple pages is created.
-
 Improve multiple template rendering process to be able to render different headers and footers for each template.
-
-Add functionality to render content of StackVertical onto a new page when it overflows.
 
 Implement functionality to use existing PDF documents as the base to render the template onto. As this functionality is not supported by PDFKit, the merge functionality may be delegated to [Hummus](https://www.npmjs.com/package/hummus) or [HummusRecipe](https://www.npmjs.com/package/hummus-recipe).
 
 ### New Components
-
-*StackGridHorizontal*: Layout children horizontally to fill available space, then move down and continue layout
-
-*StackGridVertical*: Layout children vertically to fill available space, then move right and continue layout
 
 *Barcode*: Render a barcode to the document
 

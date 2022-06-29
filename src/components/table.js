@@ -19,8 +19,8 @@ module.exports = class Table extends BaseLayoutComponent {
     this.columns = properties.columns || [];
 
     this._content = undefined;
-
     this._dataSource = [];
+    this._index = properties._index || 0;
     this._renderNextPage = false;
   }
 
@@ -160,8 +160,8 @@ module.exports = class Table extends BaseLayoutComponent {
       offsetY += header.height;
 
       // create table content
-      for (let index = this._dataSource._index || 0; index < this._dataSource.length; index++) {
-        this._dataSource._index = index;
+      for (let index = this._index || 0; index < this._dataSource.length; index++) {
+        this._index = index;
         const record = this._dataSource[index];
 
         const row = this._createTableRow(index, record);
@@ -198,66 +198,6 @@ module.exports = class Table extends BaseLayoutComponent {
     this._content.generateComponent(document, data);
 
     document.renderNextPage = this._renderNextPage;
-
-
-
-    //   // calculate absolute and relative widths
-    //   let absoluteWidthTotal = 0;
-    //   let relativeWidthTotal = 0;
-    //   for (let column of this.columns) {
-    //     if (column.width > 1) {
-    //       absoluteWidthTotal += column.width;
-    //     } else {
-    //       relativeWidthTotal += column.width;
-    //     }
-    //   }
-
-    //   const availableRelativeWidth = this.width - this.margin.horizontalTotal - absoluteWidthTotal;
-
-    //   const relativeWidthUnit = availableRelativeWidth / relativeWidthTotal;
-
-    //   for (let column of this.columns) {
-    //     column._width = column.width;
-    //     if (column._width <= 1) {
-    //       column._width *= relativeWidthUnit;
-    //     }
-    //   }
-
-
-
-    //   // layout and render heading
-    //   headings._originX = this._originX + this.x + this.margin.left;
-    //   headings._originY = this._originY + this.y + this.margin.top;
-
-    //   headings.initializeComponent(data);
-    //   headings.layoutComponent(document);
-    //   headings.generateComponent(document, data);
-    //   this._children.push(headings);
-
-    //   let offsetY = headings.height;
-
-
-
-    //   row._originX = this._originX + this.x + this.margin.left;
-    //   row._originY = offsetY + this._originY + this.y + this.margin.top;
-
-    //   row.initializeComponent(data);
-    //   row.layoutComponent(document);
-
-    //   if (offsetY + this._originY + row.height > this._originY + this.height) {
-    //     if (document.pageIndex == 50) {
-    //       return;
-    //     }
-    //     document.renderNextPage = true;
-    //     break;
-    //   }
-
-    //   row.generateComponent(document, data);
-    //   this._children.push(row);
-
-    //   offsetY += row.height;
-    // }
-    //   this.height = offsetY;
   }
 
   afterGenerateComponent(document) {

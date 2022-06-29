@@ -18,7 +18,12 @@
     "url": "https://github.com/ReplyTechnologies/ReplyPDF.git"
   },
   "keywords": [
-    "generate", "pdf", "template", "templated", "reply-pdf", "reply"
+    "generate",
+    "pdf",
+    "template",
+    "templated",
+    "reply-pdf",
+    "reply"
   ],
   "funding": "https://www.paypal.com/donate/?hosted_button_id=BVBKNU8NHN2UN",
   "license": "MIT",
@@ -27,6 +32,7 @@
     "is-xml": "^0.1.0",
     "pdfkit": "^0.12.1",
     "svg-to-pdfkit": "^0.1.8",
-    "sync-request": "^6.1.0"
+    "sync-request": "^6.1.0",
+    "uuid": "^8.3.2"
   }
 }

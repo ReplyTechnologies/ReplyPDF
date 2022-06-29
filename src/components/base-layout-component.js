@@ -57,7 +57,6 @@ module.exports = class BaseLayoutComponent extends BaseComponent {
           this.height - this.margin.verticalTotal)
         .fill(this.backgroundColor);
     }
-
   }
 
   afterGenerateComponent(document) {

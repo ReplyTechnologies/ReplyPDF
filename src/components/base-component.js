@@ -1,10 +1,13 @@
+const { v4: uuidv4 } = require('uuid');
+
 module.exports = class BaseComponent {
   constructor(properties) {
     this.binding = properties.binding;
     this.debug = properties.debug;
-
+    
     this._parent = undefined;
     this._rendered = false;
+    this._id = properties._id || uuidv4();
   }
 
   initializeComponent(data) {}

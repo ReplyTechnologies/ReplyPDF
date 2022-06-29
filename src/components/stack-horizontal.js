@@ -73,29 +73,26 @@ module.exports = class StackHorizontal extends BaseStackComponent {
       this.width = layoutOffsetX + this.margin.horizontalTotal;
     }
 
-    if (this.children.length > 1) {
+    switch (this.layout) {
+      case Layout.spaceEvenly:
+        let availableSpace = this.width - this.margin.horizontalTotal - layoutOffsetX;
+        let spacing = availableSpace / (this.children.length > 1 ? this.children.length - 1 : 1);
+        layoutOffsetX = this._layoutComponent(document, spacing);
+        break;
 
-      switch (this.layout) {
-        case Layout.spaceEvenly:
-          let availableSpace = this.width - this.margin.horizontalTotal - layoutOffsetX;
-          let spacing = availableSpace / (this.children.length - 1);
-          layoutOffsetX = this._layoutComponent(document, spacing);
-          break;
+      case Layout.sizeEvenly:
+        let childWidth = (this.width - this.margin.horizontalTotal - (this.spacing * (this.children.length - 1))) / this.children.length;
+        let offsetX = this._originX + this.x + this.margin.left;
+        for (let child of this.children) {
+          child._originX = offsetX;
 
-        case Layout.sizeEvenly:
-          let childWidth = (this.width - this.margin.horizontalTotal - (this.spacing * (this.children.length - 1))) / this.children.length;
-          let offsetX = this._originX + this.x + this.margin.left;
-          for (let child of this.children) {
-            child._originX = offsetX;
+          child.width = childWidth;
 
-            child.width = childWidth;
+          child.layoutComponent(document);
 
-            child.layoutComponent(document);
-
-            offsetX += child.width + this.spacing;
-          }
-          break;
-      }
+          offsetX += child.width + this.spacing;
+        }
+        break;
     }
   }
 
