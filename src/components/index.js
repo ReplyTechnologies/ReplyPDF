@@ -1,5 +1,6 @@
 module.exports = {
   Container: require('./container.js'),
+  GridLayout: require('./grid-layout.js'),
   Image: require('./image.js'),
   Page: require('./page.js'),
   RepeatVertical: require('./repeat-vertical.js'),
