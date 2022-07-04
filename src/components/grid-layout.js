@@ -1,6 +1,7 @@
 const BaseContainerComponent = require("./base-container-component.js");
 const { Layout } = require("./enums/index.js");
-const { Container, StackHorizontal } = require("./index.js");
+const Container = require('./container.js');
+const StackHorizontal = require('./stack-horizontal.js');
 
 module.exports = class GridLayout extends BaseContainerComponent {
     constructor(properties) {

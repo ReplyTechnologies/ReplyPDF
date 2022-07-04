@@ -1,6 +1,6 @@
 {
   "name": "@replytechnologies/reply-pdf",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "templated pdf generation",
   "main": "src/reply-pdf.js",
   "exports": {
